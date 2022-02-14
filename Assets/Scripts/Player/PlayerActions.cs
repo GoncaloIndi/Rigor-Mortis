@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,10 +11,10 @@ public class PlayerActions : MonoBehaviour
 
     [HideInInspector] public PlayerQuickTurn PlayerQuickTurnScript;
 
+    [HideInInspector] public PlayerStats PlayerStatsScript;
+
     private PlayerInputManager playerInputManager;
-
-    public bool CanMove = true;
-
+    
 
    
     private void Awake()
@@ -25,6 +22,7 @@ public class PlayerActions : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         PlayerMovementScript = GetComponent<PlayerMovement>();
         PlayerQuickTurnScript = GetComponent<PlayerQuickTurn>();
+        PlayerStatsScript = GetComponent<PlayerStats>();
 
         playerInputManager = new PlayerInputManager();
         playerInputManager.Player.Enable();
@@ -32,6 +30,10 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Sprint.started += StartSprint;
         playerInputManager.Player.Sprint.canceled += EndSprint;
         playerInputManager.Player.QuickTurn.performed += QuickTurn;
+        
+        //Starting boost to make movement feel less sluggish    
+        playerInputManager.Player.StartingForwardMomentum.performed += StartForwardMomentum;
+        playerInputManager.Player.StartingBackwardMomentum.performed += StartBackwardMomentum;
 
     }
 
@@ -58,10 +60,20 @@ public class PlayerActions : MonoBehaviour
 
     private void QuickTurn(InputAction.CallbackContext context)
     {
-        if(CanMove)
+        if(PlayerStatsScript.CanMove)
         {
-            StartCoroutine(PlayerQuickTurnScript.PerformQuickTurn());
+            PlayerQuickTurnScript.StartCoroutine(PlayerQuickTurnScript.PerformQuickTurn());
         }
+    }
+
+    private void StartForwardMomentum(InputAction.CallbackContext context)
+    {
+        PlayerMovementScript.ApplyJumpStartingMomentum(true);
+    }
+    
+    private void StartBackwardMomentum(InputAction.CallbackContext context)
+    {
+        PlayerMovementScript.ApplyJumpStartingMomentum(false);
     }
 
 }

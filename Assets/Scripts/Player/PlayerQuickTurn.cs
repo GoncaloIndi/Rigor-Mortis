@@ -1,59 +1,65 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerQuickTurn : MonoBehaviour
 {
-
-
     //Stored in the beginning of the lerp
-    private Transform playerStartRotation;   
-    private Quaternion quickTurnTargetRotation;
+    private Transform playerStartRotation;
 
+    private Vector3 relativePosition;
+
+    private Quaternion targetRotation;
+    
     [SerializeField]
     private Transform quickTurnTargetTransform;
 
-    [SerializeField]
-    private float quickTurnDuration = 1f;
-
-    private float elapsedTime;
-
+    private float quickTurnTime;
+    
     private bool isPerformingQuickTurn = false;
 
     [HideInInspector] public PlayerActions PlayerActionsScript;
+    
+    [HideInInspector] public PlayerStats PlayerStatsScript;
 
     private void Awake()
     {
         PlayerActionsScript = GetComponent<PlayerActions>();
+        PlayerStatsScript = GetComponent<PlayerStats>();
     }
 
     private void Update()
     {
+        if (!isPerformingQuickTurn) return;
+
+        quickTurnTime += Time.deltaTime;
         
-        if(isPerformingQuickTurn)
+        transform.rotation= Quaternion.Slerp(playerStartRotation.rotation, targetRotation, quickTurnTime);
+
+        if (quickTurnTime > 1)
         {
-            elapsedTime += Time.deltaTime;
-
-            float percentageComplete = elapsedTime / quickTurnDuration;
-
-            transform.rotation = Quaternion.Slerp(playerStartRotation.rotation, quickTurnTargetRotation, percentageComplete);
+            isPerformingQuickTurn = false;
         }
     }
 
     public IEnumerator PerformQuickTurn()
     {
-        if(!isPerformingQuickTurn)
-        {
-            isPerformingQuickTurn = true;
-            PlayerActionsScript.CanMove = false;
-            playerStartRotation = transform;
-            //Missing End position
-            
-            yield return new WaitForSeconds(quickTurnDuration - .15f);
-
-            PlayerActionsScript.CanMove = true;
-            isPerformingQuickTurn = false;
-        }
+        if (isPerformingQuickTurn) yield break;
         
+        quickTurnTime = 0;
+        isPerformingQuickTurn = true;
+        PlayerStatsScript.CanMove = false;
+        var transform1 = transform;
+        var reenableMovementTimer = .2f ;
+        playerStartRotation = transform1;
+        relativePosition = quickTurnTargetTransform.position - transform1.position;
+        targetRotation = Quaternion.LookRotation(relativePosition);
+            
+            
+
+        yield return new WaitForSeconds(reenableMovementTimer);
+
+        PlayerStatsScript.CanMove = true;
+        
+
     }
 }

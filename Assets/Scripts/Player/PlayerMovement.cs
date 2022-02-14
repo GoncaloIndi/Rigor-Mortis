@@ -1,36 +1,31 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody playerRigidbody;
 
-    private Transform playerPos;
-
-    public float PlayerFowardMovementSpeed = 9.95f;
-
     private float playerBackwardsMovementSpeed;
 
-    [SerializeField] private float playerRotationSpeed = 45f;
+    [SerializeField] private float playerRotationSpeed = 55f;
 
-    public PlayerActions PlayerActionsScript;
+    [HideInInspector] public PlayerActions PlayerActionsScript;
+    
+    [HideInInspector] public PlayerStats PlayerStatsScript;
 
     private float sprintSpeedMultiplier = 1.12f;
 
     private void Awake()
     {
-        playerBackwardsMovementSpeed = PlayerFowardMovementSpeed;
+        PlayerStatsScript = GetComponent<PlayerStats>();
+        playerBackwardsMovementSpeed = PlayerStatsScript.PlayerFowardMovementSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
-        playerPos = GetComponent<Transform>();
         PlayerActionsScript = GetComponent<PlayerActions>();
     }
 
     private void FixedUpdate()
     {
         //Apply movement
-        if(PlayerActionsScript.CanMove)
+        if(PlayerStatsScript.CanMove)
         {
             MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
             RotatePlayer(PlayerActionsScript.PlayerMovementVector.x);
@@ -41,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (direction > 0.1)
         {
-            playerRigidbody.AddForce(transform.forward * PlayerFowardMovementSpeed , ForceMode.Force);
+            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed , ForceMode.Force);
         }
         else if(direction < -0.1)
         {
@@ -64,14 +59,27 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartPlayerSprintingMomentum() //Called By PlayerActions
     {
-        PlayerFowardMovementSpeed *= sprintSpeedMultiplier;
-        playerRigidbody.AddForce(transform.forward * PlayerFowardMovementSpeed * 2.1f, ForceMode.Force);
+        PlayerStatsScript.PlayerFowardMovementSpeed *= sprintSpeedMultiplier;
+        playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
     }
 
     public void StopPlayerSprintingMomentum() //Called By PlayerActions
     {
-        playerRigidbody.AddForce(transform.forward * -PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
-        PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
+        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
+        PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
+    }
+
+    public void ApplyJumpStartingMomentum(bool isMovingForward)
+    {
+        if (isMovingForward)
+        {
+            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
+        }
+        else
+        {
+            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * -2.5f, ForceMode.Force);
+        }
+        
     }
 
 

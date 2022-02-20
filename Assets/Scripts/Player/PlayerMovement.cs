@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector] public PlayerStats PlayerStatsScript;
 
-    private float sprintSpeedMultiplier = 1.08f;
+    private float sprintSpeedMultiplier = 1.05f;
 
     private void Awake()
     {
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopPlayerSprintingMomentum() //Called By PlayerActions
     {
-        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3.5f, ForceMode.Force);
+        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
         PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
     }
 

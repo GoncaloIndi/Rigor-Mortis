@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector] public PlayerStats PlayerStatsScript;
 
-    private float sprintSpeedMultiplier = 1.05f;
+    private float sprintSpeedMultiplier = 1.0385f;
 
     private void Awake()
     {

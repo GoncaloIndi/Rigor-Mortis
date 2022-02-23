@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     
     [HideInInspector] public PlayerStats PlayerStatsScript;
 
+    [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
+
     private float sprintSpeedMultiplier = 1.0385f;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
         playerBackwardsMovementSpeed = PlayerStatsScript.PlayerFowardMovementSpeed;
         playerRigidbody = GetComponent<Rigidbody>();
         PlayerActionsScript = GetComponent<PlayerActions>();
+        PlayerAnimationsScript = GetComponent<PlayerAnimations>();
     }
 
     private void FixedUpdate()
@@ -61,12 +64,14 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerStatsScript.PlayerFowardMovementSpeed *= sprintSpeedMultiplier;
         playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
+        PlayerAnimationsScript.DisplayRunningAnimation = true;
     }
 
     public void StopPlayerSprintingMomentum() //Called By PlayerActions
     {
         playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
         PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
+        PlayerAnimationsScript.DisplayRunningAnimation = false;
     }
 
     public void ApplyJumpStartingMomentum(bool isMovingForward)

@@ -16,6 +16,8 @@ public class Item : Interactible
 
     [SerializeField] private Text itemNameUI;
 
+    private bool AvoidButtonSpamming = true;
+
 
 
     private Image imageUI;
@@ -34,15 +36,18 @@ public class Item : Interactible
         SpriteUI.SetActive(true);
         imageUI.sprite = itemSprite;
         itemNameUI.text = itemName;
+        StartCoroutine(AvoidButtonSpam());
         base.Interact();
     }
 
     public override void FinishInteract() //Called by PlayerActions
     {
+        if(AvoidButtonSpamming) return;
         SpriteUI.SetActive(false);
         InteractionUI.SetActive(false);
         base.FinishInteract();
-        
+        AvoidButtonSpamming = true;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,5 +60,16 @@ public class Item : Interactible
     {
         PlayerStatsScript.CurrentInteractionGameObject = null;
         PlayerStatsScript.IsInInteractionZone = false;
+    }
+    
+    //Avoid not seeing the item pick up due to spamming
+    private IEnumerator AvoidButtonSpam()
+    {
+        
+        float uiSeenTime = .4f;
+
+        yield return new WaitForSecondsRealtime(uiSeenTime);
+        AvoidButtonSpamming = false;
+
     }
 }

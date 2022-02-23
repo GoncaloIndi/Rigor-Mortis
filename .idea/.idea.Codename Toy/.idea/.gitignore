@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.Codename Toy.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../:\Users\user\Desktop\Porto\Videojogos e aplicações mutimédia\Extras\Codename-Toy\Codename Toy\.idea\.idea.Codename Toy\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

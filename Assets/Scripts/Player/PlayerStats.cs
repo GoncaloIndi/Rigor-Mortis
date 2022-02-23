@@ -10,4 +10,8 @@ public class PlayerStats : MonoBehaviour
     public float PlayerFowardMovementSpeed = 9.1f;
 
     public int playerHp = 100;
+
+    public bool IsInInteractionZone = false;
+
+    [HideInInspector] public GameObject CurrentInteractionGameObject;
 }

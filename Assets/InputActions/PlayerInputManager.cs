@@ -289,6 +289,55 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""d10a9c58-56bc-4354-b0ed-900c5530ceb1"",
+            ""actions"": [
+                {
+                    ""name"": ""Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a14a626-4cc5-4541-855d-3c8da414b71c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d7e0fe33-0ee2-4776-89f3-13086e7947f4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""722739cf-25e3-476e-9e66-4144c820528e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df08a956-5217-4157-8fef-8758a57f0ac6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -329,6 +378,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Player_QuickTurn = m_Player.FindAction("QuickTurn", throwIfNotFound: true);
         m_Player_StartingForwardMomentum = m_Player.FindAction("StartingForwardMomentum", throwIfNotFound: true);
         m_Player_StartingBackwardMomentum = m_Player.FindAction("StartingBackwardMomentum", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +499,39 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Accept;
+    public struct UIActions
+    {
+        private @PlayerInputManager m_Wrapper;
+        public UIActions(@PlayerInputManager wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Accept => m_Wrapper.m_UI_Accept;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Accept.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
+                @Accept.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
+                @Accept.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAccept;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Accept.started += instance.OnAccept;
+                @Accept.performed += instance.OnAccept;
+                @Accept.canceled += instance.OnAccept;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardandmouseSchemeIndex = -1;
     public InputControlScheme KeyboardandmouseScheme
     {
@@ -473,5 +558,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnQuickTurn(InputAction.CallbackContext context);
         void OnStartingForwardMomentum(InputAction.CallbackContext context);
         void OnStartingBackwardMomentum(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnAccept(InputAction.CallbackContext context);
     }
 }

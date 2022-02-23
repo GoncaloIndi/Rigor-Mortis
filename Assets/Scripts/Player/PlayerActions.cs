@@ -23,13 +23,16 @@ public class PlayerActions : MonoBehaviour
         PlayerMovementScript = GetComponent<PlayerMovement>();
         PlayerQuickTurnScript = GetComponent<PlayerQuickTurn>();
         PlayerStatsScript = GetComponent<PlayerStats>();
-
+        
+        //Player Action Map
         playerInputManager = new PlayerInputManager();
         playerInputManager.Player.Enable();
         playerInputManager.Player.Interact.performed += Interact;
         playerInputManager.Player.Sprint.started += StartSprint;
         playerInputManager.Player.Sprint.canceled += EndSprint;
         playerInputManager.Player.QuickTurn.performed += QuickTurn;
+        //UI Action Map
+        playerInputManager.UI.Accept.performed += Accept;
         
         //Starting boost to make movement feel less sluggish    
         playerInputManager.Player.StartingForwardMomentum.performed += StartForwardMomentum;
@@ -42,10 +45,15 @@ public class PlayerActions : MonoBehaviour
         PlayerMovementVector = playerInputManager.Player.Movement.ReadValue<Vector2>();
     }
 
-
+    
+    //Player Action Map
     private void Interact(InputAction.CallbackContext context)
     {
-        Debug.Log("interact");
+        if (PlayerStatsScript.IsInInteractionZone)
+        {
+            Item currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Item>();
+            currentItemScript.Interact();
+        }
     }
 
     private void StartSprint(InputAction.CallbackContext context)
@@ -74,6 +82,28 @@ public class PlayerActions : MonoBehaviour
     private void StartBackwardMomentum(InputAction.CallbackContext context)
     {
         PlayerMovementScript.ApplyJumpStartingMomentum(false);
+    }
+
+    //UI Action Map
+    private void Accept(InputAction.CallbackContext context)
+    {
+        Item currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Item>();
+        currentItemScript.FinishInteract();
+    }
+    
+    //Change Action Maps
+
+    public void PlayerToUI()
+    {
+        //playerInput.SwitchCurrentActionMap("UI");
+        playerInputManager.Player.Disable();
+        playerInputManager.UI.Enable();
+    }
+    
+    public void UIToPlayer()
+    {
+        playerInputManager.UI.Disable();
+        playerInputManager.Player.Enable();
     }
 
 }

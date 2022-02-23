@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 48cae0881729b5b4485b68bc81a118ac
+guid: f1420a2f3030c8149b3c4c9decf8631f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,10 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - SilentHunterIII Font
+  - 8-bit Limit (BRK)
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1

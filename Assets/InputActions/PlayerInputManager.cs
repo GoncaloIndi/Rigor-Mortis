@@ -82,7 +82,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4ec4ef6c-be00-42b1-b450-155ecf974221"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -214,7 +214,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4971fd86-e5bb-458e-83fc-e76c0980575c"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

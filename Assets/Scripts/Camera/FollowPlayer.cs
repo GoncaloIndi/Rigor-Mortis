@@ -15,6 +15,7 @@ public class FollowPlayer : MonoBehaviour
     private void Awake()
     {
         RenderSettings.fog = true;
+        Cursor.visible = false;
         playerPosition = FindObjectOfType<PlayerMovement>().GetComponent<Transform>();
     }
 

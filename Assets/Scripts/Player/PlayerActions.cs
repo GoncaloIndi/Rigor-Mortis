@@ -13,6 +13,8 @@ public class PlayerActions : MonoBehaviour
 
     [HideInInspector] public PlayerStats PlayerStatsScript;
 
+    [HideInInspector] public PlayerLockOnTarget PlayerLockOnTargetScript;
+
     private PlayerInputManager playerInputManager;
     
 
@@ -23,6 +25,7 @@ public class PlayerActions : MonoBehaviour
         PlayerMovementScript = GetComponent<PlayerMovement>();
         PlayerQuickTurnScript = GetComponent<PlayerQuickTurn>();
         PlayerStatsScript = GetComponent<PlayerStats>();
+        PlayerLockOnTargetScript = GetComponent<PlayerLockOnTarget>();
         
         //Player Action Map
         playerInputManager = new PlayerInputManager();
@@ -30,6 +33,9 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Interact.performed += Interact;
         playerInputManager.Player.Sprint.started += StartSprint;
         playerInputManager.Player.Sprint.canceled += EndSprint;
+        playerInputManager.Player.AttackLockOn.started += StartLockOn;
+        playerInputManager.Player.AttackLockOn.canceled += StopLockOn;
+        playerInputManager.Player.Attack.performed += Attack;
         playerInputManager.Player.QuickTurn.performed += QuickTurn;
         //UI Action Map
         playerInputManager.UI.Accept.performed += Accept;
@@ -64,6 +70,21 @@ public class PlayerActions : MonoBehaviour
     private void EndSprint(InputAction.CallbackContext context)
     {
         PlayerMovementScript.StopPlayerSprintingMomentum();
+    }
+
+    private void StartLockOn(InputAction.CallbackContext context)
+    {
+        PlayerLockOnTargetScript.BeginLockOnState();
+    }
+    
+    private void StopLockOn(InputAction.CallbackContext context)
+    {
+        PlayerLockOnTargetScript.EndLockOnState();
+    }
+
+    private void Attack(InputAction.CallbackContext context)
+    {
+        //Attack
     }
 
     private void QuickTurn(InputAction.CallbackContext context)

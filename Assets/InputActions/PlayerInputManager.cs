@@ -65,6 +65,22 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AttackLockOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""dfdbc168-70d2-401c-ace2-84aae37b5080"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""eead7712-29e0-4292-b7b4-77666ed0ac57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -287,6 +303,50 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""action"": ""StartingBackwardMomentum"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f9444c30-741f-4db2-93dd-1cb0516030c1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""AttackLockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""07cf6ec8-7bfc-480f-85e5-ae5cf825fcbc"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AttackLockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""13175c80-8eed-4985-8188-f74542319b64"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc3544ce-6806-4da1-aa2c-40780fb1b791"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -378,6 +438,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Player_QuickTurn = m_Player.FindAction("QuickTurn", throwIfNotFound: true);
         m_Player_StartingForwardMomentum = m_Player.FindAction("StartingForwardMomentum", throwIfNotFound: true);
         m_Player_StartingBackwardMomentum = m_Player.FindAction("StartingBackwardMomentum", throwIfNotFound: true);
+        m_Player_AttackLockOn = m_Player.FindAction("AttackLockOn", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
@@ -436,6 +498,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_QuickTurn;
     private readonly InputAction m_Player_StartingForwardMomentum;
     private readonly InputAction m_Player_StartingBackwardMomentum;
+    private readonly InputAction m_Player_AttackLockOn;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @PlayerInputManager m_Wrapper;
@@ -446,6 +510,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         public InputAction @QuickTurn => m_Wrapper.m_Player_QuickTurn;
         public InputAction @StartingForwardMomentum => m_Wrapper.m_Player_StartingForwardMomentum;
         public InputAction @StartingBackwardMomentum => m_Wrapper.m_Player_StartingBackwardMomentum;
+        public InputAction @AttackLockOn => m_Wrapper.m_Player_AttackLockOn;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -473,6 +539,12 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @StartingBackwardMomentum.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
                 @StartingBackwardMomentum.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
                 @StartingBackwardMomentum.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
+                @AttackLockOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
+                @AttackLockOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
+                @AttackLockOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
+                @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -495,6 +567,12 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @StartingBackwardMomentum.started += instance.OnStartingBackwardMomentum;
                 @StartingBackwardMomentum.performed += instance.OnStartingBackwardMomentum;
                 @StartingBackwardMomentum.canceled += instance.OnStartingBackwardMomentum;
+                @AttackLockOn.started += instance.OnAttackLockOn;
+                @AttackLockOn.performed += instance.OnAttackLockOn;
+                @AttackLockOn.canceled += instance.OnAttackLockOn;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -558,6 +636,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnQuickTurn(InputAction.CallbackContext context);
         void OnStartingForwardMomentum(InputAction.CallbackContext context);
         void OnStartingBackwardMomentum(InputAction.CallbackContext context);
+        void OnAttackLockOn(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

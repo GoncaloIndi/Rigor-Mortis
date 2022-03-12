@@ -7,6 +7,14 @@ public class PlayerStats : MonoBehaviour
     //Stores all the stats so they are easy to use in the scripts
     public bool CanMove = true;
 
+    public bool CanRotate = true;
+
+    public bool CanAttack = false;
+
+    public bool CanRun = true;
+
+    public bool IsRunning = false;
+
     public bool IsOnTargetLockOn = false;
     
     public float PlayerFowardMovementSpeed = 9.1f;

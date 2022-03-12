@@ -74,22 +74,35 @@ public class PlayerActions : MonoBehaviour
 
     private void StartLockOn(InputAction.CallbackContext context)
     {
+        if (PlayerStatsScript.IsRunning)
+        {
+            PlayerMovementScript.ForcePlayerToWalk();
+        }
         PlayerLockOnTargetScript.BeginLockOnState();
     }
     
     private void StopLockOn(InputAction.CallbackContext context)
     {
         PlayerLockOnTargetScript.EndLockOnState();
+
+        if (PlayerStatsScript.IsRunning)
+        {
+            PlayerMovementScript.StartPlayerSprintingMomentum();
+        }
+
     }
 
     private void Attack(InputAction.CallbackContext context)
     {
-        //Attack
+        if (PlayerStatsScript.CanAttack)
+        {
+            //Attack
+        }
     }
 
     private void QuickTurn(InputAction.CallbackContext context)
     {
-        if(PlayerStatsScript.CanMove)
+        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
         {
             PlayerQuickTurnScript.StartCoroutine(PlayerQuickTurnScript.PerformQuickTurn());
         }
@@ -116,7 +129,6 @@ public class PlayerActions : MonoBehaviour
 
     public void PlayerToUI()
     {
-        //playerInput.SwitchCurrentActionMap("UI");
         playerInputManager.Player.Disable();
         playerInputManager.UI.Enable();
     }

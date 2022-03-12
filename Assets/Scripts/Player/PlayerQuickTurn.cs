@@ -53,13 +53,12 @@ public class PlayerQuickTurn : MonoBehaviour
         playerStartRotation = transform1;
         relativePosition = quickTurnTargetTransform.position - transform1.position;
         targetRotation = Quaternion.LookRotation(relativePosition);
-            
-            
+
+
 
         yield return new WaitForSeconds(reenableMovementTimer);
 
         PlayerStatsScript.CanMove = true;
-        
 
     }
 }

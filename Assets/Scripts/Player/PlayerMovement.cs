@@ -28,11 +28,15 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         //Apply movement
-        if(PlayerStatsScript.CanMove)
+        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
         {
             MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
             RotatePlayer(PlayerActionsScript.PlayerMovementVector.x);
-        }       
+        }
+        else if(PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate)
+        {
+            MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
+        }
     }
 
     public void MovePlayer(float direction)
@@ -62,6 +66,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void StartPlayerSprintingMomentum() //Called By PlayerActions
     {
+        PlayerStatsScript.IsRunning = true;
+        if (!PlayerStatsScript.CanRun) return;
+        
         PlayerStatsScript.PlayerFowardMovementSpeed *= sprintSpeedMultiplier;
         playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
         PlayerAnimationsScript.DisplayRunningAnimation = true;
@@ -69,6 +76,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopPlayerSprintingMomentum() //Called By PlayerActions
     {
+        PlayerStatsScript.IsRunning = false;
+        if (!PlayerStatsScript.CanRun) return;
+        
+        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
+        PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
+        PlayerAnimationsScript.DisplayRunningAnimation = false;
+    }
+    
+    public void ForcePlayerToWalk() //Called By PlayerActions
+    {
+        if (!PlayerStatsScript.CanRun) return;
+        
         playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
         PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
         PlayerAnimationsScript.DisplayRunningAnimation = false;

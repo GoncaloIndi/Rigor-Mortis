@@ -34,8 +34,8 @@ public class PlayerQuickTurn : MonoBehaviour
         quickTurnTime += Time.deltaTime;
         
         transform.rotation= Quaternion.Slerp(playerStartRotation.rotation, targetRotation, quickTurnTime);
-
-        if (quickTurnTime > 1)
+        
+        if (quickTurnTime > 1 || !PlayerStatsScript.CanRotate)
         {
             isPerformingQuickTurn = false;
         }

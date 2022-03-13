@@ -34,12 +34,7 @@ public class PlayerLockOnTarget : MonoBehaviour
         lockOnTime += Time.deltaTime;
         
         transform.rotation= Quaternion.Slerp(playerStartRotation.rotation, lockOnRotation, lockOnTime);
-
-        if (lockOnTime > 1)
-        {
-            doLockLerp = false;
-        }
-
+        
     }
 
     public void BeginLockOnState()
@@ -117,6 +112,7 @@ public class PlayerLockOnTarget : MonoBehaviour
 
     public void EndLockOnState()
     {
+        doLockLerp = false;
         PlayerStatsScript.IsOnTargetLockOn = false;
         PlayerStatsScript.CanAttack = false;
         PlayerStatsScript.CanRotate = true;

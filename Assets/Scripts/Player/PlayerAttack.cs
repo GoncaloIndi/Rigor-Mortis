@@ -2,9 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerAttack : MonoBehaviour
 {
+    //From xinput don't know wtf it does
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
     [HideInInspector] public PlayerStats PlayerStatsScript;
@@ -33,8 +38,8 @@ public class PlayerAttack : MonoBehaviour
             PlayerStatsScript.CanMove = false;
             PlayerAnimationsScript.DisplayAttackAnimation();
             //Make it animation based and remove invokes
-            Invoke("PerformAttackLogic", .7f);
-            Invoke("ResetAttack", 1.5f);
+            Invoke("PerformAttackLogic", .6f);
+            Invoke("ResetAttack", 1.3f);
             
         }
     }
@@ -47,6 +52,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyCombat enemyCombatScript = enemyCol[i].GetComponent<EnemyCombat>();
             if (enemyCombatScript != null)
             {
+                StartCoroutine(VibrateController());
                 enemyCombatScript.TakeDamage(10);
             }
         }
@@ -55,5 +61,17 @@ public class PlayerAttack : MonoBehaviour
     {
         PlayerStatsScript.CanMove = true;
         isAttackOnCooldown = false;
+    }
+
+    private IEnumerator VibrateController()
+    {
+        GamePad.SetVibration(playerIndex, .8f, 0);
+        yield return new WaitForSeconds(.1f);
+        GamePad.SetVibration(playerIndex, 0, 0);
+        
+        yield return new WaitForSeconds(.3f);
+        GamePad.SetVibration(playerIndex, 0, .8f);
+        yield return new WaitForSeconds(.1f);
+        GamePad.SetVibration(playerIndex, 0, 0);
     }
 }

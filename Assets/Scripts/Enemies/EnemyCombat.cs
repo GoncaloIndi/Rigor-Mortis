@@ -21,7 +21,7 @@ public class EnemyCombat : MonoBehaviour
         
         if (EnemyStatsScript.EnemyHp <= 0)
         {
-            Destroy(this.gameObject, 2f);
+            Destroy(this.gameObject, 1.7f);
         }
     }
 }

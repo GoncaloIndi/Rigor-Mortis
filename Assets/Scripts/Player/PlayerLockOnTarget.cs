@@ -22,6 +22,8 @@ public class PlayerLockOnTarget : MonoBehaviour
 
     private List<EnemyStats> availableTargets = new List<EnemyStats>();
 
+    
+    // IMPORTANT: Enemy must have a collider and the EnemyStats script in order to make this work
     private void Awake()
     {
         PlayerStatsScript = GetComponent<PlayerStats>();
@@ -44,9 +46,13 @@ public class PlayerLockOnTarget : MonoBehaviour
         PlayerStatsScript.CanRotate = false;
         PlayerStatsScript.CanRun = false;
         CheckForEnemies();
+
+        if (nearestLockOnTarget != null)
+        {
+            currentLockOnTarget = nearestLockOnTarget;
+            LockOnTarget();
+        }
         
-        currentLockOnTarget = nearestLockOnTarget;
-        LockOnTarget();
     }
 
    
@@ -89,6 +95,7 @@ public class PlayerLockOnTarget : MonoBehaviour
 
     private void LockOnTarget()
     {
+        
         Vector3 lockOnVector = currentLockOnTarget.position - transform.position;
         lockOnRotation = Quaternion.LookRotation(lockOnVector);
         lockOnRotation = ClampQuaternionValues(lockOnRotation);

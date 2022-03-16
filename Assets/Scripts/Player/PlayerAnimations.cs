@@ -12,6 +12,7 @@ public class PlayerAnimations : MonoBehaviour
     private Animator PlayerAnim;
     private static readonly int Movement = Animator.StringToHash("Movement");
     [HideInInspector] public PlayerActions PlayerActionsScript;
+    private static readonly int Attack = Animator.StringToHash("Attack");
 
     private void Awake()
     {
@@ -34,5 +35,10 @@ public class PlayerAnimations : MonoBehaviour
             PlayerAnim.SetFloat(Movement, 0,.15f, Time.deltaTime);
         }
         
+    }
+
+    public void DisplayAttackAnimation()
+    {
+        PlayerAnim.SetTrigger(Attack);
     }
 }

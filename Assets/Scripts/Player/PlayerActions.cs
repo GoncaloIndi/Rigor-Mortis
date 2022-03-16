@@ -15,6 +15,8 @@ public class PlayerActions : MonoBehaviour
 
     [HideInInspector] public PlayerLockOnTarget PlayerLockOnTargetScript;
 
+    [HideInInspector] public PlayerAttack PlayerAttackScript;
+
     private PlayerInputManager playerInputManager;
     
 
@@ -26,6 +28,7 @@ public class PlayerActions : MonoBehaviour
         PlayerQuickTurnScript = GetComponent<PlayerQuickTurn>();
         PlayerStatsScript = GetComponent<PlayerStats>();
         PlayerLockOnTargetScript = GetComponent<PlayerLockOnTarget>();
+        PlayerAttackScript = GetComponent<PlayerAttack>();
         
         //Player Action Map
         playerInputManager = new PlayerInputManager();
@@ -96,7 +99,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (PlayerStatsScript.CanAttack)
         {
-            //Attack
+            PlayerAttackScript.Attack();
         }
     }
 

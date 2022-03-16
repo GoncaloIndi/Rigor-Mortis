@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3427945162760724111}
   - component: {fileID: 3427945162760724110}
   - component: {fileID: 3427945162760724145}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BloodVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3427945162760724144}
-  m_LocalRotation: {x: -0.7053887, y: 0.049264397, z: 0.049264383, w: 0.7053885}
+  m_LocalRotation: {x: -0.70538867, y: 0.049263716, z: 0.049263716, w: 0.70538867}
   m_LocalPosition: {x: 4.597069, y: 7.8193355, z: 1.6738487}
-  m_LocalScale: {x: 28.955597, y: 28.955599, z: 28.955599}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 3427945163103055664}
   - {fileID: 3427945163383679208}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 7.99}
 --- !u!198 &3427945162760724110
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -286,7 +286,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.2
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -977,7 +977,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 3
-        scalar: 20
+        scalar: 15
         minScalar: 5
         maxCurve:
           serializedVersion: 2
@@ -1544,7 +1544,7 @@ ParticleSystem:
     flipU: 0
     flipV: 0
   VelocityModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -1654,7 +1654,7 @@ ParticleSystem:
     z:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4875,7 +4875,7 @@ GameObject:
   - component: {fileID: 3427945163103055664}
   - component: {fileID: 3427945163103055630}
   - component: {fileID: 3427945163103055665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blood_Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4912,7 +4912,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -9737,7 +9737,7 @@ GameObject:
   - component: {fileID: 3427945163383679208}
   - component: {fileID: 3427945163383679210}
   - component: {fileID: 3427945163383679211}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blood_Splash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9774,7 +9774,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

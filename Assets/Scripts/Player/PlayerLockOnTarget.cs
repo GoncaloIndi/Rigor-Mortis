@@ -89,6 +89,7 @@ public class PlayerLockOnTarget : MonoBehaviour
 
     private void LockOnTarget()
     {
+        if (currentLockOnTarget == null) return;
         Vector3 lockOnVector = currentLockOnTarget.position - transform.position;
         lockOnRotation = Quaternion.LookRotation(lockOnVector);
         lockOnRotation = ClampQuaternionValues(lockOnRotation);

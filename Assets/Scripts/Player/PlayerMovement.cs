@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody playerRigidbody;
+    private CharacterController playerController;
 
     private float playerBackwardsMovementSpeed;
 
@@ -14,13 +14,16 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
-    private float sprintSpeedMultiplier = 1.0385f;
+    //Character Controller Related
+    private Vector3 gravityVector;
+    private float sprintSpeedMultiplier = 1.6f;
+    private float gravity = -9.81f;
 
     private void Awake()
     {
         PlayerStatsScript = GetComponent<PlayerStats>();
-        playerBackwardsMovementSpeed = PlayerStatsScript.PlayerFowardMovementSpeed;
-        playerRigidbody = GetComponent<Rigidbody>();
+        playerBackwardsMovementSpeed = -PlayerStatsScript.PlayerFowardMovementSpeed;
+        playerController = GetComponent<CharacterController>();
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
     }
@@ -41,13 +44,26 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer(float direction)
     {
+        //Gravity
+        if (playerController.isGrounded)
+        {
+            gravityVector.y = -1;
+        }
+        else
+        {
+            gravityVector.y -= gravity * -2 * Time.deltaTime;
+        }
+        playerController.Move(gravityVector);
+        
+        
         if (direction > 0.1)
         {
-            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed , ForceMode.Force);
+            playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
+            
         }
         else if(direction < -0.1)
         {
-            playerRigidbody.AddForce(transform.forward * -playerBackwardsMovementSpeed , ForceMode.Force);
+            playerController.Move(transform.forward * playerBackwardsMovementSpeed);
         }
         
     }
@@ -70,7 +86,6 @@ public class PlayerMovement : MonoBehaviour
         if (!PlayerStatsScript.CanRun) return;
         
         PlayerStatsScript.PlayerFowardMovementSpeed *= sprintSpeedMultiplier;
-        playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
         PlayerAnimationsScript.DisplayRunningAnimation = true;
     }
 
@@ -79,7 +94,6 @@ public class PlayerMovement : MonoBehaviour
         PlayerStatsScript.IsRunning = false;
         if (!PlayerStatsScript.CanRun) return;
         
-        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
         PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
         PlayerAnimationsScript.DisplayRunningAnimation = false;
     }
@@ -88,23 +102,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!PlayerStatsScript.CanRun) return;
         
-        playerRigidbody.AddForce(transform.forward * -PlayerStatsScript.PlayerFowardMovementSpeed * 3f, ForceMode.Force);
         PlayerStatsScript.PlayerFowardMovementSpeed /= sprintSpeedMultiplier;
         PlayerAnimationsScript.DisplayRunningAnimation = false;
     }
-
-    public void ApplyJumpStartingMomentum(bool isMovingForward)
-    {
-        if (isMovingForward)
-        {
-            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * 2.5f, ForceMode.Force);
-        }
-        else
-        {
-            playerRigidbody.AddForce(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed * -2.5f, ForceMode.Force);
-        }
-        
-    }
-
+    
 
 }

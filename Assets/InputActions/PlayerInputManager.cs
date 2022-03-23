@@ -51,22 +51,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""StartingForwardMomentum"",
-                    ""type"": ""Button"",
-                    ""id"": ""856e086c-1ff4-4552-ac21-590fea25babe"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""StartingBackwardMomentum"",
-                    ""type"": ""Button"",
-                    ""id"": ""b786e014-0d69-42d2-bfc7-79882da6ebfe"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""AttackLockOn"",
                     ""type"": ""Button"",
                     ""id"": ""dfdbc168-70d2-401c-ace2-84aae37b5080"",
@@ -262,50 +246,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ffc2c391-d3a3-40e4-9200-1bce2d807964"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""StartingForwardMomentum"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0e074bac-aa68-4bb7-a160-2437955f2d54"",
-                    ""path"": ""<Gamepad>/dpad/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""StartingForwardMomentum"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""877caebe-5654-4a3d-8a41-3a1c39a0eb76"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""StartingBackwardMomentum"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""863a2472-2460-4e5a-8073-aac6fcf291a5"",
-                    ""path"": ""<Gamepad>/dpad/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""StartingBackwardMomentum"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""f9444c30-741f-4db2-93dd-1cb0516030c1"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -436,8 +376,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_QuickTurn = m_Player.FindAction("QuickTurn", throwIfNotFound: true);
-        m_Player_StartingForwardMomentum = m_Player.FindAction("StartingForwardMomentum", throwIfNotFound: true);
-        m_Player_StartingBackwardMomentum = m_Player.FindAction("StartingBackwardMomentum", throwIfNotFound: true);
         m_Player_AttackLockOn = m_Player.FindAction("AttackLockOn", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // UI
@@ -496,8 +434,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_QuickTurn;
-    private readonly InputAction m_Player_StartingForwardMomentum;
-    private readonly InputAction m_Player_StartingBackwardMomentum;
     private readonly InputAction m_Player_AttackLockOn;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
@@ -508,8 +444,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @QuickTurn => m_Wrapper.m_Player_QuickTurn;
-        public InputAction @StartingForwardMomentum => m_Wrapper.m_Player_StartingForwardMomentum;
-        public InputAction @StartingBackwardMomentum => m_Wrapper.m_Player_StartingBackwardMomentum;
         public InputAction @AttackLockOn => m_Wrapper.m_Player_AttackLockOn;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -533,12 +467,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @QuickTurn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
-                @StartingForwardMomentum.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingForwardMomentum;
-                @StartingForwardMomentum.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingForwardMomentum;
-                @StartingForwardMomentum.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingForwardMomentum;
-                @StartingBackwardMomentum.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
-                @StartingBackwardMomentum.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
-                @StartingBackwardMomentum.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartingBackwardMomentum;
                 @AttackLockOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
                 @AttackLockOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
                 @AttackLockOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
@@ -561,12 +489,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @QuickTurn.started += instance.OnQuickTurn;
                 @QuickTurn.performed += instance.OnQuickTurn;
                 @QuickTurn.canceled += instance.OnQuickTurn;
-                @StartingForwardMomentum.started += instance.OnStartingForwardMomentum;
-                @StartingForwardMomentum.performed += instance.OnStartingForwardMomentum;
-                @StartingForwardMomentum.canceled += instance.OnStartingForwardMomentum;
-                @StartingBackwardMomentum.started += instance.OnStartingBackwardMomentum;
-                @StartingBackwardMomentum.performed += instance.OnStartingBackwardMomentum;
-                @StartingBackwardMomentum.canceled += instance.OnStartingBackwardMomentum;
                 @AttackLockOn.started += instance.OnAttackLockOn;
                 @AttackLockOn.performed += instance.OnAttackLockOn;
                 @AttackLockOn.canceled += instance.OnAttackLockOn;
@@ -634,8 +556,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnQuickTurn(InputAction.CallbackContext context);
-        void OnStartingForwardMomentum(InputAction.CallbackContext context);
-        void OnStartingBackwardMomentum(InputAction.CallbackContext context);
         void OnAttackLockOn(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }

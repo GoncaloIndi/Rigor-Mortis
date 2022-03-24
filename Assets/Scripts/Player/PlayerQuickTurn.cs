@@ -49,7 +49,7 @@ public class PlayerQuickTurn : MonoBehaviour
         isPerformingQuickTurn = true;
         PlayerStatsScript.CanMove = false;
         var transform1 = transform;
-        var reenableMovementTimer = .01f ;
+        var reenableMovementTimer = .3f;
         playerStartRotation = transform1;
         relativePosition = quickTurnTargetTransform.position - transform1.position;
         targetRotation = Quaternion.LookRotation(relativePosition);

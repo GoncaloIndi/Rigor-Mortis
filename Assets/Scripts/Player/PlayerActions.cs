@@ -42,10 +42,6 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.QuickTurn.performed += QuickTurn;
         //UI Action Map
         playerInputManager.UI.Accept.performed += Accept;
-        
-        //Starting boost to make movement feel less sluggish    
-        playerInputManager.Player.StartingForwardMomentum.performed += StartForwardMomentum;
-        playerInputManager.Player.StartingBackwardMomentum.performed += StartBackwardMomentum;
 
     }
 
@@ -109,16 +105,6 @@ public class PlayerActions : MonoBehaviour
         {
             PlayerQuickTurnScript.StartCoroutine(PlayerQuickTurnScript.PerformQuickTurn());
         }
-    }
-
-    private void StartForwardMomentum(InputAction.CallbackContext context)
-    {
-        PlayerMovementScript.ApplyJumpStartingMomentum(true);
-    }
-    
-    private void StartBackwardMomentum(InputAction.CallbackContext context)
-    {
-        PlayerMovementScript.ApplyJumpStartingMomentum(false);
     }
 
     //UI Action Map

@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float playerBackwardsMovementSpeed;
 
-    [SerializeField] private bool isUsingTankControls = true; //To be put in the options script later
-
     [SerializeField] private float playerRotationSpeed = 55f;
 
     [HideInInspector] public PlayerActions PlayerActionsScript;
@@ -37,8 +35,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyGravity();
-        if(isUsingTankControls) UseTankControls();
-        else MovePlayerBasedOnCamera();
+        if(GameSettings.IsUsingTankControls) UseTankControls();
+        else
+        {
+            if(!PlayerStatsScript.IsOnTargetLockOn) MovePlayerBasedOnCamera();
+            else LockOnMovementLogic();
+        }
 
         
     }
@@ -108,31 +110,82 @@ public class PlayerMovement : MonoBehaviour
             Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
             Vector3 yMovement = Vector3.zero;
             Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
-            Vector3 Movement = xMovement + yMovement + zMovement;
+            Vector3 movement = xMovement + yMovement + zMovement;
 
-            Movement = new Vector3(Movement.x, 0, Movement.z);
-            Movement.Normalize();
+            movement = new Vector3(movement.x, 0, movement.z);
+            movement.Normalize();
 
-            if (Movement != Vector3.zero)
+            if (movement != Vector3.zero)
             {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Movement), playerRotationSpeed * 10 * Time.deltaTime );
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movement), playerRotationSpeed * 10 * Time.deltaTime );
             }
 
-            playerController.Move(Movement * PlayerStatsScript.PlayerFowardMovementSpeed);
+            playerController.Move(movement * PlayerStatsScript.PlayerFowardMovementSpeed);
         }
-        else if (PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate) //Need to figure out how to make alternate controls work with lock on
+        else if (PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate) 
         {
             Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
             Vector3 yMovement = Vector3.zero;
             Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
-            Vector3 Movement = xMovement + yMovement + zMovement;
+            Vector3 movement = xMovement + yMovement + zMovement;
             
-            Movement = new Vector3(Movement.x, 0, Movement.z);
-            Movement.Normalize();
-            
-            playerController.Move(Movement * PlayerStatsScript.PlayerFowardMovementSpeed);
+            movement = new Vector3(movement.x, 0, movement.z);
+            movement.Normalize();
+
+            playerController.Move(movement * PlayerStatsScript.PlayerFowardMovementSpeed);
         }
         
+    }
+
+    private void LockOnMovementLogic() //Verifies the current Quadrant of the vector and determines how the input should work based on that
+    {
+        if(!PlayerStatsScript.CanMove) return;
+        //To simplify math Q1 = 1 | Q2 = 2 | Q3 = -1 | Q4 = -2
+        int inputQuadrant = 0; // Q1 X+ | Q2 Y+ | Q3 X- | Q4 Y-
+
+        //Verify enemy quadrant
+        if (PlayerStatsScript.LockOnVector.x > 0 && PlayerStatsScript.LockOnVector.z > 0) //Q1
+        {
+            if (PlayerStatsScript.LockOnVector.x > PlayerStatsScript.LockOnVector.z) inputQuadrant = 1;
+            else inputQuadrant = 2;
+        }
+        else if (PlayerStatsScript.LockOnVector.x < 0 && PlayerStatsScript.LockOnVector.z > 0) //Q2
+        {
+            if (-PlayerStatsScript.LockOnVector.x > PlayerStatsScript.LockOnVector.z) inputQuadrant = -1;
+            else inputQuadrant = 2;
+        }
+        else if (PlayerStatsScript.LockOnVector.x < 0 && PlayerStatsScript.LockOnVector.z < 0) //Q3
+        {
+            if (PlayerStatsScript.LockOnVector.x < PlayerStatsScript.LockOnVector.z) inputQuadrant = -1;
+            else inputQuadrant = -2;
+        }
+        else if (PlayerStatsScript.LockOnVector.x > 0 && PlayerStatsScript.LockOnVector.z < 0) //Q4
+        {
+            if (PlayerStatsScript.LockOnVector.x > -PlayerStatsScript.LockOnVector.z) inputQuadrant = 1;
+            else inputQuadrant = -2;
+        }
+        
+        //Handle movement
+        if (inputQuadrant == -1)
+        {
+            if(PlayerActionsScript.PlayerMovementVector.x > 0) playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
+            else if (PlayerActionsScript.PlayerMovementVector.x < 0) playerController.Move(transform.forward * playerBackwardsMovementSpeed);
+        }
+        if (inputQuadrant == -2)
+        {
+            if(PlayerActionsScript.PlayerMovementVector.y > 0) playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
+            else if (PlayerActionsScript.PlayerMovementVector.y < 0) playerController.Move(transform.forward * playerBackwardsMovementSpeed);
+        }
+        if (inputQuadrant == 1)
+        {
+            if(PlayerActionsScript.PlayerMovementVector.x < 0) playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
+            else if (PlayerActionsScript.PlayerMovementVector.x > 0) playerController.Move(transform.forward * playerBackwardsMovementSpeed);
+        }
+        if (inputQuadrant == 2)
+        {
+            if(PlayerActionsScript.PlayerMovementVector.y < 0) playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
+            else if (PlayerActionsScript.PlayerMovementVector.y > 0) playerController.Move(transform.forward * playerBackwardsMovementSpeed);
+        }
     }
 
     public void StartPlayerSprintingMomentum() //Called By PlayerActions

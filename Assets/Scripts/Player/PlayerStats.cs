@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     public bool IsInInteractionZone = false;
 
     [HideInInspector] public GameObject CurrentInteractionGameObject;
+    [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
 
     public void DamagePlayer(int dmg)
     {

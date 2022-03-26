@@ -101,7 +101,7 @@ public class PlayerActions : MonoBehaviour
 
     private void QuickTurn(InputAction.CallbackContext context)
     {
-        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
+        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate && GameSettings.IsUsingTankControls)
         {
             PlayerQuickTurnScript.StartCoroutine(PlayerQuickTurnScript.PerformQuickTurn());
         }

@@ -605,7 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1531b48d0343de34ab5df1ab2b68482d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isUsingTankControls: 0
   playerRotationSpeed: 65
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
@@ -15520,9 +15519,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1470673341}
   - component: {fileID: 1470673340}
-  - component: {fileID: 1470673339}
   - component: {fileID: 1470673342}
   - component: {fileID: 1470673343}
+  - component: {fileID: 1470673339}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -15530,14 +15529,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1470673339
-AudioListener:
+--- !u!114 &1470673339
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470673338}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!20 &1470673340
 Camera:
   m_ObjectHideFlags: 0

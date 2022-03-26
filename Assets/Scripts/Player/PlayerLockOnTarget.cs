@@ -34,6 +34,7 @@ public class PlayerLockOnTarget : MonoBehaviour
         if(!doLockLerp) return;
         
         lockOnTime += Time.deltaTime;
+        UpdateTargetPosition();
         
         transform.rotation= Quaternion.Slerp(playerStartRotation.rotation, lockOnRotation, lockOnTime);
         
@@ -102,6 +103,18 @@ public class PlayerLockOnTarget : MonoBehaviour
         lockOnTime = 0;
         playerStartRotation = transform;
         doLockLerp = true;
+    }
+
+    private void UpdateTargetPosition()
+    {
+        Vector3 lockOnVector = currentLockOnTarget.position - transform.position;
+        lockOnRotation = Quaternion.LookRotation(lockOnVector);
+        lockOnRotation = ClampQuaternionValues(lockOnRotation);
+
+        if (!GameSettings.IsUsingTankControls)
+        {
+            PlayerStatsScript.LockOnVector = lockOnVector;
+        }
     }
 
     private void ClearLockOnTarget()

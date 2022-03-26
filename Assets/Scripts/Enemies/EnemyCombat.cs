@@ -21,6 +21,7 @@ public class EnemyCombat : MonoBehaviour
         
         if (EnemyStatsScript.EnemyHp <= 0)
         {
+            //Code for killing the enemy
             Destroy(this.gameObject, 1.7f);
         }
     }

@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -5,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController playerController;
 
     private float playerBackwardsMovementSpeed;
+
+    [SerializeField] private bool isUsingTankControls = true; //To be put in the options script later
 
     [SerializeField] private float playerRotationSpeed = 55f;
 
@@ -14,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
+    private GameObject currentCamera; //Change later based on which camera is rendering
+
     //Character Controller Related
     private Vector3 gravityVector;
     private float sprintSpeedMultiplier = 1.6f;
@@ -22,27 +27,23 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         PlayerStatsScript = GetComponent<PlayerStats>();
-        playerBackwardsMovementSpeed = -PlayerStatsScript.PlayerFowardMovementSpeed;
+        playerBackwardsMovementSpeed = -PlayerStatsScript.PlayerFowardMovementSpeed *.6f;
         playerController = GetComponent<CharacterController>();
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
+        currentCamera = FindObjectOfType<FollowPlayer>().gameObject;
     }
 
     private void FixedUpdate()
     {
-        //Apply movement
-        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
-        {
-            MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
-            RotatePlayer(PlayerActionsScript.PlayerMovementVector.x);
-        }
-        else if(PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate)
-        {
-            MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
-        }
+        ApplyGravity();
+        if(isUsingTankControls) UseTankControls();
+        else MovePlayerBasedOnCamera();
+
+        
     }
 
-    public void MovePlayer(float direction)
+    private void ApplyGravity()
     {
         //Gravity
         if (playerController.isGrounded)
@@ -54,8 +55,13 @@ public class PlayerMovement : MonoBehaviour
             gravityVector.y -= gravity * -2 * Time.deltaTime;
         }
         playerController.Move(gravityVector);
-        
-        
+
+
+    }
+
+    //Tank Controls
+    private void MovePlayer(float direction)
+    {
         if (direction > 0.1)
         {
             playerController.Move(transform.forward * PlayerStatsScript.PlayerFowardMovementSpeed);
@@ -68,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    public void RotatePlayer(float rotationDirection)
+    private void RotatePlayer(float rotationDirection)
     {
         if (rotationDirection > 0.1)
         {
@@ -78,6 +84,55 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.Rotate(Vector3.up * (-playerRotationSpeed * Time.deltaTime));
         }
+    }
+
+    private void UseTankControls()
+    {
+        //Apply movement
+        if(PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
+        {
+            MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
+            RotatePlayer(PlayerActionsScript.PlayerMovementVector.x);
+        }
+        else if(PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate)
+        {
+            MovePlayer(PlayerActionsScript.PlayerMovementVector.y);
+        }
+    }
+    
+    //Alternate Controls
+    private void MovePlayerBasedOnCamera()
+    {
+        if (PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
+        {
+            Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
+            Vector3 yMovement = Vector3.zero;
+            Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
+            Vector3 Movement = xMovement + yMovement + zMovement;
+
+            Movement = new Vector3(Movement.x, 0, Movement.z);
+            Movement.Normalize();
+
+            if (Movement != Vector3.zero)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Movement), playerRotationSpeed * 10 * Time.deltaTime );
+            }
+
+            playerController.Move(Movement * PlayerStatsScript.PlayerFowardMovementSpeed);
+        }
+        else if (PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate) //Need to figure out how to make alternate controls work with lock on
+        {
+            Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
+            Vector3 yMovement = Vector3.zero;
+            Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
+            Vector3 Movement = xMovement + yMovement + zMovement;
+            
+            Movement = new Vector3(Movement.x, 0, Movement.z);
+            Movement.Normalize();
+            
+            playerController.Move(Movement * PlayerStatsScript.PlayerFowardMovementSpeed);
+        }
+        
     }
 
     public void StartPlayerSprintingMomentum() //Called By PlayerActions

@@ -22,11 +22,11 @@ public class PlayerAnimations : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (PlayerActionsScript.PlayerMovementVector.y > 0 && DisplayRunningAnimation)
+        if (PlayerActionsScript.PlayerMovementVector.y > 0 || PlayerActionsScript.PlayerMovementVector.x > 0 && DisplayRunningAnimation)
         {
             PlayerAnim.SetFloat(Movement, 1, .1f, Time.deltaTime);
         }
-        else if (PlayerActionsScript.PlayerMovementVector.y != 0)
+        else if (PlayerActionsScript.PlayerMovementVector != Vector2.zero)
         {
             PlayerAnim.SetFloat(Movement, .5f,.15f, Time.deltaTime);
         }

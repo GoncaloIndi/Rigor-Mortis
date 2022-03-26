@@ -523,7 +523,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 95479324}
-  - component: {fileID: 95479323}
   - component: {fileID: 95479321}
   - component: {fileID: 95479329}
   - component: {fileID: 95479326}
@@ -577,14 +576,6 @@ MonoBehaviour:
   maximumLockOnDistance: 5
   nearestLockOnTarget: {fileID: 0}
   currentLockOnTarget: {fileID: 0}
---- !u!33 &95479323
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 95479320}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &95479324
 Transform:
   m_ObjectHideFlags: 0
@@ -614,7 +605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1531b48d0343de34ab5df1ab2b68482d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRotationSpeed: 55
+  isUsingTankControls: 0
+  playerRotationSpeed: 65
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
   PlayerAnimationsScript: {fileID: 0}

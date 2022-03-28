@@ -19,11 +19,19 @@ public class IncreaseFOV : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CameraFollowScript.CameraOffset += new Vector3(0, yOffset, 0);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CameraFollowScript.CameraOffset += new Vector3(0, yOffset, 0);
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        CameraFollowScript.CameraOffset -= new Vector3(0, yOffset, 0);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CameraFollowScript.CameraOffset -= new Vector3(0, yOffset, 0);
+        }
+        
     }
 }

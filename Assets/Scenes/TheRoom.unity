@@ -573,7 +573,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  maximumLockOnDistance: 5
+  maximumLockOnDistance: 3.5
   nearestLockOnTarget: {fileID: 0}
   currentLockOnTarget: {fileID: 0}
 --- !u!4 &95479324
@@ -677,6 +677,7 @@ MonoBehaviour:
   PlayerHp: 100
   IsInInteractionZone: 0
   CurrentInteractionGameObject: {fileID: 0}
+  LockOnVector: {x: 0, y: 0, z: 0}
 --- !u!114 &95479330
 MonoBehaviour:
   m_ObjectHideFlags: 0

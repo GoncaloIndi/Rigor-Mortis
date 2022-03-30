@@ -35,7 +35,7 @@ public class RatStateManager : MonoBehaviour
 
     private void Update()
     {
-       RatNavMeshAgent.transform.localPosition = Vector3.zero;
+       //RatNavMeshAgent.transform.localPosition = Vector3.zero;
     }
 
 

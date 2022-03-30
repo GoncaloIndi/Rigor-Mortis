@@ -12,53 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
   m_Name: Readme
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 7801804018a7dcf42abb827444e18660, type: 3}
-  title: Universal Render Pipeline Template
+  icon: {fileID: 2800000, guid: f3b461aa3ce4e164e80610d900c9b22d, type: 3}
+  iconMaxWidth: 192
+  title: SNAPS Prototype Pack
+  titlesub: 
   sections:
-  - heading: Universal Render Pipeline
-    text: 'The Universal Project Template configures Project settings for Projects
-      where performance, wide platform support, and ease of customizing graphics
-      are the primary considerations.'
+  - heading: About SNAPS Packs
+    text: 'SNAPS provides Unity developers an exhaustive library of modular content designed to make prototyping and building first playables quick and easy. '
     linkText: 
     url: 
   - heading: 
-    text: 'This Template uses the Universal Render Pipeline (URP) and Shader Graph.'
+    text: "SNAPS prefabs are built to real-world scale but are designed to \u201Csnap\u201D
+      together when used with ProGrids. \nGrid snap measurements start at 1m and are
+      halved ( eg. 0.5, 0.25, 0.125 etc ) according to refinement needed to place
+      or position smaller objects."
     linkText: 
     url: 
   - heading: 
-    text: 'URP is prebuilt Scriptable Render Pipeline that is quick and easy to customize,
-      and lets you create optimized graphics across a wide range of platforms. URP
-      also includes an optimized 2D renderer complete with 2D lights and pixel perfect
-      rendering, and an integrated post-processing solution.'
+    text: SNAP pack models were "modelled" entirely with ProBuilder, and can be further customized or modified with ProBuilder.
     linkText: 
     url: 
   - heading: 
-    text: 'Shader Graph is a tool that allows you to create shaders using a visual
-      node editor instead of writing code.'
+    text: Each SNAPS Pack caters for a particular theme and while they can be used
+      together in a project, they are not designed to be "snap-able" between packs.
+      Different themes require different size and scale settings.
     linkText: 
     url: 
-  - heading: 
-    text: 'This template contains a sample Scene that contains examples of how to
-      configure lighting settings, Materials, Shaders, and post-processing effects
-      in URP, several preconfigured Universal Render Pipeline Assets that let you
-      quickly swap between graphics quality levels, and Presets that have been optimized
-      for use with URP.'
+  - heading: Requirements
+    text: SNAPS packs are meant to be used in unison with ProBuilder and ProGrids,
+      both available via the Package Manager. While the packs can be used without
+      using ProGrids, ProBuilder will need to be installed.
     linkText: 
     url: 
-  - heading: 
-    text: 'This template contains a sample Scene that contains examples of how to
-      configure lighting settings, Materials, Shaders, and post-processing effects
-      in URP, several preconfigured Universal Render Pipeline Assets that let you
-      quickly swap between graphics quality levels, and Presets that have been optimized
-      for use with URP.'
-    linkText: 
-    url: 
-  - heading: 
-    text: 'To read more about URP and its built-in features, see the '
-    linkText: URP documentation.
-    url: https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest/index.html
-  - heading: 
-    text: 'For more information about Shader Graph, see the '
-    linkText: Shader Graph documentation
-    url: https://docs.unity3d.com/Packages/com.unity.shadergraph@latest
   loadedLayout: 1

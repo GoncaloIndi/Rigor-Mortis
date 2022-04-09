@@ -12,7 +12,7 @@ public class RatStateManager : MonoBehaviour
     [SerializeField] private State currentState;
 
     [Header("Current Target")] 
-    public PlayerStats CurrentTarget;
+    public GameObject CurrentTarget;
 
     [HideInInspector]public NavMeshAgent RatNavMeshAgent;
     [HideInInspector] public Rigidbody RatRB;
@@ -24,7 +24,7 @@ public class RatStateManager : MonoBehaviour
     private void Awake()
     {
         currentState = startingState;
-        RatNavMeshAgent = GetComponentInChildren<NavMeshAgent>();
+        RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
     }
 
@@ -32,12 +32,6 @@ public class RatStateManager : MonoBehaviour
     {
         HandleStateMachine();
     }
-
-    private void Update()
-    {
-       //RatNavMeshAgent.transform.localPosition = Vector3.zero;
-    }
-
 
     private void HandleStateMachine()
     {

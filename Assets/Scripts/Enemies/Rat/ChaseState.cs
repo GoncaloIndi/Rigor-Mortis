@@ -9,7 +9,7 @@ public class ChaseState : State
     
     public override State Tick(RatStateManager ratStateManager)
     {
-        MoveTowardsCurrentTarget(ratStateManager);
+        //MoveTowardsCurrentTarget(ratStateManager);
         RotateTowardsCurrentTarget(ratStateManager);
         return this;
     }
@@ -23,6 +23,6 @@ public class ChaseState : State
     {
         ratStateManager.RatNavMeshAgent.enabled = true;
         ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-        ratStateManager.transform.rotation = Quaternion.Slerp(ratStateManager.transform.rotation, ratStateManager.RatNavMeshAgent.transform.rotation, ratStateManager.RotationSpeed/Time.deltaTime);
+        //ratStateManager.transform.rotation = Quaternion.Slerp(ratStateManager.transform.rotation, ratStateManager.RatNavMeshAgent.transform.rotation, ratStateManager.RotationSpeed/Time.deltaTime);
     }
 }

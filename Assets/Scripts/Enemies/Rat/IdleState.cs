@@ -44,9 +44,10 @@ public class IdleState : State
         //Searching the player via PlayerStatsScript
         for (int i = 0; i < colliders.Length; i++)
         {
-            PlayerStats player = colliders[i].GetComponent<PlayerStats>(); //Tutorial had transform before getcomponent
+            GameObject player = colliders[i].gameObject; //Tutorial had transform before getcomponent
+            
 
-            if (player != null)
+            if (player.CompareTag("Player"))
             {
 
                 Vector3 targetDirection = transform.position - player.transform.position;

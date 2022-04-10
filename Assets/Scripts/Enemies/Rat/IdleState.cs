@@ -14,8 +14,8 @@ public class IdleState : State
     [SerializeField] private LayerMask playerLayer;
     
     [Header("Detection FOV")] //Rat FOV
-    [SerializeField] private float minimumDetectionAngle = -35;
-    [SerializeField] private float maximumDetectionAngle = 35;
+    [SerializeField] private float minimumDetectionAngle = 145;
+    [SerializeField] private float maximumDetectionAngle = 200;
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
     
 
@@ -52,6 +52,8 @@ public class IdleState : State
 
                 Vector3 targetDirection = transform.position - player.transform.position;
                 float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+                
+                
                 
                 if (viewableAngle > minimumDetectionAngle && viewableAngle < maximumDetectionAngle)
                 {

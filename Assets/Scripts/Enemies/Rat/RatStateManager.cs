@@ -13,23 +13,31 @@ public class RatStateManager : MonoBehaviour
 
     [Header("Current Target")] 
     public GameObject CurrentTarget;
-
+    public float DistanceFromCurrentTarget;
     [HideInInspector]public NavMeshAgent RatNavMeshAgent;
     [HideInInspector] public Rigidbody RatRB;
+    
     [Header("Locomotion")]
-    public float RatSpeed = .5f;
+    public float RatSpeed = .65f;
 
-    public float RotationSpeed = 1;
+    [Header("Attack")] 
+    public float MinimumAttackDistance = 1f;
+    
 
     private void Awake()
     {
         currentState = startingState;
         RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
+        ChangeRatSpeed();
     }
 
     private void FixedUpdate()
     {
+        if (CurrentTarget != null)
+        {
+            DistanceFromCurrentTarget = Vector3.Distance(CurrentTarget.transform.position, transform.position);
+        }
         HandleStateMachine();
     }
 
@@ -46,8 +54,10 @@ public class RatStateManager : MonoBehaviour
                 currentState = nextState;
             }
         }
+    }
 
-        
-        
+    public void ChangeRatSpeed() //To be easily called whenever the speed has changed
+    {
+        RatNavMeshAgent.speed = RatSpeed;
     }
 }

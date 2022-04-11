@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         PlayerStatsScript = GetComponent<PlayerStats>();
-        playerBackwardsMovementSpeed = -PlayerStatsScript.PlayerFowardMovementSpeed *.6f;
+        playerBackwardsMovementSpeed = -PlayerStatsScript.PlayerFowardMovementSpeed *.8f;
         playerController = GetComponent<CharacterController>();
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();

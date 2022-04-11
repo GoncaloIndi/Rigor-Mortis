@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class RatStateManager : MonoBehaviour
 {
     [SerializeField] private IdleState startingState;
+    public Vector3 Origin;
     
     [Header("Current State")]
     [SerializeField] private State currentState;
@@ -18,10 +19,15 @@ public class RatStateManager : MonoBehaviour
     [HideInInspector] public Rigidbody RatRB;
     
     [Header("Locomotion")]
-    public float RatSpeed = .65f;
+    public float RatSpeed = .6f;
 
-    [Header("Attack")] 
+    [Header("Attack & Chase")] 
     public float MinimumAttackDistance = 1f;
+    public float MaximumChaseDistance = 3.7f;
+
+    [Header("Debug Values")] 
+    public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies
+    public bool ReturnToOrigin = false;
     
 
     private void Awake()
@@ -30,6 +36,7 @@ public class RatStateManager : MonoBehaviour
         RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
         ChangeRatSpeed();
+        Origin = transform.position;
     }
 
     private void FixedUpdate()
@@ -59,5 +66,11 @@ public class RatStateManager : MonoBehaviour
     public void ChangeRatSpeed() //To be easily called whenever the speed has changed
     {
         RatNavMeshAgent.speed = RatSpeed;
+    }
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        ReturnToOrigin = true;
+        Debug.Log("Returning");
     }
 }

@@ -2106,8 +2106,8 @@ MonoBehaviour:
   RatNavMeshAgent: {fileID: 0}
   RatRB: {fileID: 0}
   RatSpeed: 0.4
-  MinimumAttackDistance: 1
-  MaximumChaseDistance: 3.7
+  MinimumAttackDistance: 0.8
+  MaximumChaseDistance: 4.1
   IsPerformingAction: 0
   ReturnToOrigin: 0
 --- !u!114 &489573651
@@ -7469,12 +7469,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasDetectedPlayer: 0
-  detectionRadius: 3
+  detectionRadius: 4
   playerLayer:
     serializedVersion: 2
     m_Bits: 512
-  minimumDetectionAngle: 130
-  maximumDetectionAngle: 230
+  minimumDetectionAngle: 120
+  maximumDetectionAngle: 240
   ignoreWhenInLineOfSight:
     serializedVersion: 2
     m_Bits: 1023
@@ -7490,6 +7490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d592feecbc824cc4eae28275e4f331ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreWhenInLineOfSight:
+    serializedVersion: 2
+    m_Bits: 1023
 --- !u!4 &2076577589
 Transform:
   m_ObjectHideFlags: 0

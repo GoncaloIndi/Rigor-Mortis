@@ -93,10 +93,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context)
     {
-        if (PlayerStatsScript.CanAttack)
-        {
-            PlayerAttackScript.Attack();
-        }
+        PlayerAttackScript.Attack();
     }
 
     private void QuickTurn(InputAction.CallbackContext context)

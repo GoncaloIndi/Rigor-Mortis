@@ -106,10 +106,8 @@ public class IdleState : State
                     var transform1 = player.transform;
                     Vector3 playerStartPoint = new Vector3(transform1.position.x, transform1.position.y + height, transform1.position.z);
                     var position = transform.position;
-                    Vector3 ratStartPoint = new Vector3(position.x, position.y, position.z);;
+                    Vector3 ratStartPoint = new Vector3(position.x, position.y + height, position.z);
 
-                    
-                    
                     if (Physics.Linecast(playerStartPoint, ratStartPoint, out hit, ignoreWhenInLineOfSight))
                     {
 

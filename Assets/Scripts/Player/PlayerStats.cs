@@ -8,9 +8,7 @@ public class PlayerStats : MonoBehaviour
     public bool CanMove = true;
 
     public bool CanRotate = true;
-
-    public bool CanAttack = false;
-
+    
     public bool CanRun = true;
 
     public bool IsRunning = false;

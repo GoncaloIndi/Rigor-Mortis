@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        if (PlayerStatsScript.CanAttack && !isAttackOnCooldown)
+        if (!isAttackOnCooldown)
         {
             isAttackOnCooldown = true;
             PlayerStatsScript.CanMove = false;

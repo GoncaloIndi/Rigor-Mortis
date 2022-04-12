@@ -43,7 +43,6 @@ public class PlayerLockOnTarget : MonoBehaviour
     public void BeginLockOnState()
     {
         PlayerStatsScript.IsOnTargetLockOn = true;
-        PlayerStatsScript.CanAttack = true;
         PlayerStatsScript.CanRotate = false;
         PlayerStatsScript.CanRun = false;
         CheckForEnemies();
@@ -134,7 +133,6 @@ public class PlayerLockOnTarget : MonoBehaviour
     {
         doLockLerp = false;
         PlayerStatsScript.IsOnTargetLockOn = false;
-        PlayerStatsScript.CanAttack = false;
         PlayerStatsScript.CanRotate = true;
         PlayerStatsScript.CanRun = true;
         ClearLockOnTarget();

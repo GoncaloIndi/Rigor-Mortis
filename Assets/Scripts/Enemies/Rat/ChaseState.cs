@@ -10,6 +10,9 @@ public class ChaseState : State
 
     private AttackState attackState;
     private IdleState idleState;
+    
+    //Raycast to see if the player is still in line of sight
+    [SerializeField] private LayerMask ignoreWhenInLineOfSight;
 
     private void Awake()
     {
@@ -35,20 +38,43 @@ public class ChaseState : State
         {
             ratStateManager.CurrentTarget = null;
             //Later remove cuz it will be the retreat state
-            ratStateManager.RatSpeed = .3f;
+            ratStateManager.RatSpeed = .4f;
             ratStateManager.ChangeRatSpeed();
             return idleState;
         }
-        
-        else
+        else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI
         {
-            return this;
+            ratStateManager.RatSpeed = .5f; //DIRECTOR AI
+            ratStateManager.ChangeRatSpeed();
         }
+        else if (ratStateManager.DistanceFromCurrentTarget > 2)
+        {
+            ratStateManager.RatSpeed = .6f;
+            ratStateManager.ChangeRatSpeed();
+        }
+        
+        return this;
     }
 
     private void MoveTowardsCurrentTarget(RatStateManager ratStateManager)
     {
-        ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+        RaycastHit hit;
+        //raycast goes a bit up
+        float height = .2f;
+        var transform1 = ratStateManager.CurrentTarget.transform;
+        Vector3 playerStartPoint = new Vector3(transform1.position.x, transform1.position.y + height, transform1.position.z);
+        var position = transform.position;
+        Vector3 ratStartPoint = new Vector3(position.x, position.y + height, position.z);
+
+        if (Physics.Linecast(playerStartPoint, ratStartPoint, out hit, ignoreWhenInLineOfSight))
+        {
+            Debug.Log("View obstructed");
+        }
+        else
+        {
+            ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+        }
+
     }
     
 }

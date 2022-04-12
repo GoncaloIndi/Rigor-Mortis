@@ -6,7 +6,7 @@ public class AttackState : State
 {
     public override State Tick(RatStateManager ratStateManager)
     {
-        Debug.Log("AttackStarted");
+        //Debug.Log("AttackStarted");
         ratStateManager.RatSpeed = 0;
         ratStateManager.ChangeRatSpeed();
         return this;

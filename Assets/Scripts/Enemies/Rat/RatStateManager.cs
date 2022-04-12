@@ -71,6 +71,5 @@ public class RatStateManager : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         ReturnToOrigin = true;
-        Debug.Log("Returning");
     }
 }

@@ -10,6 +10,8 @@ public class ChaseState : State
 
     private AttackState attackState;
     private IdleState idleState;
+    private bool hasPlayerInSight = true;
+    private Vector3 currentDestination;
     
     //Raycast to see if the player is still in line of sight
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
@@ -29,12 +31,12 @@ public class ChaseState : State
         
         MoveTowardsCurrentTarget(ratStateManager);
         
-        if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.MinimumAttackDistance) //Transition to AttackState
+        if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.MinimumAttackDistance && hasPlayerInSight) //Transition to AttackState
         {
             //Raycast to check if player is directly in range
             return attackState;
         }
-        else if (ratStateManager.DistanceFromCurrentTarget >= ratStateManager.MaximumChaseDistance) //Transition to RetreatState
+        else if (ratStateManager.DistanceFromCurrentTarget >= ratStateManager.MaximumChaseDistance || (!hasPlayerInSight && Vector3.Distance(ratStateManager.RatNavMeshAgent.destination, transform.position) < .5)) //Transition to RetreatState
         {
             ratStateManager.CurrentTarget = null;
             //Later remove cuz it will be the retreat state
@@ -68,10 +70,11 @@ public class ChaseState : State
 
         if (Physics.Linecast(playerStartPoint, ratStartPoint, out hit, ignoreWhenInLineOfSight))
         {
-            Debug.Log("View obstructed");
+            hasPlayerInSight = false;
         }
         else
         {
+            hasPlayerInSight = true;
             ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
         }
 

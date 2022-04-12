@@ -1,64 +1,9 @@
 fileFormatVersion: 2
-guid: 2a464f79bb7207b42a9d7497e19358a4
+guid: 3f31db14a7da4e84db1952772ae6a6b9
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: f9a1722fbe8cb63438f3f9811b682985, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: cd64c42aa64987946a16b25b8ffed179, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 84a4ffd993d2e474aafca629c57c08a8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerArm
-    second: {fileID: 2100000, guid: b983dc6ff35511f448c9ba534d4adbc1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerArm.001
-    second: {fileID: 2100000, guid: a0dffe42110945d47bbee33c57957962, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerHat
-    second: {fileID: 2100000, guid: 7e2439db66afec843b78bd319ef8594a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerKnee
-    second: {fileID: 2100000, guid: b7bdaa3f60c0bbd4eb4acb8518fef333, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerKnee.001
-    second: {fileID: 2100000, guid: 0d392ebfcb097c642a76c21d2762488d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerLeg
-    second: {fileID: 2100000, guid: a33d268eb1c64c445b748ef2e7b15372, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerLeg.001
-    second: {fileID: 2100000, guid: 3ff0e5eda12c05c4d981b8b9159aa8be, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: PlayerTorso
-    second: {fileID: 2100000, guid: 1e765710d7e625f4f9b0fe5925ec32b9, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

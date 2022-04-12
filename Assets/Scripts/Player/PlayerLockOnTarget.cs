@@ -62,6 +62,8 @@ public class PlayerLockOnTarget : MonoBehaviour
         var shortestDistance = Mathf.Infinity;
 
         Collider[] enemyColliders = Physics.OverlapSphere(transform.position, maximumLockOnDistance, enemyLayer);
+        
+        
 
         for (int i = 0; i < enemyColliders.Length; i++)
         {

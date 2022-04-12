@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameSettings : MonoBehaviour
 {
-    public static readonly bool IsUsingTankControls = false;
+    public static readonly bool IsUsingTankControls = true;
 }

@@ -26,7 +26,12 @@ public class EnemyCombat : MonoBehaviour
         if (EnemyStatsScript.EnemyHp <= 0)
         {
             //Code for killing the enemy
-            this.gameObject.SetActive(false);
+            KillEnemy();
         }
+    }
+
+    public void KillEnemy()
+    {
+        this.gameObject.SetActive(false);
     }
 }

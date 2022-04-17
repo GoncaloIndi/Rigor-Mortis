@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-
-public class WaterTrap : MonoBehaviour
+public class LooseCable : MonoBehaviour
 {
-
-    [HideInInspector]public PlayerStats PlayerStatsScript;
     
+    [HideInInspector]public PlayerStats PlayerStatsScript;
+
     PlayerIndex playerIndex;
     GamePadState state;
     GamePadState prevState;
+    [SerializeField] private GameObject waterTrap;
 
     private bool isGettingEletrified = false;
 
@@ -29,13 +29,14 @@ public class WaterTrap : MonoBehaviour
             isGettingEletrified = true;
             StartCoroutine(ElectrifyPlayer());
         }
-        else if (other.gameObject.CompareTag("Enemy"))
+    }
+
+    private void OnTriggerStay(Collider other) //Disable this script whenever the watertrap is enabled
+    {
+        if (waterTrap.activeSelf)
         {
-            
-            EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
-            enemy.KillEnemy();
+            this.gameObject.SetActive(false);
         }
-       
     }
 
     private void OnTriggerExit(Collider other)
@@ -59,7 +60,7 @@ public class WaterTrap : MonoBehaviour
             
             yield return new WaitForSeconds(shockTime);
             GamePad.SetVibration(playerIndex, 0, 0);
-            if (timesShocked < 3)
+            if (timesShocked < 6)
             {
                 timesShocked++;
             }
@@ -69,7 +70,7 @@ public class WaterTrap : MonoBehaviour
             }
             
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.5f);
         }
         
     }

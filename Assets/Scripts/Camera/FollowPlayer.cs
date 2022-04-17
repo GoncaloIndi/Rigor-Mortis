@@ -4,13 +4,16 @@ public class FollowPlayer : MonoBehaviour
 {
     private Transform playerPosition;
 
+
     public Vector3 CameraOffset;
 
     [SerializeField] private float cameraSmoothness;
 
     //Both have min an max values to clamp the camera
+    [Header("Camera Constraints")]
     [SerializeField] private float[] xCameraClamp;
     [SerializeField] private float[] zCameraClamp;
+    
 
     private void Awake()
     {
@@ -32,4 +35,5 @@ public class FollowPlayer : MonoBehaviour
         position = new Vector3(xPosition, yPosition, zPosition);
         transform.position = position;
     }
+
 }

@@ -12,6 +12,9 @@ public class ChaseState : State
     private IdleState idleState;
     private bool hasPlayerInSight = true;
     private Vector3 currentDestination;
+    private float chaseLossDelay = 1.3f; //Continues to follow player after a few seconds after loss of sight
+    private float chaseLossTimer = 0;
+    private bool hasPerformedDelayChase = false;
     
     //Raycast to see if the player is still in line of sight
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
@@ -38,10 +41,15 @@ public class ChaseState : State
         }
         else if (ratStateManager.DistanceFromCurrentTarget >= ratStateManager.MaximumChaseDistance || (!hasPlayerInSight && Vector3.Distance(ratStateManager.RatNavMeshAgent.destination, transform.position) < .5)) //Transition to RetreatState
         {
+            //Chase the player for a few seconds before retreating to make the AI more cohesive (DIRECTOR AI)
+            ChasePlayerByDelay(ratStateManager);
+
+            if (!hasPerformedDelayChase) return this;
+            
             ratStateManager.CurrentTarget = null;
-            //Later remove cuz it will be the retreat state
             ratStateManager.RatSpeed = .4f;
             ratStateManager.ChangeRatSpeed();
+            hasPerformedDelayChase = false;
             return idleState;
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI
@@ -77,7 +85,19 @@ public class ChaseState : State
             hasPlayerInSight = true;
             ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
         }
+    }
 
+    private void ChasePlayerByDelay(RatStateManager ratStateManager)
+    {
+        while (chaseLossTimer <= chaseLossDelay && !hasPlayerInSight)
+        {
+            
+            chaseLossTimer += Time.deltaTime;
+            ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+            Debug.Log("chaseByDelay");
+        }
+        hasPerformedDelayChase = true;
+        chaseLossTimer = 0;
     }
     
 }

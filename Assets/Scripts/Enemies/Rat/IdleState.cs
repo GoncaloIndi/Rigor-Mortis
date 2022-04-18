@@ -14,6 +14,7 @@ public class IdleState : State
     [Header("Detection Radius")]
     [SerializeField] private float detectionRadius = 2;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float detectPlayerByNoise = 2.2f;
     
     [Header("Detection FOV")] //Rat FOV
     [SerializeField] private float minimumDetectionAngle = 145;
@@ -80,16 +81,23 @@ public class IdleState : State
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius, playerLayer);
         
-        //Searching the player via PlayerStatsScript
+        //Searching the player via Tag
         for (int i = 0; i < colliders.Length; i++)
         {
-            GameObject player = colliders[i].gameObject; //Tutorial had transform before getcomponent
+            GameObject player = colliders[i].gameObject; 
             
 
             if (player.CompareTag("Player"))
             {
+                ratStateManager.DistanceFromCurrentTarget = Vector3.Distance(player.transform.position, transform.position);
+                if (ratStateManager.DistanceFromCurrentTarget <= detectPlayerByNoise)
+                {
+                    TargetPlayer();   
+                }
+                
                 if (HasDetectedPlayer)
                 {
+                    HasDetectedPlayer = false;
                     ratStateManager.CurrentTarget = player;
                 }
                 

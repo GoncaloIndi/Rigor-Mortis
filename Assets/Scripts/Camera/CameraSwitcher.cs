@@ -8,8 +8,8 @@ public class CameraSwitcher : MonoBehaviour
     [HideInInspector] private PlayerMovement playerMovementScript;
     
     [Header("Cameras")]
-    [SerializeField] private GameObject cameraOne;
-    [SerializeField] private GameObject cameraTwo;
+    [SerializeField] private GameObject currentCamera;
+    [SerializeField] private GameObject cameraToActivate;
 
     private void Awake()
     {
@@ -20,26 +20,31 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SwitchCameras();
+            playerMovementScript.IsOnAnotherTrigger++; 
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (playerMovementScript.IsOnAnotherTrigger < 2)
+            {
+                SwitchCameras();
+            }
+            playerMovementScript.IsOnAnotherTrigger--;
         }
     }
 
     private void SwitchCameras()
     {
-        if (cameraOne.activeSelf)
+        if (currentCamera.activeSelf)
         {
-            cameraTwo.SetActive(true);
-            cameraOne.SetActive(false);
+            cameraToActivate.SetActive(true);
+            currentCamera.SetActive(false);
 
-            playerMovementScript.CameraToUseMovement = cameraTwo;
-            playerMovementScript.IsHoldingMovementCamera = true;
-        }
-        else
-        {
-            cameraOne.SetActive(true);
-            cameraTwo.SetActive(false);
-            
-            playerMovementScript.CameraToUseMovement = cameraOne;
+            playerMovementScript.GetCurrentInput();
+            playerMovementScript.CameraToUseMovement = cameraToActivate;
             playerMovementScript.IsHoldingMovementCamera = true;
         }
     }

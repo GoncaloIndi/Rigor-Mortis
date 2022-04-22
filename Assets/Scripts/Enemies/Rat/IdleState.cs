@@ -70,9 +70,9 @@ public class IdleState : State
         {
             if (waitingTime >= lookoutTime)
             {
+                ratStateManager.RatNavMeshAgent.SetDestination((Random.insideUnitSphere * 4) + position);
                 lookoutTime = Random.Range(1, 5);
                 waitingTime = 0;
-                ratStateManager.RatNavMeshAgent.SetDestination((Random.insideUnitSphere * 4) + position);
             }
         }
     }

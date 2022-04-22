@@ -15,11 +15,18 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
-    [Header("Modern Movement")]
+    [Header("Modern Movement Camera Switching")]
     public GameObject CurrentCamera;
 
     public GameObject CameraToUseMovement;
     public bool IsHoldingMovementCamera = false;
+    public int IsOnAnotherTrigger = 0;
+    private bool isMovingOnXAxis = false;
+    [SerializeField] private float InputOffset = .1f;
+    float xOffsetMin;
+    float xOffsetMax;
+    float yOffsetMin;
+    float yOffsetMax;
 
     //Character Controller Related
     private Vector3 gravityVector;
@@ -42,8 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if(GameSettings.IsUsingTankControls) UseTankControls();
         else
         {
-            if(!PlayerStatsScript.IsOnTargetLockOn) MovePlayerBasedOnCamera();
-            else LockOnMovementLogic();
+            MovePlayerBasedOnCamera();
         }
 
         //For alternate controls camera holding
@@ -65,8 +71,6 @@ public class PlayerMovement : MonoBehaviour
             gravityVector.y -= gravity * -2 * Time.deltaTime;
         }
         playerController.Move(gravityVector);
-
-
     }
 
     //Tank Controls
@@ -130,27 +134,34 @@ public class PlayerMovement : MonoBehaviour
 
             playerController.Move(movement * PlayerStatsScript.PlayerFowardMovementSpeed);
         }
-        else if (PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate) 
-        {
-            Vector3 xMovement = CurrentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
-            Vector3 yMovement = Vector3.zero;
-            Vector3 zMovement = CurrentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
-            Vector3 movement = xMovement + yMovement + zMovement;
-            
-            movement = new Vector3(movement.x, 0, movement.z);
-            movement.Normalize();
-
-            playerController.Move(movement * PlayerStatsScript.PlayerFowardMovementSpeed);
-        }
-        
     }
 
     private void SwitchCameraBasedInput()
     {
-        if (PlayerActionsScript.PlayerMovementVector != Vector2.zero) return;
+        if (isMovingOnXAxis)
+        {
+            if (PlayerActionsScript.PlayerMovementVector.y < yOffsetMax && PlayerActionsScript.PlayerMovementVector.y > yOffsetMin) return;
+        }
+        else if (!isMovingOnXAxis)
+        {
+            if (PlayerActionsScript.PlayerMovementVector.x < xOffsetMax && PlayerActionsScript.PlayerMovementVector.x > xOffsetMin) return;
+        }
 
         CurrentCamera = CameraToUseMovement;
         IsHoldingMovementCamera = false;
+    }
+
+    public void GetCurrentInput()
+    {
+
+        xOffsetMin = PlayerActionsScript.PlayerMovementVector.x - InputOffset;
+        xOffsetMax = PlayerActionsScript.PlayerMovementVector.x + InputOffset;
+        
+        yOffsetMin = PlayerActionsScript.PlayerMovementVector.y - InputOffset;
+        yOffsetMax = PlayerActionsScript.PlayerMovementVector.y + InputOffset;
+        
+        //Verify what axis the player is moving to apply the offset in the other direction
+        isMovingOnXAxis = PlayerActionsScript.PlayerMovementVector.x > PlayerActionsScript.PlayerMovementVector.y;
     }
 
     private void LockOnMovementLogic() //Verifies the current Quadrant of the vector and determines how the input should work based on that

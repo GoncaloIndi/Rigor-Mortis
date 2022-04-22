@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ChaseState : State
 {
@@ -12,7 +13,7 @@ public class ChaseState : State
     private IdleState idleState;
     private bool hasPlayerInSight = true;
     private Vector3 currentDestination;
-    private float chaseLossDelay = 1.3f; //Continues to follow player after a few seconds after loss of sight
+    [SerializeField] private float chaseLossDelay = .4f; //Continues to follow player after a few seconds after loss of sight
     private float chaseLossTimer = 0;
     private bool hasPerformedDelayChase = false;
     
@@ -46,11 +47,11 @@ public class ChaseState : State
 
             if (!hasPerformedDelayChase) return this;
 
-            ratStateManager.HasTarget = false;
             ratStateManager.CurrentTarget = null;
             ratStateManager.RatSpeed = .4f;
             ratStateManager.ChangeRatSpeed();
             hasPerformedDelayChase = false;
+            ratStateManager.HasTarget = false;
             return idleState;
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI
@@ -90,6 +91,7 @@ public class ChaseState : State
 
     private void ChasePlayerByDelay(RatStateManager ratStateManager)
     {
+
         while (chaseLossTimer <= chaseLossDelay && !hasPlayerInSight)
         {
             

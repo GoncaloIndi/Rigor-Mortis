@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
-    private GameObject currentCamera; //Change later based on which camera is rendering
+    public GameObject CurrentCamera; 
 
     //Character Controller Related
     private Vector3 gravityVector;
@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         playerController = GetComponent<CharacterController>();
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
-        currentCamera = FindObjectOfType<FollowPlayer>().gameObject;
+        CurrentCamera = FindObjectOfType<FollowPlayer>().gameObject;
     }
 
     private void FixedUpdate()
@@ -107,9 +107,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PlayerStatsScript.CanMove && PlayerStatsScript.CanRotate)
         {
-            Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
+            Vector3 xMovement = CurrentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
             Vector3 yMovement = Vector3.zero;
-            Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
+            Vector3 zMovement = CurrentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
             Vector3 movement = xMovement + yMovement + zMovement;
 
             movement = new Vector3(movement.x, 0, movement.z);
@@ -124,9 +124,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (PlayerStatsScript.CanMove && !PlayerStatsScript.CanRotate) 
         {
-            Vector3 xMovement = currentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
+            Vector3 xMovement = CurrentCamera.transform.right * PlayerActionsScript.PlayerMovementVector.x;
             Vector3 yMovement = Vector3.zero;
-            Vector3 zMovement = currentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
+            Vector3 zMovement = CurrentCamera.transform.forward * PlayerActionsScript.PlayerMovementVector.y;
             Vector3 movement = xMovement + yMovement + zMovement;
             
             movement = new Vector3(movement.x, 0, movement.z);

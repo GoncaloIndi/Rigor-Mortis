@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour
 {
+    [HideInInspector] private PlayerMovement playerMovementScript;
+    
     [Header("Cameras")]
     [SerializeField] private GameObject cameraOne;
     [SerializeField] private GameObject cameraTwo;
+
+    private void Awake()
+    {
+        playerMovementScript = FindObjectOfType<PlayerMovement>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {

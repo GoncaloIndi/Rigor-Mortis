@@ -8,6 +8,7 @@ public class RatStateManager : MonoBehaviour
 {
     [SerializeField] private IdleState startingState;
     public Vector3 Origin;
+    public bool HasTarget = false;
     
     [Header("Current State")]
     [SerializeField] private State currentState;

@@ -45,7 +45,8 @@ public class ChaseState : State
             ChasePlayerByDelay(ratStateManager);
 
             if (!hasPerformedDelayChase) return this;
-            
+
+            ratStateManager.HasTarget = false;
             ratStateManager.CurrentTarget = null;
             ratStateManager.RatSpeed = .4f;
             ratStateManager.ChangeRatSpeed();
@@ -94,7 +95,6 @@ public class ChaseState : State
             
             chaseLossTimer += Time.deltaTime;
             ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-            Debug.Log("chaseByDelay");
         }
         hasPerformedDelayChase = true;
         chaseLossTimer = 0;

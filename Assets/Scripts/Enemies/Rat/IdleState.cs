@@ -35,7 +35,7 @@ public class IdleState : State
 
     public override State Tick(RatStateManager ratStateManager)
     {
-        if (ratStateManager.CurrentTarget != null)
+        if (ratStateManager.HasTarget)
         {
             ratStateManager.RatSpeed = .6f;
             ratStateManager.ChangeRatSpeed();
@@ -98,6 +98,7 @@ public class IdleState : State
                 if (HasDetectedPlayer)
                 {
                     HasDetectedPlayer = false;
+                    ratStateManager.HasTarget = true;
                     ratStateManager.CurrentTarget = player;
                 }
                 
@@ -122,6 +123,7 @@ public class IdleState : State
                     }
                     else
                     {
+                        ratStateManager.HasTarget = true;
                         ratStateManager.CurrentTarget = player;
                     }
                 }

@@ -939,6 +939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 749110974}
   cameraToActivate: {fileID: 621059992}
+  cameraPositionReseter: {x: -4.15, y: 2.06, z: -7.02}
 --- !u!65 &173214315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -998,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 1783852964}
+  cameraPositionReseter: {x: 4.5, y: 2.16, z: 1.88}
 --- !u!65 &187118142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1547,6 +1549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1783852964}
   cameraToActivate: {fileID: 621059992}
+  cameraPositionReseter: {x: -4.15, y: 2.06, z: -0.13}
 --- !u!65 &318821527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3425,6 +3428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1367391386}
   cameraToActivate: {fileID: 1338051725}
+  cameraPositionReseter: {x: 3.97, y: 2.06, z: -9.74}
 --- !u!65 &602328768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4685,6 +4689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 749110974}
+  cameraPositionReseter: {x: -1.42, y: 2.16, z: -4.97}
 --- !u!65 &803947332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5260,6 +5265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1783852964}
   cameraToActivate: {fileID: 1338051725}
+  cameraPositionReseter: {x: 3.4, y: 2.06, z: 3.13}
 --- !u!65 &950253043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11187,6 +11193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1367391386}
   cameraToActivate: {fileID: 621059992}
+  cameraPositionReseter: {x: -2.24, y: 2.16, z: -11.35}
 --- !u!65 &1156961363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11265,6 +11272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 1783852964}
+  cameraPositionReseter: {x: -1.37, y: 2.16, z: 1.92}
 --- !u!65 &1213431808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12018,6 +12026,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 749110974}
   cameraToActivate: {fileID: 1338051725}
+  cameraPositionReseter: {x: 3.47, y: 2.06, z: -2.78}
 --- !u!65 &1338295817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13337,6 +13346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 1367391386}
+  cameraPositionReseter: {x: 4.5, y: 2.16, z: -11.65}
 --- !u!65 &1725375519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14225,6 +14235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 1367391386}
+  cameraPositionReseter: {x: -2.31, y: 2.15, z: -11.38}
 --- !u!65 &1915187266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14813,6 +14824,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 749110974}
+  cameraPositionReseter: {x: 4.5, y: 2.16, z: -4.95}
 --- !u!65 &2067854806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15359,7 +15371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &919132148262279196
 Rigidbody:
   m_ObjectHideFlags: 0

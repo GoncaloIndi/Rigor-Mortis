@@ -11,6 +11,8 @@ public class CameraSwitcher : MonoBehaviour
     [SerializeField] private GameObject currentCamera;
     [SerializeField] private GameObject cameraToActivate;
 
+    [SerializeField] private Vector3 cameraPositionReseter;
+
     private void Awake()
     {
         playerMovementScript = FindObjectOfType<PlayerMovement>();
@@ -40,6 +42,7 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (currentCamera.activeSelf)
         {
+            cameraToActivate.transform.position = cameraPositionReseter;
             cameraToActivate.SetActive(true);
             currentCamera.SetActive(false);
 

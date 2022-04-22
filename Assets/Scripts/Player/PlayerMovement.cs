@@ -15,7 +15,11 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
-    public GameObject CurrentCamera; 
+    [Header("Modern Movement")]
+    public GameObject CurrentCamera;
+
+    public GameObject CameraToUseMovement;
+    public bool IsHoldingMovementCamera = false;
 
     //Character Controller Related
     private Vector3 gravityVector;
@@ -42,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
             else LockOnMovementLogic();
         }
 
-        
+        //For alternate controls camera holding
+        if (IsHoldingMovementCamera)
+        {
+            SwitchCameraBasedInput();
+        }
     }
 
     private void ApplyGravity()
@@ -137,6 +145,14 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    private void SwitchCameraBasedInput()
+    {
+        if (PlayerActionsScript.PlayerMovementVector != Vector2.zero) return;
+
+        CurrentCamera = CameraToUseMovement;
+        IsHoldingMovementCamera = false;
+    }
+
     private void LockOnMovementLogic() //Verifies the current Quadrant of the vector and determines how the input should work based on that
     {
         if(!PlayerStatsScript.CanMove) return;
@@ -206,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerAnimationsScript.DisplayRunningAnimation = false;
     }
     
-    public void ForcePlayerToWalk() //Called By PlayerActions
+    public void ForcePlayerToWalk() //Called By PlayerActions WEIRD CHECK LATER
     {
         if (!PlayerStatsScript.CanRun) return;
         

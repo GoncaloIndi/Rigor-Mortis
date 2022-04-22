@@ -30,11 +30,17 @@ public class CameraSwitcher : MonoBehaviour
         {
             cameraTwo.SetActive(true);
             cameraOne.SetActive(false);
+
+            playerMovementScript.CameraToUseMovement = cameraTwo;
+            playerMovementScript.IsHoldingMovementCamera = true;
         }
         else
         {
             cameraOne.SetActive(true);
             cameraTwo.SetActive(false);
+            
+            playerMovementScript.CameraToUseMovement = cameraOne;
+            playerMovementScript.IsHoldingMovementCamera = true;
         }
     }
 }

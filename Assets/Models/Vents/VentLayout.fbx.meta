@@ -5,6 +5,111 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 1
+    second: {fileID: 2100000, guid: 7ff8c3aaeae6e99469d117bca29fe7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 2
+    second: {fileID: 2100000, guid: 96d2a12c4f542ee489d472891d7bae2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 3
+    second: {fileID: 2100000, guid: f5744c19a4851fa45a324f06d6f2b845, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 4
+    second: {fileID: 2100000, guid: 29294dc2029f5084d9557cdb9747ecaf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 5
+    second: {fileID: 2100000, guid: 2ecb318f5482c1a40816cc8110d20c92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Inside Door 6
+    second: {fileID: 2100000, guid: be3e6f7a5fa8fa04f93749812c9bed59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 1
+    second: {fileID: 2100000, guid: 472ff4e8c24ae3445a2724676ee19af0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 2
+    second: {fileID: 2100000, guid: c24b5e28e0b433d45ad6283d5e215815, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 3
+    second: {fileID: 2100000, guid: 89af2017e10b59d4c817abe2f446fb70, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 4
+    second: {fileID: 2100000, guid: ca81d1ff19707f34a97f454ef8c60f60, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 5
+    second: {fileID: 2100000, guid: d6d2828ab741e8c4a9171d416c43b0d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 6
+    second: {fileID: 2100000, guid: 45b9ee8738e2fe2479eafa31ef02dd3b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 7
+    second: {fileID: 2100000, guid: 055d8204fabbef343b77a7b49429ecc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Interior Wall 8
+    second: {fileID: 2100000, guid: 626e9e1be90c500449a8e2157c014467, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 1
+    second: {fileID: 2100000, guid: c844a3a02923f794d97fd322caae5ed0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 2
+    second: {fileID: 2100000, guid: 0c9e857633f24d143af04009cfb11269, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 3
+    second: {fileID: 2100000, guid: c3e9021b3166a2a4cb7e2c7ec71b7d75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 4
+    second: {fileID: 2100000, guid: a582de5032ebad247b2bbb99b49ad9c4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 5
+    second: {fileID: 2100000, guid: 6483a8785bd7f1740affa8d7f9b9bc7e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vent Wall 6
+    second: {fileID: 2100000, guid: 797b566f76aeae940bc730da21a3b3b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vents Floor
+    second: {fileID: 2100000, guid: e2c4c53a2e066bc4ea38d9edc2a4abd9, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: VentInsideDoor1Albedo

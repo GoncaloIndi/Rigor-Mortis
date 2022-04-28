@@ -46,6 +46,7 @@ public class CameraSwitcher : MonoBehaviour
             cameraToActivate.SetActive(true);
             currentCamera.SetActive(false);
 
+            if (GameSettings.IsUsingTankControls) return;
             playerMovementScript.GetCurrentInput();
             playerMovementScript.CameraToUseMovement = cameraToActivate;
             playerMovementScript.IsHoldingMovementCamera = true;

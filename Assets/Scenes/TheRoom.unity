@@ -467,7 +467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.55, y: 1.42, z: -8.2}
+  m_LocalPosition: {x: 4.55, y: -8.629, z: -8.2}
   m_LocalScale: {x: 0.29108223, y: 0.29108223, z: 0.29108223}
   m_Children:
   - {fileID: 1482103968}
@@ -938,7 +938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 749110974}
   cameraToActivate: {fileID: 621059992}
-  cameraPositionReseter: {x: -4.15, y: 2.06, z: -7.02}
+  cameraPositionReseter: {x: -4.15, y: -7.65, z: -7.02}
 --- !u!65 &173214315
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -998,7 +998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 1783852964}
-  cameraPositionReseter: {x: 4.5, y: 2.16, z: 1.88}
+  cameraPositionReseter: {x: 4.5, y: -7.65, z: 1.88}
 --- !u!65 &187118142
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1783852964}
   cameraToActivate: {fileID: 621059992}
-  cameraPositionReseter: {x: -4.15, y: 2.06, z: -0.13}
+  cameraPositionReseter: {x: -4.15, y: -7.65, z: -0.13}
 --- !u!65 &318821527
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3553,7 +3553,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -3562,7 +3562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589999089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -9.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 281919056}
@@ -3622,7 +3622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1367391386}
   cameraToActivate: {fileID: 1338051725}
-  cameraPositionReseter: {x: 3.97, y: 2.06, z: -9.74}
+  cameraPositionReseter: {x: 3.97, y: -7.65, z: -9.74}
 --- !u!65 &602328768
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4789,7 +4789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 749110974}
-  cameraPositionReseter: {x: -1.42, y: 2.16, z: -4.97}
+  cameraPositionReseter: {x: -1.42, y: -7.65, z: -4.97}
 --- !u!65 &803947332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4969,6 +4969,69 @@ Transform:
   m_Father: {fileID: 543450653686559565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &858082010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 858082011}
+  - component: {fileID: 858082013}
+  - component: {fileID: 858082012}
+  m_Layer: 0
+  m_Name: VentsToRoom
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &858082011
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858082010}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.88, y: 1.526, z: -8.056}
+  m_LocalScale: {x: 1, y: 1, z: 1.4039}
+  m_Children: []
+  m_Father: {fileID: 901135954}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &858082012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858082010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0f2413430a099d41a5cb551a500a99f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  PlayerActionsScript: {fileID: 0}
+  PlayerStatsScript: {fileID: 0}
+  descriptionUI: {fileID: 0}
+  fadeEffect: {fileID: 0}
+  playerTeleportPosition: {x: 4.55, y: 1.42, z: -8.2}
+--- !u!65 &858082013
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858082010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &864955696 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7464712844483496833, guid: bc4be0977569c3e4fbbd9286b1e067be, type: 3}
@@ -5322,6 +5385,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 381805488}
+  - {fileID: 858082011}
   m_Father: {fileID: 589999090}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5458,7 +5522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1783852964}
   cameraToActivate: {fileID: 1338051725}
-  cameraPositionReseter: {x: 3.4, y: 2.06, z: 3.13}
+  cameraPositionReseter: {x: 3.4, y: -7.65, z: 3.13}
 --- !u!65 &950253043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11381,7 +11445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1367391386}
   cameraToActivate: {fileID: 621059992}
-  cameraPositionReseter: {x: -4.4, y: 2.06, z: -11.7}
+  cameraPositionReseter: {x: -4.4, y: -7.65, z: -11.7}
 --- !u!65 &1156961363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11460,7 +11524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 1783852964}
-  cameraPositionReseter: {x: -1.37, y: 2.16, z: 1.92}
+  cameraPositionReseter: {x: -1.37, y: -7.65, z: 1.92}
 --- !u!65 &1213431808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11590,7 +11654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1259472402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12213,7 +12277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 749110974}
   cameraToActivate: {fileID: 1338051725}
-  cameraPositionReseter: {x: 3.47, y: 2.06, z: -2.78}
+  cameraPositionReseter: {x: 3.47, y: -7.65, z: -2.78}
 --- !u!65 &1338295817
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12962,6 +13026,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436711250}
   m_CullTransparentMesh: 1
+--- !u!1 &1437185986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1437185988}
+  - component: {fileID: 1437185987}
+  m_Layer: 0
+  m_Name: Area Light (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1437185987
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437185986}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 3
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.9598247, b: 0.8901961, a: 1}
+  m_Intensity: 0.02
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.02
+    m_NormalBias: 0.1
+    m_NearPlane: 0.1
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 2
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 29.57492, y: 18.815105}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1437185988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437185986}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -6.54, y: -6.29, z: -4.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1442568435
 GameObject:
   m_ObjectHideFlags: 0
@@ -13408,7 +13565,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1652802654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13531,7 +13688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 1367391386}
-  cameraPositionReseter: {x: 4.5, y: 2.16, z: -11.65}
+  cameraPositionReseter: {x: 4.5, y: -7.65, z: -11.65}
 --- !u!65 &1725375519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14509,7 +14666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 621059992}
   cameraToActivate: {fileID: 1367391386}
-  cameraPositionReseter: {x: -2.31, y: 2.15, z: -11.38}
+  cameraPositionReseter: {x: -2.31, y: -7.65, z: -11.38}
 --- !u!65 &1915187266
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15190,7 +15347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCamera: {fileID: 1338051725}
   cameraToActivate: {fileID: 749110974}
-  cameraPositionReseter: {x: 4.5, y: 2.16, z: -4.95}
+  cameraPositionReseter: {x: 4.5, y: -7.65, z: -4.95}
 --- !u!65 &2067854806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17980,7 +18137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &8177385122651727691
 MeshRenderer:
   m_ObjectHideFlags: 0

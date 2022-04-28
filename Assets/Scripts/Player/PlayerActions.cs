@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -45,6 +46,13 @@ public class PlayerActions : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        if (GameSettings.IsUsingTankControls) return;
+            
+        PlayerMovementScript.StartPlayerSprintingMomentum(); //For alternate controls to invert sprint mechanics
+    }
+
     private void Update()
     {
         PlayerMovementVector = playerInputManager.Player.Movement.ReadValue<Vector2>();
@@ -61,14 +69,30 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void StartSprint(InputAction.CallbackContext context)
+    private void StartSprint(InputAction.CallbackContext context) //EndSprint in alternate controls
     {
-        PlayerMovementScript.StartPlayerSprintingMomentum();
+        if (GameSettings.IsUsingTankControls)
+        {
+            PlayerMovementScript.StartPlayerSprintingMomentum();
+        }
+        else
+        {
+            PlayerMovementScript.StopPlayerSprintingMomentum();
+        }
+        
     }
 
-    private void EndSprint(InputAction.CallbackContext context)
+    private void EndSprint(InputAction.CallbackContext context) //StartSprint in alternate controls
     {
-        PlayerMovementScript.StopPlayerSprintingMomentum();
+        if (GameSettings.IsUsingTankControls)
+        {
+            PlayerMovementScript.StopPlayerSprintingMomentum();
+        }
+        else
+        {
+            PlayerMovementScript.StartPlayerSprintingMomentum();
+        }
+        
     }
 
     private void StartLockOn(InputAction.CallbackContext context)

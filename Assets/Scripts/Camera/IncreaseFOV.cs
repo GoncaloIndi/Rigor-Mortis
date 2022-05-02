@@ -8,20 +8,14 @@ public class IncreaseFOV : MonoBehaviour
     [SerializeField] private float yOffset; //Determines how much the camera will go up
 
     public FollowPlayer CameraFollowScript;
+    private bool hasActivatedTrigger = false;
     
-
-    private void Awake()
-    {
-        CameraFollowScript = FindObjectOfType<FollowPlayer>().GetComponent<FollowPlayer>();
-        
-    }
-    
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !hasActivatedTrigger)
         {
             CameraFollowScript.CameraOffset += new Vector3(0, yOffset, 0);
+            hasActivatedTrigger = true;
         }
         
     }
@@ -31,6 +25,7 @@ public class IncreaseFOV : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             CameraFollowScript.CameraOffset -= new Vector3(0, yOffset, 0);
+            hasActivatedTrigger = false;
         }
         
     }

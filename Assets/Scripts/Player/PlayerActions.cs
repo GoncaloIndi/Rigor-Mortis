@@ -64,7 +64,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (PlayerStatsScript.IsInInteractionZone)
         {
-            Item currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Item>();
+            Interactible currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Interactible>();
             currentItemScript.Interact();
         }
     }

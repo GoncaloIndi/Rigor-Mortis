@@ -50,18 +50,6 @@ public class Item : Interactible
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        PlayerStatsScript.CurrentInteractionGameObject = this.gameObject;
-        PlayerStatsScript.IsInInteractionZone = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        PlayerStatsScript.CurrentInteractionGameObject = null;
-        PlayerStatsScript.IsInInteractionZone = false;
-    }
-    
     //Avoid not seeing the item pick up due to spamming
     private IEnumerator AvoidButtonSpam()
     {

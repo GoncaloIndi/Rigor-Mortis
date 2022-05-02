@@ -10,7 +10,7 @@ public class Interactible : MonoBehaviour
 
     [HideInInspector] public PlayerActions PlayerActionsScript;
     
-    [HideInInspector] public PlayerStats PlayerStatsScript;
+    public PlayerStats PlayerStatsScript;
 
     [SerializeField] private Text descriptionUI;
     
@@ -24,8 +24,7 @@ public class Interactible : MonoBehaviour
 
     protected virtual void Awake()
     {
-        PlayerActionsScript = FindObjectOfType<PlayerActions>().GetComponent<PlayerActions>();
-        PlayerStatsScript = FindObjectOfType<PlayerActions>().GetComponent<PlayerStats>();
+        PlayerActionsScript = FindObjectOfType<PlayerActions>();
     }
 
     public virtual void Interact() //UI must be turned on by child script
@@ -40,5 +39,17 @@ public class Interactible : MonoBehaviour
         PlayerActionsScript.UIToPlayer(); 
         Time.timeScale = 1;
         Destroy(this.gameObject);
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerStatsScript.CurrentInteractionGameObject = this.gameObject;
+        PlayerStatsScript.IsInInteractionZone = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        PlayerStatsScript.CurrentInteractionGameObject = null;
+        PlayerStatsScript.IsInInteractionZone = false;
     }
 }

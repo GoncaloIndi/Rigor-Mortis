@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class SceneTransition : Interactible
 {
     [SerializeField] private Animator fadeEffect;
     private CharacterController playerController; //Controller prevents TP
+    private PlayerStats playerStatsScript;
     [SerializeField] private FollowPlayer cameraScript; //Manually assigned
     [SerializeField] private float fadeTime = 1f;
 
@@ -20,10 +22,13 @@ public class SceneTransition : Interactible
     {
         playerPosition = FindObjectOfType<PlayerStats>().GetComponent<Transform>();
         playerController = FindObjectOfType<CharacterController>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
     }
 
-    public override void Interact()
+    public override void Interact() //Spam prevention done in playerStats
     {
+        if (!playerStatsScript.CanTransitionTroughtScenes) return;
+        playerStatsScript.ResetTransition();
         PlayerStatsScript.CurrentInteractionGameObject = null;
         PlayerStatsScript.IsInInteractionZone = false;
         fadeEffect.SetTrigger(DarkenAndLighten);
@@ -44,4 +49,5 @@ public class SceneTransition : Interactible
     {
         cameraScript.transform.position = playerPosition.position + cameraScript.CameraOffset;
     }
+    
 }

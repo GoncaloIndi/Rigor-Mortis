@@ -31,9 +31,8 @@ public class WaterTrap : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Enemy"))
         {
-            
             EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
-            enemy.KillEnemy();
+            StartCoroutine(enemy.ElectrifyEnemy());
         }
        
     }
@@ -44,6 +43,7 @@ public class WaterTrap : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             isGettingEletrified = false;
+            GamePad.SetVibration(playerIndex, 0, 0); //Prevent infinite vibration
         }
     }
 
@@ -76,7 +76,6 @@ public class WaterTrap : MonoBehaviour
     
     private void TakeShockDamage()
     {
-        
         PlayerStatsScript.DamagePlayer(10);
     }
 }

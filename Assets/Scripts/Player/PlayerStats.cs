@@ -21,6 +21,8 @@ public class PlayerStats : MonoBehaviour
 
     public bool IsInInteractionZone = false;
 
+    public bool CanTransitionTroughtScenes = true;
+
     [HideInInspector] public GameObject CurrentInteractionGameObject;
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
 
@@ -31,5 +33,17 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Death");
         }
+    }
+
+    private IEnumerator ResetSceneTransition() //Called by sceneTransition script in order to prevent spamming oddities
+    {
+        CanTransitionTroughtScenes = false;
+        yield return new WaitForSeconds(2f);
+        CanTransitionTroughtScenes = true;
+    }
+
+    public void ResetTransition()
+    {
+        StartCoroutine(ResetSceneTransition());
     }
 }

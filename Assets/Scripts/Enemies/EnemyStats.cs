@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    public int EnemyHp = 40;
+    public int EnemyHp = 50;
 
     public bool IsBeingTargetedByPlayer = false;
 

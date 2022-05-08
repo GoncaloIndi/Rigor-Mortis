@@ -8,6 +8,8 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private ParticleSystem bloodVFX;
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
+    private RatAnimations ratAnimationsScript;
+    private RatStateManager ratStateManager;
 
     private IdleState idleStateScript;
 
@@ -15,6 +17,8 @@ public class EnemyCombat : MonoBehaviour
     {
         EnemyStatsScript = GetComponent<EnemyStats>();
         idleStateScript = GetComponentInChildren<IdleState>();
+        ratAnimationsScript = GetComponent<RatAnimations>();
+        ratStateManager = GetComponent<RatStateManager>();
     }
 
     public void TakeDamage(int damage)
@@ -22,6 +26,8 @@ public class EnemyCombat : MonoBehaviour
         EnemyStatsScript.EnemyHp -= damage;
         bloodVFX.Play();
         idleStateScript.HasDetectedPlayer = true; //Might need to redo this later
+        ratAnimationsScript.DisplayDamageAnimation();
+        
         
         if (EnemyStatsScript.EnemyHp <= 0)
         {
@@ -30,8 +36,18 @@ public class EnemyCombat : MonoBehaviour
         }
     }
 
-    public void KillEnemy()
+    private void KillEnemy()
     {
-        this.gameObject.SetActive(false);
+        ratStateManager.enabled = false;
+        ratAnimationsScript.DisplayDeathAnimation();
     }
+
+    public IEnumerator ElectrifyEnemy() //Called By eletricTrap
+    {
+        yield return new WaitForSeconds(.7f); //Delay so it is closer to the puddle
+        ratStateManager.enabled = false;
+        ratAnimationsScript.DisplayDamageAnimation();
+        ratAnimationsScript.DisplayElectrifyAnimation();
+    }
+    
 }

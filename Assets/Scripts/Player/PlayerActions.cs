@@ -149,4 +149,20 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Enable();
     }
 
+    public void PlayerToNoInput()
+    {
+        if (playerInputManager.NoInput.enabled)
+        {
+            playerInputManager.NoInput.Disable();
+            playerInputManager.Player.Enable();
+        }
+        else
+        {
+            playerInputManager.Player.Disable();
+            playerInputManager.NoInput.Enable();
+        }
+        
+
+    }
+
 }

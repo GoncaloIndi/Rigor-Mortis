@@ -393,6 +393,33 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""NoInput"",
+            ""id"": ""70acf9fa-1952-4703-bef0-4d29867ca293"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""31972e1b-35f3-4e2d-9b59-c55865f3fb62"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5dd9d4b2-204b-48b4-97d6-68016b394f94"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -436,6 +463,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Accept = m_UI.FindAction("Accept", throwIfNotFound: true);
+        // NoInput
+        m_NoInput = asset.FindActionMap("NoInput", throwIfNotFound: true);
+        m_NoInput_Newaction = m_NoInput.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -587,6 +617,39 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // NoInput
+    private readonly InputActionMap m_NoInput;
+    private INoInputActions m_NoInputActionsCallbackInterface;
+    private readonly InputAction m_NoInput_Newaction;
+    public struct NoInputActions
+    {
+        private @PlayerInputManager m_Wrapper;
+        public NoInputActions(@PlayerInputManager wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_NoInput_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_NoInput; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NoInputActions set) { return set.Get(); }
+        public void SetCallbacks(INoInputActions instance)
+        {
+            if (m_Wrapper.m_NoInputActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_NoInputActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public NoInputActions @NoInput => new NoInputActions(this);
     private int m_KeyboardandmouseSchemeIndex = -1;
     public InputControlScheme KeyboardandmouseScheme
     {
@@ -617,5 +680,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     public interface IUIActions
     {
         void OnAccept(InputAction.CallbackContext context);
+    }
+    public interface INoInputActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }

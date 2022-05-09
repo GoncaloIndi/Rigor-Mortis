@@ -24,8 +24,15 @@ public class PlayerStats : MonoBehaviour
 
     public bool CanTransitionTroughtScenes = true;
 
+    private PlayerActions playerActionsScript;
+
     [HideInInspector] public GameObject CurrentInteractionGameObject; //Used for items
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
+
+    private void Awake()
+    {
+        playerActionsScript = GetComponent<PlayerActions>();
+    }
 
     public void DamagePlayer(int dmg)
     {
@@ -38,14 +45,12 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator ResetSceneTransition() //Called by sceneTransition script in order to prevent spamming oddities
     {
-        CanMove = false;
-        CanRotate = false;
+        playerActionsScript.PlayerToNoInput();
         CanTransitionTroughtScenes = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         
-        CanMove = true;
-        CanRotate = true;
-        yield return new WaitForSeconds(1f);
+        playerActionsScript.PlayerToNoInput();
+        yield return new WaitForSeconds(.5f);
         CanTransitionTroughtScenes = true;
     }
 

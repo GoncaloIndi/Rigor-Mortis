@@ -42,7 +42,7 @@ public class RatStateManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CurrentTarget != null)
+        if (HasTarget)
         {
             DistanceFromCurrentTarget = Vector3.Distance(CurrentTarget.transform.position, transform.position);
         }

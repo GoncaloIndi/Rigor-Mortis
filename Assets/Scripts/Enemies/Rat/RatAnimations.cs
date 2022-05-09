@@ -36,6 +36,7 @@ public class RatAnimations : MonoBehaviour
         ratAnim.SetTrigger(Damage);
     }
 
+    //Player must be in damage animation state to transition to die
     public void DisplayDeathAnimation()
     {
         ratAnim.SetTrigger(Death); 

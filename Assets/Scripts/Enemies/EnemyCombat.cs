@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class EnemyCombat : MonoBehaviour
 {
+    [Header("Particles")]
     [SerializeField] private ParticleSystem bloodVFX;
+    [SerializeField] private ParticleSystem dustVFX;
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
@@ -21,7 +23,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager = GetComponent<RatStateManager>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage) 
     {
         EnemyStatsScript.EnemyHp -= damage;
         bloodVFX.Play();
@@ -31,15 +33,17 @@ public class EnemyCombat : MonoBehaviour
         
         if (EnemyStatsScript.EnemyHp <= 0)
         {
-            //Code for killing the enemy
-            KillEnemy();
+            StartCoroutine(KillEnemy());
         }
     }
 
-    private void KillEnemy()
+    private IEnumerator KillEnemy() //Normal Death
     {
         ratStateManager.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation();
+        yield return new WaitForSeconds(1.2f);
+        dustVFX.Play();
+        Destroy(this);
     }
 
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
@@ -48,6 +52,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.enabled = false;
         ratAnimationsScript.DisplayDamageAnimation();
         ratAnimationsScript.DisplayElectrifyAnimation();
+        Destroy(this);
     }
     
 }

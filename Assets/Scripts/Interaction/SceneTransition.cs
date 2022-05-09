@@ -11,11 +11,13 @@ public class SceneTransition : Interactible
     [SerializeField] private FollowPlayer cameraScript; //Manually assigned
     [SerializeField] private float fadeTime = 1f;
 
-    [Header("Scene Related")] [SerializeField] private Vector3 playerTeleportPosition;
-
+    [Header("Scene Related")] 
+    [SerializeField] private Vector3 playerTeleportPosition;
+    [SerializeField] private Quaternion playerTeleportRotation;
     [SerializeField] private GameObject currentScene;
     [SerializeField] private GameObject sceneToTransition;
     private Transform playerPosition;
+    
     private static readonly int DarkenAndLighten = Animator.StringToHash("DarkenAndLighten");
 
     protected override void Awake()
@@ -41,6 +43,7 @@ public class SceneTransition : Interactible
         currentScene.SetActive(false);
         playerController.enabled = false;
         playerPosition.position = playerTeleportPosition;
+        playerPosition.rotation = playerTeleportRotation;
         playerController.enabled = true;
         FixCameraPosition();
     }

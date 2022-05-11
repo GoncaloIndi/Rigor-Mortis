@@ -29,10 +29,18 @@ public class WaterTrap : MonoBehaviour
             isGettingEletrified = true;
             StartCoroutine(ElectrifyPlayer());
         }
-        else if (other.gameObject.CompareTag("Enemy"))
+        else if (other.gameObject.CompareTag("Enemy")) //Make it so that when the rat hits the the trap and has no target (idle state only) it returns to its origin point instead of dying
         {
-            EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
-            StartCoroutine(enemy.ElectrifyEnemy());
+            RatStateManager ratState = other.gameObject.GetComponent<RatStateManager>();
+            if (ratState.CurrentTarget == null)
+            {
+                ratState.ReturnToOrigin = true;
+            }
+            else
+            {
+                EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
+                StartCoroutine(enemy.ElectrifyEnemy());
+            }
         }
        
     }

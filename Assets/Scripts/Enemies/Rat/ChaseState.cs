@@ -16,6 +16,11 @@ public class ChaseState : State
     [SerializeField] private float chaseLossDelay = .4f; //Continues to follow player after a few seconds after loss of sight
     private float chaseLossTimer = 0;
     private bool hasPerformedDelayChase = false;
+    [Header("Speed")]
+    [SerializeField] private float minRatChaseSpeed = 2.2f;
+    [SerializeField] private float maxRatChaseSpeed = 2.5f;
+    
+    
     
     //Raycast to see if the player is still in line of sight
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
@@ -56,12 +61,12 @@ public class ChaseState : State
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI
         {
-            ratStateManager.RatSpeed = .5f; //DIRECTOR AI
+            ratStateManager.RatSpeed = minRatChaseSpeed; //DIRECTOR AI
             ratStateManager.ChangeRatSpeed();
         }
         else if (ratStateManager.DistanceFromCurrentTarget > 2)
         {
-            ratStateManager.RatSpeed = .6f;
+            ratStateManager.RatSpeed = maxRatChaseSpeed;
             ratStateManager.ChangeRatSpeed();
         }
         

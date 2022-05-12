@@ -8,6 +8,8 @@ public class SceneTransition : Interactible
     [SerializeField] private Animator fadeEffect;
     private CharacterController playerController; //Controller prevents TP
     private PlayerStats playerStatsScript;
+    private PlayerMovement playerMovementScript;
+    [SerializeField] private bool isCameraFixed = false;
     [SerializeField] private FollowPlayer cameraScript; //Manually assigned
     [SerializeField] private float fadeTime = 1f;
 
@@ -16,6 +18,11 @@ public class SceneTransition : Interactible
     [SerializeField] private Quaternion playerTeleportRotation;
     [SerializeField] private GameObject currentScene;
     [SerializeField] private GameObject sceneToTransition;
+    [SerializeField] private GameObject oddObjectOff; //Both this serve to turn objects on and off that are not in the scene if need be
+    [SerializeField] private GameObject oddObjectOn;
+    [Header("Movement Related")]
+    [SerializeField] private GameObject cameraToTransition;
+    [SerializeField] private bool shouldSwitchCameraInput = false;
     private Transform playerPosition;
     
     private static readonly int DarkenAndLighten = Animator.StringToHash("DarkenAndLighten");
@@ -25,6 +32,7 @@ public class SceneTransition : Interactible
         playerPosition = FindObjectOfType<PlayerStats>().GetComponent<Transform>();
         playerController = FindObjectOfType<CharacterController>();
         playerStatsScript = FindObjectOfType<PlayerStats>();
+        playerMovementScript = FindObjectOfType<PlayerMovement>();
     }
 
     public override void Interact() //Spam prevention done in playerStats
@@ -40,6 +48,14 @@ public class SceneTransition : Interactible
     private void TeleportPlayer()
     {
         sceneToTransition.SetActive(true);
+        if (oddObjectOn != null)
+        {
+            oddObjectOn.SetActive(true);
+        }
+        if (oddObjectOff != null)
+        {
+            oddObjectOff.SetActive(false);
+        }
         currentScene.SetActive(false);
         playerController.enabled = false;
         playerPosition.position = playerTeleportPosition;
@@ -50,7 +66,13 @@ public class SceneTransition : Interactible
 
     private void FixCameraPosition()
     {
+        if (shouldSwitchCameraInput)
+        {
+            playerMovementScript.CurrentCamera = cameraToTransition;
+        }
+        if (isCameraFixed) return;
         cameraScript.transform.position = playerPosition.position + cameraScript.CameraOffset;
     }
+    
     
 }

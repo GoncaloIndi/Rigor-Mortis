@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : Interactible
+public class Weapon : Interactible
 {
     [SerializeField] private string itemName;
 
@@ -18,15 +17,12 @@ public class Item : Interactible
 
     private bool AvoidButtonSpamming = true;
 
-
-
     private Image imageUI;
 
     protected override void Awake()
     {
         base.Awake();
         imageUI = SpriteUI.GetComponent<Image>();
-        
     }
 
     public override void Interact() //Called by PlayerActions
@@ -44,9 +40,12 @@ public class Item : Interactible
     public override void FinishInteract() //Called by PlayerActions
     {
         if(AvoidButtonSpamming) return;
+        PlayerStatsScript.EquipSword();
         SpriteUI.SetActive(false);
         InteractionUI.SetActive(false);
         base.FinishInteract();
+
+
     }
 
     //Avoid not seeing the item pick up due to spamming

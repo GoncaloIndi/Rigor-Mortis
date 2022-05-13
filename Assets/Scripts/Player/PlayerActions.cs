@@ -132,7 +132,7 @@ public class PlayerActions : MonoBehaviour
     //UI Action Map
     private void Accept(InputAction.CallbackContext context)
     {
-        Item currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Item>();
+        Interactible currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Interactible>();
         currentItemScript.FinishInteract();
     }
     

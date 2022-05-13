@@ -8,6 +8,7 @@ public class EnemyCombat : MonoBehaviour
     [Header("Particles")]
     [SerializeField] private ParticleSystem bloodVFX;
     [SerializeField] private ParticleSystem dustVFX;
+    [SerializeField] private ParticleSystem electricVFX;
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
@@ -48,10 +49,12 @@ public class EnemyCombat : MonoBehaviour
 
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
-        yield return new WaitForSeconds(.7f); //Delay so it is closer to the puddle
+        yield return new WaitForSeconds(.3f); //Delay so it is closer to the puddle
         ratStateManager.enabled = false;
         ratAnimationsScript.DisplayDamageAnimation();
         ratAnimationsScript.DisplayElectrifyAnimation();
+        yield return new WaitForSeconds(.2f);
+        electricVFX.Play();
         Destroy(this);
     }
     

@@ -6,22 +6,21 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     //Stores all the stats so they are easy to use in the scripts
+    [Header("Movement")]
     public bool CanMove = true;
-
     public bool CanRotate = true;
-    
     public bool CanRun = true;
-
     public bool IsRunning = false;
-
-    public bool IsOnTargetLockOn = false;
+    [HideInInspector]public bool IsOnTargetLockOn = false;
     
+    [Header("Combat")]
     public float PlayerFowardMovementSpeed = 9.1f;
-
     public int PlayerHp = 100;
+    public bool HasWeaponEquipped = false;
+    [SerializeField] private GameObject sword; //Temp if game gets more weapons
 
+    [Header("Interaction")]
     public bool IsInInteractionZone = false;
-
     public bool CanTransitionTroughtScenes = true;
 
     private PlayerActions playerActionsScript;
@@ -34,6 +33,7 @@ public class PlayerStats : MonoBehaviour
         playerActionsScript = GetComponent<PlayerActions>();
     }
 
+    //Combat
     public void DamagePlayer(int dmg)
     {
         PlayerHp -= dmg;
@@ -43,6 +43,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public void EquipSword()
+    {
+        HasWeaponEquipped = true;
+        sword.SetActive(true);
+    }
+
+    //Interaction
     private IEnumerator ResetSceneTransition() //Called by sceneTransition script in order to prevent spamming oddities
     {
         playerActionsScript.PlayerToNoInput();

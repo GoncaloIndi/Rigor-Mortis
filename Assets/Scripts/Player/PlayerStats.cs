@@ -25,7 +25,8 @@ public class PlayerStats : MonoBehaviour
 
     private PlayerActions playerActionsScript;
 
-    [HideInInspector] public GameObject CurrentInteractionGameObject; //Used for items
+    //[HideInInspector] 
+    public GameObject CurrentInteractionGameObject; //Used for items
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
 
     private void Awake()

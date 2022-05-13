@@ -90,7 +90,8 @@ public class IdleState : State
             if (player.CompareTag("Player"))
             {
                 ratStateManager.DistanceFromCurrentTarget = Vector3.Distance(player.transform.position, transform.position);
-                if (ratStateManager.DistanceFromCurrentTarget <= detectPlayerByNoise)
+                
+                if (ratStateManager.DistanceFromCurrentTarget <= detectPlayerByNoise) //Improve to allow stealth
                 {
                     TargetPlayer();   
                 }

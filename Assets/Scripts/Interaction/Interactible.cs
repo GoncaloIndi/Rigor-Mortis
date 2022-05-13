@@ -25,6 +25,7 @@ public class Interactible : MonoBehaviour
     protected virtual void Awake()
     {
         PlayerActionsScript = FindObjectOfType<PlayerActions>();
+        PlayerStatsScript = FindObjectOfType<PlayerStats>();
     }
 
     public virtual void Interact() //UI must be turned on by child script

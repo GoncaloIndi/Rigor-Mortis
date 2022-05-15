@@ -12,6 +12,8 @@ public class Thunder : MonoBehaviour
     [SerializeField] private float minStormFlash;
     [SerializeField] private float maxStormFlash;
     private Light lighting;
+    [SerializeField] private ParticleSystem rainVFX;
+    [SerializeField] private int rainChance = 20;
 
     private void Awake()
     {
@@ -73,13 +75,22 @@ public class Thunder : MonoBehaviour
                 ThunderSound();
             }
         }
-        
-        
-        
     }
 
+    private IEnumerator Rain()
+    {
+        while (true)
+        {
+            int rng = Random.Range(4, 16);
+
+            rainVFX.Play();
+            yield return new WaitForSeconds(rng);
+            
+        }
+    }
     private void OnEnable()
     {
         StartCoroutine(Thunderstorm());
+        StartCoroutine(Rain());
     }
 }

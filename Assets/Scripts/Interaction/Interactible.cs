@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+
+[RequireComponent(typeof(BoxCollider))]
 
 public class Interactible : MonoBehaviour
 {
+    
     [SerializeField] private string description;
 
     [HideInInspector] public PlayerActions PlayerActionsScript;
@@ -44,12 +48,14 @@ public class Interactible : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        PlayerStatsScript.CurrentInteractionGameObject = this.gameObject;
+        if (!other.gameObject.CompareTag("Player")) return;
+            PlayerStatsScript.CurrentInteractionGameObject = this.gameObject;
         PlayerStatsScript.IsInInteractionZone = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!other.gameObject.CompareTag("Player")) return;
         PlayerStatsScript.CurrentInteractionGameObject = null;
         PlayerStatsScript.IsInInteractionZone = false;
     }

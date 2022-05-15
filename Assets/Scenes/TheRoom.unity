@@ -8357,7 +8357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -27342,7 +27342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04c2a3e2ef1e1a46b65717e53bd425b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: A dead rat, but he's long gone
+  description: A dead rat, he's long gone
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
   descriptionUI: {fileID: 266337773}

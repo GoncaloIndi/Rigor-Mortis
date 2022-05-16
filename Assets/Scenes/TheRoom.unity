@@ -592,7 +592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.91, y: 1.33, z: -14.222}
+  m_LocalPosition: {x: 3.69, y: 1.33, z: -13.43}
   m_LocalScale: {x: 0.29108223, y: 0.29108223, z: 0.29108223}
   m_Children:
   - {fileID: 1482103968}
@@ -6314,6 +6314,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10000002, y: 0.10000002, z: 0.10000002}
   m_Center: {x: -0.000000059604645, y: 0.000000029802322, z: 0}
+--- !u!54 &250630499
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250630494}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 2
+  m_AngularDrag: 0.2
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &255766165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6815,6 +6831,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.10000004, z: 0.10000004}
   m_Center: {x: 0, y: -0.00000016018748, z: -0.000000014901161}
+--- !u!54 &332710959
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332710954}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 2
+  m_AngularDrag: 0.2
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &340843554
 GameObject:
   m_ObjectHideFlags: 0
@@ -7715,7 +7747,7 @@ MonoBehaviour:
   RatNavMeshAgent: {fileID: 0}
   RatRB: {fileID: 0}
   RatSpeed: 0.9
-  MinimumAttackDistance: 0.8
+  MinimumAttackDistance: 1.1
   MaximumChaseDistance: 7.2
   IsPerformingAction: 0
   ReturnToOrigin: 0
@@ -7886,25 +7918,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1 &538005027 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -5568371526223589888, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
-  m_PrefabInstance: {fileID: 1330958259}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &538005031
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 538005027}
-  m_Material: {fileID: 13400000, guid: 80bbcdbd8cbbfe04eab6312421b5b7f5, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
 --- !u!1 &543693957
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,6 +8982,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   InteractionUI: {fileID: 27153601}
   itemNameUI: {fileID: 575540788}
   descriptionBottomUI: {fileID: 200892708}
@@ -9918,6 +9932,40 @@ Transform:
   m_Father: {fileID: 543450653686559565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &857334628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7677471772335586173, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
+  m_PrefabInstance: {fileID: 1330958259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &857334632
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857334628}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 2
+  m_AngularDrag: 0.2
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &857334633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857334628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.11412679, y: 0.11999998, z: 0.099999994}
+  m_Center: {x: -0.0000000018626451, y: 0, z: -0.000000029802322}
 --- !u!1 &858082010
 GameObject:
   m_ObjectHideFlags: 0
@@ -9966,6 +10014,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 0}
+  interactionEvent: {fileID: 0}
   fadeEffect: {fileID: 1652802655}
   isCameraFixed: 0
   cameraScript: {fileID: 1470673343}
@@ -10123,7 +10172,6 @@ MonoBehaviour:
   minStormFlash: 0
   maxStormFlash: 0
   rainVFX: {fileID: 1252501983}
-  rainChance: 20
 --- !u!1 &870986834
 GameObject:
   m_ObjectHideFlags: 0
@@ -10641,6 +10689,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   itemName: Marcus Adkins
   itemSprite: {fileID: 21300000, guid: 1ab31da4162e03f48bb4cf299686b4af, type: 3}
   InteractionUI: {fileID: 27153601}
@@ -10904,6 +10953,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.10000003, y: 0.1, z: 0.100000024}
   m_Center: {x: -0.000000059604645, y: -0.000000059604645, z: -0.000000029802322}
+--- !u!54 &986460614
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986460609}
+  serializedVersion: 2
+  m_Mass: 2.5
+  m_Drag: 2
+  m_AngularDrag: 0.2
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &990831963
 GameObject:
   m_ObjectHideFlags: 0
@@ -11477,6 +11542,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30186637ccea8d841ad5870419edfecd, type: 3}
+--- !u!1 &1074827995
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1074827998}
+  - component: {fileID: 1074827997}
+  - component: {fileID: 1074827996}
+  m_Layer: 0
+  m_Name: ToyBoxObservation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1074827996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074827995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb4955c65c3ace4185cdd8efcf06d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 
+  PlayerActionsScript: {fileID: 0}
+  PlayerStatsScript: {fileID: 0}
+  descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
+  InteractionUI: {fileID: 27153601}
+  itemNameUI: {fileID: 575540788}
+  descriptionBottomUI: {fileID: 200892708}
+  bottomDescription: There is nothing up there anymore.
+--- !u!65 &1074827997
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074827995}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.9538646, y: 1, z: 2.0082917}
+  m_Center: {x: -0.023067713, y: 0, z: -0.14155202}
+--- !u!4 &1074827998
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074827995}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 7.4699993, y: 9.535872, z: 21.326}
+  m_LocalScale: {x: 0.78586, y: 0.78586006, z: 1.1032687}
+  m_Children: []
+  m_Father: {fileID: 1794918601}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1097249240 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ba123a0b8b25d194c9640a492e379055, type: 3}
@@ -11662,6 +11793,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   InteractionUI: {fileID: 27153601}
   itemNameUI: {fileID: 575540788}
   descriptionBottomUI: {fileID: 200892708}
@@ -17122,6 +17254,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 0}
+  interactionEvent: {fileID: 0}
   fadeEffect: {fileID: 1652802655}
   isCameraFixed: 0
   cameraScript: {fileID: 1338051727}
@@ -17448,7 +17581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7677471772335586173, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -7677471772335586173, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -17456,7 +17589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7640558969779515294, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -7640558969779515294, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -17476,6 +17609,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5568371526223589888, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -5568371526223589888, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
@@ -17492,7 +17629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1599826595754709761, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -1599826595754709761, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -17516,7 +17653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -466329591000292508, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -466329591000292508, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -18269,6 +18406,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   itemName: The sword
   itemSprite: {fileID: 21300000, guid: 4818b601ca89e4c48abb5b328cecd5ed, type: 3}
   InteractionUI: {fileID: 27153601}
@@ -18926,7 +19064,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1470673338}
   m_LocalRotation: {x: -0, y: 0.9144495, z: -0.40470004, w: 0}
-  m_LocalPosition: {x: 2.4140134, y: 3.3671756, z: 9.188625}
+  m_LocalPosition: {x: 4.046483, y: 2.3756557, z: 8.888771}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8910899981801066904}
@@ -18995,6 +19133,7 @@ GameObject:
   - component: {fileID: 1478668774}
   - component: {fileID: 1478668776}
   - component: {fileID: 1478668775}
+  - component: {fileID: 1478668777}
   m_Layer: 0
   m_Name: ToyBoxToRoom
   m_TagString: Untagged
@@ -19032,6 +19171,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 0}
+  interactionEvent: {fileID: 1478668777}
   fadeEffect: {fileID: 1652802655}
   isCameraFixed: 0
   cameraScript: {fileID: 1470673343}
@@ -19057,6 +19197,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.9538646, y: 1, z: 2.0082917}
   m_Center: {x: -0.023067713, y: 0, z: -0.14155202}
+--- !u!114 &1478668777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478668773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a476fe0698cd8854fb95022faf80ad16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toyBoxTransition: {fileID: 1909318434}
+  toyBoxObservation: {fileID: 1074827995}
 --- !u!1 &1482103967
 GameObject:
   m_ObjectHideFlags: 0
@@ -20462,6 +20616,7 @@ Transform:
   - {fileID: 1909318437}
   - {fileID: 543693958}
   - {fileID: 702554310}
+  - {fileID: 1074827998}
   m_Father: {fileID: 8910899981801066904}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20637,8 +20792,16 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
       propertyPath: InitialModule.gravityModifier.scalar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
+      propertyPath: EmissionModule.rateOverTime.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
@@ -20702,6 +20865,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4065905294558437140, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065905294878219411, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4065905294878219412, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
@@ -21140,6 +21307,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 0}
+  interactionEvent: {fileID: 0}
   fadeEffect: {fileID: 1652802655}
   isCameraFixed: 1
   cameraScript: {fileID: 1338051727}
@@ -26583,6 +26751,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 95479329}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   itemName: Bottlecap with water
   itemSprite: {fileID: 21300000, guid: e446e9ac9aefe804a9b54502329548b7, type: 3}
   InteractionUI: {fileID: 27153601}
@@ -27514,6 +27683,7 @@ MonoBehaviour:
   PlayerActionsScript: {fileID: 0}
   PlayerStatsScript: {fileID: 0}
   descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
   InteractionUI: {fileID: 27153601}
   itemNameUI: {fileID: 575540788}
   descriptionBottomUI: {fileID: 200892708}

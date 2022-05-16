@@ -62,6 +62,11 @@ public class SceneTransition : Interactible
         playerPosition.rotation = playerTeleportRotation;
         playerController.enabled = true;
         FixCameraPosition();
+        //Invoke event
+        if (interactionEvent != null)
+        {
+            interactionEvent.Trigger();
+        }
     }
 
     private void FixCameraPosition()

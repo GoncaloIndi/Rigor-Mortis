@@ -17,15 +17,7 @@ public class Interactible : MonoBehaviour
     public PlayerStats PlayerStatsScript;
 
     [SerializeField] private Text descriptionUI;
-    
-    
-    protected InteractionType Interaction;
-    protected enum InteractionType
-    {
-        Item,
-        Puzzle
-    }
-
+    [SerializeField] protected InteractionEvent interactionEvent;
     protected virtual void Awake()
     {
         PlayerActionsScript = FindObjectOfType<PlayerActions>();
@@ -36,6 +28,10 @@ public class Interactible : MonoBehaviour
     {
         PlayerActionsScript.PlayerToUI();
         descriptionUI.text = description;
+        if (interactionEvent != null)
+        {
+            interactionEvent.Trigger();
+        }
         Time.timeScale = 0;
     }
 

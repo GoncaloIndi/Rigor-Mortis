@@ -13,7 +13,6 @@ public class Thunder : MonoBehaviour
     [SerializeField] private float maxStormFlash;
     private Light lighting;
     [SerializeField] private ParticleSystem rainVFX;
-    [SerializeField] private int rainChance = 20;
 
     private void Awake()
     {

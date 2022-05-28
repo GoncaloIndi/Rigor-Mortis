@@ -42,14 +42,18 @@ public class ObservationWithCamera : Interactible
     }
 
     public override void FinishInteract() //Called by PlayerActions
-    {
-        SwitchCameras();
+    {        
         if(AvoidButtonSpamming) return;
+        SwitchCameras();
         descriptionBottomUI.text = "";
         InteractionUI.SetActive(false);
         darkenEffect.SetActive(true);
         PlayerActionsScript.UIToPlayer(); 
         Time.timeScale = 1;
+        if (onEndEvent != null)
+        {
+            onEndEvent.Trigger();
+        }
     }
 
     //Avoid not seeing the item pick up due to spamming

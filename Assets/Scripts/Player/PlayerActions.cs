@@ -132,8 +132,20 @@ public class PlayerActions : MonoBehaviour
     //UI Action Map
     private void Accept(InputAction.CallbackContext context)
     {
-        Interactible currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Interactible>();
-        currentItemScript.FinishInteract();
+        Interactible currentItemScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<Interactible>(); //If the item is caught by default method
+        if (currentItemScript != null)
+        {
+            currentItemScript.FinishInteract();
+        }
+        else
+        {
+            InteractionEvent currentEventScript = PlayerStatsScript.CurrentInteractionGameObject.GetComponent<InteractionEvent>(); //If the item is caught by interaction event
+            if (currentEventScript != null)
+            {
+                currentEventScript.FinishInteract();
+            }
+        }
+        
     }
     
     //Change Action Maps

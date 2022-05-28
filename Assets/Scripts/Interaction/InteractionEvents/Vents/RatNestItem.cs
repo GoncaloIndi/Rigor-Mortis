@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : Interactible
+public class RatNestItem : InteractionEvent
 {
     [SerializeField] private string itemName;
 
@@ -15,28 +14,46 @@ public class Item : Interactible
     [SerializeField] private GameObject SpriteUI;
 
     [SerializeField] private Text itemNameUI;
+    
+    [SerializeField] private Text descriptionUI;
+    [SerializeField] private string description;
 
     private bool AvoidButtonSpamming = true;
 
     private Image imageUI;
 
-    protected override void Awake()
+    [SerializeField] private GameObject newInteraction;
+    [SerializeField] private GameObject oldInteraction;
+
+    private PlayerActions playerActionsScript;
+    private PlayerStats playerStatsScript;
+
+    
+    
+    private void Awake()
     {
-        base.Awake();
         imageUI = SpriteUI.GetComponent<Image>();
-        
+        playerActionsScript = FindObjectOfType<PlayerActions>();
+        playerStatsScript = FindObjectOfType<PlayerStats>();
+    }
+    
+    public override void Trigger()
+    {
+        playerStatsScript.CurrentInteractionGameObject = this.gameObject;
+        Interact();
     }
 
-    public override void Interact() //Called by PlayerActions
+    private void Interact() //Called by PlayerActions
     {
-        PlayerStatsScript.IsInInteractionZone = false;
+        playerActionsScript.PlayerToUI();
         InteractionUI.SetActive(true);
         SpriteUI.SetActive(true);
         imageUI.sprite = itemSprite;
+        descriptionUI.text = description;
         itemNameUI.text = itemName;
         AvoidButtonSpamming = true;
         StartCoroutine(AvoidButtonSpam());
-        base.Interact();
+        Time.timeScale = 0;
     }
 
     public override void FinishInteract() //Called by PlayerActions
@@ -44,7 +61,11 @@ public class Item : Interactible
         if(AvoidButtonSpamming) return;
         SpriteUI.SetActive(false);
         InteractionUI.SetActive(false);
-        base.FinishInteract();
+        playerActionsScript.UIToPlayer(); 
+        Time.timeScale = 1;
+        newInteraction.SetActive(true);
+        playerStatsScript.CurrentInteractionGameObject = newInteraction;
+        Destroy(oldInteraction);
     }
 
     //Avoid not seeing the item pick up due to spamming

@@ -17,7 +17,9 @@ public class Interactible : MonoBehaviour
     public PlayerStats PlayerStatsScript;
 
     [SerializeField] private Text descriptionUI;
-    [SerializeField] protected InteractionEvent interactionEvent;
+    [Header("Interaction Events")]
+    [SerializeField] protected InteractionEvent interactionEvent; //OnBegin change name
+    [SerializeField] protected InteractionEvent onEndEvent;
     protected virtual void Awake()
     {
         PlayerActionsScript = FindObjectOfType<PlayerActions>();
@@ -39,6 +41,11 @@ public class Interactible : MonoBehaviour
     {
         PlayerActionsScript.UIToPlayer(); 
         Time.timeScale = 1;
+        if (onEndEvent != null)
+        {
+            print("TriggeredByEvent");
+            onEndEvent.Trigger();
+        }
         Destroy(this.gameObject);
     }
     

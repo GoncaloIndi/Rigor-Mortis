@@ -8,4 +8,9 @@ public class InteractionEvent : MonoBehaviour
     {
         return;
     }
+
+    public virtual void FinishInteract()
+    {
+        return;
+    }
 }

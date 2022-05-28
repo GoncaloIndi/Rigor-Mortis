@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -90,6 +88,7 @@ public class Thunder : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(Thunderstorm());
+        if (rainVFX == null) return; //Only start rain if there is rain in the scene
         StartCoroutine(Rain());
     }
 }

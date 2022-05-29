@@ -28,6 +28,9 @@ public class RatNestItem : InteractionEvent
     private PlayerActions playerActionsScript;
     private PlayerStats playerStatsScript;
 
+    [Header("Room Related")]
+    [SerializeField] private GameObject bear;
+
     
     
     private void Awake()
@@ -40,6 +43,7 @@ public class RatNestItem : InteractionEvent
     public override void Trigger()
     {
         playerStatsScript.CurrentInteractionGameObject = this.gameObject;
+        RoomGasLighting();
         Interact();
     }
 
@@ -72,10 +76,17 @@ public class RatNestItem : InteractionEvent
     private IEnumerator AvoidButtonSpam()
     {
         
-        float uiSeenTime = .4f;
+        float uiSeenTime = .3f;
 
         yield return new WaitForSecondsRealtime(uiSeenTime);
         AvoidButtonSpamming = false;
 
+    }
+    
+    //Responsible for changes in room the next time the player goes there
+    private void RoomGasLighting()
+    {
+        bear.SetActive(false);
+        //Also the closet door moving slightly and changed model when its done
     }
 }

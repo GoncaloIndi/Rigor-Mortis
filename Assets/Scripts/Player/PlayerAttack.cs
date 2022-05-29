@@ -49,11 +49,18 @@ public class PlayerAttack : MonoBehaviour
         Collider[] enemyCol = Physics.OverlapSphere(swordTip.position, attackRange, enemyLayer);
         for (int i = 0; i < enemyCol.Length; i++)
         {
+            //Attack the enemy
             EnemyCombat enemyCombatScript = enemyCol[i].GetComponent<EnemyCombat>();
             if (enemyCombatScript != null)
             {
                 StartCoroutine(VibrateController());
                 enemyCombatScript.TakeDamage(10);
+            }
+            //Attack the vents (To break them)
+            BreakableVent breakableVentScript = enemyCol[i].GetComponent<BreakableVent>();
+            if (breakableVentScript != null)
+            {
+                breakableVentScript.Hit();
             }
         }
     }

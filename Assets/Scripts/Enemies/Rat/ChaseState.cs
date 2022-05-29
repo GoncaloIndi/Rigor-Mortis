@@ -17,8 +17,7 @@ public class ChaseState : State
     private float chaseLossTimer = 0;
     private bool hasPerformedDelayChase = false;
     [Header("Speed")]
-    [SerializeField] private float minRatChaseSpeed = 2.2f;
-    [SerializeField] private float maxRatChaseSpeed = 2.5f;
+    
     
     
     
@@ -53,7 +52,7 @@ public class ChaseState : State
             if (!hasPerformedDelayChase) return this;
 
             ratStateManager.CurrentTarget = null;
-            ratStateManager.RatSpeed = .4f;
+            ratStateManager.RatSpeed = ratStateManager.DelayChaseSpeed;
             ratStateManager.ChangeRatSpeed();
             hasPerformedDelayChase = false;
             ratStateManager.HasTarget = false;
@@ -61,12 +60,12 @@ public class ChaseState : State
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI
         {
-            ratStateManager.RatSpeed = minRatChaseSpeed; //DIRECTOR AI
+            ratStateManager.RatSpeed = ratStateManager.MinRatChaseSpeed; //DIRECTOR AI
             ratStateManager.ChangeRatSpeed();
         }
         else if (ratStateManager.DistanceFromCurrentTarget > 2)
         {
-            ratStateManager.RatSpeed = maxRatChaseSpeed;
+            ratStateManager.RatSpeed = ratStateManager.MaxRatChaseSpeed;
             ratStateManager.ChangeRatSpeed();
         }
         

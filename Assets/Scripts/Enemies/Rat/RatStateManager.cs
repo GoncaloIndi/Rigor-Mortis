@@ -21,6 +21,9 @@ public class RatStateManager : MonoBehaviour
     
     [Header("Locomotion")]
     public float RatSpeed = .6f;
+    public float MinRatChaseSpeed = 1.2f;
+    public float MaxRatChaseSpeed = 2.2f;
+    public float DelayChaseSpeed = .6f;
 
     [Header("Attack & Chase")] 
     public float MinimumAttackDistance = 1f;

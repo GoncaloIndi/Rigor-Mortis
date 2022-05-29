@@ -51,7 +51,7 @@ public class Item : Interactible
     private IEnumerator AvoidButtonSpam()
     {
         
-        float uiSeenTime = .4f;
+        float uiSeenTime = .3f;
 
         yield return new WaitForSecondsRealtime(uiSeenTime);
         AvoidButtonSpamming = false;

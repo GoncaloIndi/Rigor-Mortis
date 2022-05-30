@@ -1442,7 +1442,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -9219,7 +9219,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -9438,6 +9438,8 @@ MonoBehaviour:
   zCameraClamp:
   - -11.7
   - -0.1
+  isFogEnabled: 1
+  fogDensity: 0.2
 --- !u!114 &621059996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9952,7 +9954,7 @@ Transform:
   m_GameObject: {fileID: 702554309}
   m_LocalRotation: {x: 0.011089457, y: -0.70701987, z: 0.70701987, w: 0.011089457}
   m_LocalPosition: {x: 4.8409367, y: 9.231049, z: 9.993349}
-  m_LocalScale: {x: 0.1332543, y: 0.1332543, z: 0.13325427}
+  m_LocalScale: {x: 0.20654416, y: 0.20654416, z: 0.20654412}
   m_Children: []
   m_Father: {fileID: 1794918601}
   m_RootOrder: 8
@@ -10235,6 +10237,8 @@ MonoBehaviour:
   zCameraClamp:
   - -5.25
   - -4.95
+  isFogEnabled: 1
+  fogDensity: 0.2
 --- !u!114 &749110978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11646,7 +11650,7 @@ Transform:
   m_GameObject: {fileID: 928645083}
   m_LocalRotation: {x: -0.69226617, y: -0.14410956, z: -0.69226617, w: 0.14410956}
   m_LocalPosition: {x: 0.051, y: 0.107, z: 0.024}
-  m_LocalScale: {x: 0.22894353, y: 0.23160313, z: 0.23160315}
+  m_LocalScale: {x: 0.32832792, y: 0.33214206, z: 0.33214208}
   m_Children: []
   m_Father: {fileID: 543450652156396611}
   m_RootOrder: 3
@@ -11906,8 +11910,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
-      maxColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+      minColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -23984,6 +23988,8 @@ MonoBehaviour:
   zCameraClamp:
   - -11.5
   - 3.13
+  isFogEnabled: 1
+  fogDensity: 0.2
 --- !u!114 &1338051728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24322,6 +24328,8 @@ MonoBehaviour:
   zCameraClamp:
   - -11.65
   - -11.35
+  isFogEnabled: 1
+  fogDensity: 0.2
 --- !u!114 &1367391390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25342,6 +25350,8 @@ MonoBehaviour:
   zCameraClamp:
   - -24.4
   - -11.15
+  isFogEnabled: 1
+  fogDensity: 0.15
 --- !u!1 &1478668773
 GameObject:
   m_ObjectHideFlags: 0
@@ -26871,6 +26881,8 @@ MonoBehaviour:
   zCameraClamp:
   - 1.75
   - 2.05
+  isFogEnabled: 1
+  fogDensity: 0.2
 --- !u!114 &1783852968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27248,6 +27260,14 @@ PrefabInstance:
     - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.11372549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
+      propertyPath: InitialModule.startColor.minColor.a
+      value: 0.3137255
       objectReference: {fileID: 0}
     - target: {fileID: 4065905294558437139, guid: 0f4f026f6f8ffc24ea3b92ea01e1a287, type: 3}
       propertyPath: VelocityModule.orbitalX.minMaxState
@@ -28592,7 +28612,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

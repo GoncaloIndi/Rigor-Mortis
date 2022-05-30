@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -13,13 +14,23 @@ public class FollowPlayer : MonoBehaviour
     [Header("Camera Constraints")]
     [SerializeField] private float[] xCameraClamp;
     [SerializeField] private float[] zCameraClamp;
+
+    [Header("Fog")] 
+    [SerializeField] private bool isFogEnabled = true;
+
+    [SerializeField] private float fogDensity = .2f;
     
 
     private void Awake()
     {
-        RenderSettings.fog = true;
         //Cursor.visible = false;
         playerPosition = FindObjectOfType<PlayerMovement>().GetComponent<Transform>();
+    }
+
+    private void OnEnable() 
+    {
+        RenderSettings.fog = isFogEnabled;
+        RenderSettings.fogDensity = fogDensity;
     }
 
     private void FixedUpdate()

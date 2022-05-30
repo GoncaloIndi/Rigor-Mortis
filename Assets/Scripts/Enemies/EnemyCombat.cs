@@ -49,6 +49,7 @@ public class EnemyCombat : MonoBehaviour
 
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
+        EnemyStatsScript.EnemyHp = 0;
         yield return new WaitForSeconds(.3f); //Delay so it is closer to the puddle
         ratStateManager.enabled = false;
         ratAnimationsScript.DisplayDamageAnimation();

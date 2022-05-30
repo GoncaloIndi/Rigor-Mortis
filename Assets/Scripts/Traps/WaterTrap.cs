@@ -39,7 +39,10 @@ public class WaterTrap : MonoBehaviour
             else
             {
                 EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
-                StartCoroutine(enemy.ElectrifyEnemy());
+                if (enemy != null)
+                {
+                    StartCoroutine(enemy.ElectrifyEnemy());
+                }
             }
         }
        

@@ -30,6 +30,7 @@ public class RatNestItem : InteractionEvent
 
     [Header("Room Related")]
     [SerializeField] private GameObject bear;
+    [SerializeField] private ClosetDoor closetDoorScript;
 
     
     
@@ -87,6 +88,6 @@ public class RatNestItem : InteractionEvent
     private void RoomGasLighting()
     {
         bear.SetActive(false);
-        //Also the closet door moving slightly and changed model when its done
+        closetDoorScript.IsAffectedByWind = true;
     }
 }

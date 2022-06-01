@@ -145,7 +145,7 @@ public class AttackState : State
     {
 
         float distance = Vector3.Distance(ratStateManager.transform.position, retreatSpot.position);
-        ratStateManager.RatSpeed = ratStateManager.MinRatChaseSpeed;
+        ratStateManager.RatSpeed = ratStateManager.MaxRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
 
         if (distance >= maxAttackDistance)

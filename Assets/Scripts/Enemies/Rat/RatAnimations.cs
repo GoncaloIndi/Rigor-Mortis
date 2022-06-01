@@ -14,6 +14,7 @@ public class RatAnimations : MonoBehaviour
     private static readonly int Damage = Animator.StringToHash("Damage");
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int ElectricDeath = Animator.StringToHash("ElectricDeath");
+    private static readonly int Attack = Animator.StringToHash("Attack");
 
     private void Awake()
     {
@@ -34,6 +35,11 @@ public class RatAnimations : MonoBehaviour
     {
         ratStateManager.RatNavMeshAgent.speed = 0;
         ratAnim.SetTrigger(Damage);
+    }
+
+    public void DisplayAttackAnimation()
+    {
+        ratAnim.SetTrigger(Attack);
     }
 
     //Player must be in damage animation state to transition to die

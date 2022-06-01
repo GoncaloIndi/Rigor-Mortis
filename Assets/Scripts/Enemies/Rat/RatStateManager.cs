@@ -25,9 +25,13 @@ public class RatStateManager : MonoBehaviour
     public float MaxRatChaseSpeed = 2.2f;
     public float DelayChaseSpeed = .6f;
 
-    [Header("Attack & Chase")] 
-    public float MinimumAttackDistance = 1f;
+    [Header("Attack & Chase")]
     public float MaximumChaseDistance = 3.7f;
+    public float AttackCooldown = 2.5f;
+    public float ReturnToChaseDistance = 3;
+    public float DistanceToTriggerAttackState = 1.1f;
+    public float AttackSpeed = 3f;
+    public bool HasPerformedAttack = false;
 
     [Header("Debug Values")] 
     public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies
@@ -40,7 +44,7 @@ public class RatStateManager : MonoBehaviour
         RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
         ChangeRatSpeed();
-        Origin = transform.position;
+        Origin = transform.localPosition;
     }
 
     private void FixedUpdate()

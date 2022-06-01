@@ -39,11 +39,11 @@ public class ChaseState : State
         
         MoveTowardsCurrentTarget(ratStateManager);
         
-        if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.MinimumAttackDistance && hasPlayerInSight) //Transition to AttackState
+        if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.DistanceToTriggerAttackState && hasPlayerInSight && !ratStateManager.HasPerformedAttack) //Transition to AttackState
         {
-            //Raycast to check if player is directly in range
             return attackState;
         }
+        
         else if (ratStateManager.DistanceFromCurrentTarget >= ratStateManager.MaximumChaseDistance || (!hasPlayerInSight && Vector3.Distance(ratStateManager.RatNavMeshAgent.destination, transform.position) < .5)) //Transition to RetreatState
         {
             //Chase the player for a few seconds before retreating to make the AI more cohesive (DIRECTOR AI)

@@ -40,10 +40,12 @@ public class EnemyCombat : MonoBehaviour
 
     private IEnumerator KillEnemy() //Normal Death
     {
+        ratStateManager.RatNavMeshAgent.speed = 0;
         ratStateManager.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation();
         yield return new WaitForSeconds(1.2f);
         dustVFX.Play();
+        this.gameObject.layer = 7;
         Destroy(this);
     }
 

@@ -39,7 +39,7 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Sprint.canceled += EndSprint;
         playerInputManager.Player.AttackLockOn.started += StartLockOn;
         playerInputManager.Player.AttackLockOn.canceled += StopLockOn;
-        playerInputManager.Player.Attack.performed += Attack;
+        playerInputManager.Player.Attack.started += Attack;
         playerInputManager.Player.QuickTurn.performed += QuickTurn;
         //UI Action Map
         playerInputManager.UI.Accept.performed += Accept;

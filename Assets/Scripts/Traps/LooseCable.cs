@@ -78,6 +78,6 @@ public class LooseCable : MonoBehaviour
     private void TakeShockDamage()
     {
         
-        PlayerStatsScript.DamagePlayer(10);
+        PlayerStatsScript.DamagePlayer(10, false);
     }
 }

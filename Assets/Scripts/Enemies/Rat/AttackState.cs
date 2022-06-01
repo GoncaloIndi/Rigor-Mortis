@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,7 +24,15 @@ public class AttackState : State
 
     [Header("Cooldown")]
     [SerializeField] private float currentAttackCooldown;
+    [SerializeField] private Transform retreatPosition;
+    private bool isGoingBehind = false;
 
+    [Header("Attack Logic")] 
+    [SerializeField] private Transform attackPosition;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float attackRange = .3f;
+    private bool hasAttackSucceded = false;
+ 
     private float delayBeforeRetreat;
     private bool isPerformingAttack = false;
 
@@ -62,6 +71,7 @@ public class AttackState : State
         if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget && !isPerformingAttack) //Return to chase state
         {
             ratStateManager.HasPerformedAttack = false;
+            isGoingBehind = false;
             
             return chaseState;
         }
@@ -102,6 +112,7 @@ public class AttackState : State
                     }
                     else
                     {
+                        isGoingBehind = false;
                         StartCoroutine(PerformAttack(ratStateManager));
                     }
                 }
@@ -126,13 +137,16 @@ public class AttackState : State
         ratStateManager.RatSpeed = ratStateManager.AttackSpeed;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-        yield return new WaitForSeconds(.65f);
+        yield return new WaitForSeconds(.35f);
+        AttackLogic();
+        yield return new WaitForSeconds(.3f);
         ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
-        //Attack logic here
+        AttackLogic();
         currentAttackCooldown = ratStateManager.AttackCooldown;
         isPerformingAttack = false;
         delayBeforeRetreat = Random.Range(0f, .5f);
         delayBeforeRetreat *= ratStateManager.AttackCooldown;
+        hasAttackSucceded = false;
     }
 
     private void GetTargetAngle(RatStateManager ratStateManager)
@@ -143,18 +157,21 @@ public class AttackState : State
 
     private void Retreat(RatStateManager ratStateManager)
     {
+        if (isGoingBehind) return;
 
-        float distance = Vector3.Distance(ratStateManager.transform.position, retreatSpot.position);
         ratStateManager.RatSpeed = ratStateManager.MaxRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
+        ratStateManager.RatNavMeshAgent.SetDestination(retreatPosition.position);
+        isGoingBehind = true;
+    }
 
-        if (distance >= maxAttackDistance)
-        {
-            ratStateManager.RatNavMeshAgent.SetDestination(retreatSpot.position);
-        }
-        else
-        {
-            ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.Origin);
-        }
+    private void AttackLogic()
+    {
+        Collider[] playerCol = Physics.OverlapSphere(attackPosition.position, attackRange, playerLayer);
+
+        if (playerCol.Length < 1 || hasAttackSucceded) return;
+            var dmg = Random.Range(6, 11);
+            playerCol[0].GetComponent<PlayerStats>().DamagePlayer(dmg, true);
+            hasAttackSucceded = true;
     }
 }

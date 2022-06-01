@@ -47,6 +47,10 @@ public class SceneTransition : Interactible
 
     private void TeleportPlayer()
     {
+        if (interactionEvent != null) //Interaction event
+        {
+            interactionEvent.Trigger();
+        }
         sceneToTransition.SetActive(true);
         if (oddObjectOn != null)
         {

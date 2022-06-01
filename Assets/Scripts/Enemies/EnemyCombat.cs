@@ -40,12 +40,11 @@ public class EnemyCombat : MonoBehaviour
 
     private IEnumerator KillEnemy() //Normal Death
     {
-        ratStateManager.RatNavMeshAgent.speed = 0;
         ratStateManager.enabled = false;
+        ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation();
         yield return new WaitForSeconds(1.2f);
         dustVFX.Play();
-        this.gameObject.layer = 7;
         Destroy(this);
     }
 
@@ -53,7 +52,9 @@ public class EnemyCombat : MonoBehaviour
     {
         EnemyStatsScript.EnemyHp = 0;
         yield return new WaitForSeconds(.3f); //Delay so it is closer to the puddle
+        
         ratStateManager.enabled = false;
+        ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDamageAnimation();
         ratAnimationsScript.DisplayElectrifyAnimation();
         yield return new WaitForSeconds(.2f);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -25,9 +26,11 @@ public class PlayerStats : MonoBehaviour
 
     private PlayerActions playerActionsScript;
 
-    //[HideInInspector] 
-    public GameObject CurrentInteractionGameObject; //Used for items
+    [HideInInspector] public GameObject CurrentInteractionGameObject; //Used for items
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
 
     private void Awake()
     {
@@ -35,9 +38,14 @@ public class PlayerStats : MonoBehaviour
     }
 
     //Combat
-    public void DamagePlayer(int dmg)
+    public void DamagePlayer(int dmg, bool vibrateController)
     {
         PlayerHp -= dmg;
+        if (vibrateController)
+        {
+            StartCoroutine(VibrateController());
+        }
+        
         if (PlayerHp <= 0)
         {
             Debug.Log("Death");
@@ -65,5 +73,16 @@ public class PlayerStats : MonoBehaviour
     public void ResetTransition()
     {
         StartCoroutine(ResetSceneTransition());
+    }
+
+    private IEnumerator VibrateController()
+    {
+        var shockTime = .2f;
+        
+        GamePad.SetVibration(playerIndex, 1f, 1f);
+            
+            
+        yield return new WaitForSeconds(shockTime);
+        GamePad.SetVibration(playerIndex, 0, 0);
     }
 }

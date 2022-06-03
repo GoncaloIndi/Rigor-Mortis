@@ -161,6 +161,7 @@ public class AttackState : State
 
         ratStateManager.RatSpeed = ratStateManager.MaxRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
+        if (!ratStateManager.RatNavMeshAgent.isActiveAndEnabled) return;
         ratStateManager.RatNavMeshAgent.SetDestination(retreatPosition.position);
         isGoingBehind = true;
     }

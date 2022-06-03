@@ -29,7 +29,7 @@ public class ObservationWithCamera : Interactible
     public override void Interact() //Called by PlayerActions
     {
         //Camera related
-        cameraToDeactivate = playerMovementScript.CurrentCamera;
+        cameraToDeactivate = playerMovementScript.CameraToUseMovement;
         SwitchCameras();
         
         InteractionUI.SetActive(true);

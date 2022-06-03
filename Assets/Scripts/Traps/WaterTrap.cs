@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 using XInputDotNetPure;
 
 
@@ -13,6 +15,7 @@ public class WaterTrap : MonoBehaviour
     GamePadState prevState;
 
     private bool isGettingEletrified = false;
+    private bool hasKilledRat = false;
 
     private void Awake()
     {
@@ -39,11 +42,33 @@ public class WaterTrap : MonoBehaviour
                 EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
                 if (enemy != null)
                 {
+                    hasKilledRat = true;
                     StartCoroutine(enemy.ElectrifyEnemy());
                 }
             }
         }
        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy") && !hasKilledRat) 
+        {
+            RatStateManager ratState = other.gameObject.GetComponent<RatStateManager>();
+            if (ratState.CurrentTarget == null)
+            {
+                ratState.ReturnToOrigin = true;
+            }
+            else
+            {
+                EnemyCombat enemy = other.gameObject.GetComponent<EnemyCombat>();
+                if (enemy != null)
+                {
+                    hasKilledRat = true;
+                    StartCoroutine(enemy.ElectrifyEnemy());
+                }
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

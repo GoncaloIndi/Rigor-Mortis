@@ -9,10 +9,11 @@ public class PlayerAnimations : MonoBehaviour
     public bool DisplayRunningAnimation = false;
     
     [SerializeField]
-    private Animator PlayerAnim;
+    private Animator playerAnim;
     private static readonly int Movement = Animator.StringToHash("Movement");
     [HideInInspector] public PlayerActions PlayerActionsScript;
     private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Damage = Animator.StringToHash("Damage");
 
     private void Awake()
     {
@@ -26,22 +27,27 @@ public class PlayerAnimations : MonoBehaviour
         {
             if (DisplayRunningAnimation)
             {
-                PlayerAnim.SetFloat(Movement, 1, .1f, Time.deltaTime);
+                playerAnim.SetFloat(Movement, 1, .1f, Time.deltaTime);
             }
             else
             {
-                PlayerAnim.SetFloat(Movement, .5f,.15f, Time.deltaTime);
+                playerAnim.SetFloat(Movement, .5f,.15f, Time.deltaTime);
             }
         }
         else
         {
-            PlayerAnim.SetFloat(Movement, 0,.15f, Time.deltaTime);
+            playerAnim.SetFloat(Movement, 0,.15f, Time.deltaTime);
         }
         
     }
 
     public void DisplayAttackAnimation()
     {
-        PlayerAnim.SetTrigger(Attack);
+        playerAnim.SetTrigger(Attack);
+    }
+
+    public void DisplayDamageAnimation()
+    {
+        playerAnim.SetTrigger(Damage);
     }
 }

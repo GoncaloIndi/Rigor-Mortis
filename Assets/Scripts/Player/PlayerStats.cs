@@ -25,6 +25,7 @@ public class PlayerStats : MonoBehaviour
     public bool CanTransitionTroughtScenes = true;
 
     private PlayerActions playerActionsScript;
+    private PlayerAnimations playerAnimationsScript;
 
     [HideInInspector] public GameObject CurrentInteractionGameObject; //Used for items
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
@@ -35,12 +36,14 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         playerActionsScript = GetComponent<PlayerActions>();
+        playerAnimationsScript = GetComponent<PlayerAnimations>();
     }
 
     //Combat
     public void DamagePlayer(int dmg, bool vibrateController)
     {
         PlayerHp -= dmg;
+        playerAnimationsScript.DisplayDamageAnimation();
         if (vibrateController)
         {
             StartCoroutine(VibrateController());
@@ -77,12 +80,14 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator VibrateController()
     {
-        var shockTime = .2f;
-        
+        var shockTime = .5f;
+
+        playerActionsScript.PlayerToNoInput();
         GamePad.SetVibration(playerIndex, 1f, 1f);
             
             
         yield return new WaitForSeconds(shockTime);
+        playerActionsScript.PlayerToNoInput();
         GamePad.SetVibration(playerIndex, 0, 0);
     }
 }

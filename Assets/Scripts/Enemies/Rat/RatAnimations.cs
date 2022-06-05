@@ -34,7 +34,7 @@ public class RatAnimations : MonoBehaviour
         //Yoinked from the internet (Calculates the speed) ROTATION;
  
         angle = Mathf.Lerp(angle, (transform.rotation.eulerAngles - oldEulerAngles).magnitude / Time.deltaTime, test);
-        print(angle);
+        //print(angle);
         oldEulerAngles = transform.rotation.eulerAngles;
         
 

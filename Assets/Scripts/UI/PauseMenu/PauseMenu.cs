@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
-    [Range(0, 2)] public int CurrentButton = 0; //0-Resume / 1-Options / 2-Quit
-
     [SerializeField] private PauseGame pauseGameScript;
 
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject defaultMenu;
 
-    [Header("Buttons")] [SerializeField] private GameObject onPauseButton, optionsFirstButton, optionsClosedButton;
+    
 
     public void ResumeGame()
     {
@@ -22,6 +21,7 @@ public class PauseMenu : MonoBehaviour
     {
         defaultMenu.SetActive(false);
         optionsMenu.SetActive(true);
+        pauseGameScript.HandleOptionsButtonSelection(true);
     }
 
     public void QuitGame()
@@ -35,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         {
             optionsMenu.SetActive(false);
             defaultMenu.SetActive(true);
+            pauseGameScript.HandleOptionsButtonSelection(false);
         }
         else
         {

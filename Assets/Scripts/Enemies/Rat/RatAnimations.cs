@@ -7,7 +7,10 @@ public class RatAnimations : MonoBehaviour
 {
     [SerializeField] private Animator ratAnim;
     private float speed;
+    private float angle;
     private Vector3 lastPosition;
+    private Vector3 oldEulerAngles;
+    [SerializeField] private float test = .75f;
 
     private RatStateManager ratStateManager;
     private static readonly int Speed = Animator.StringToHash("Speed");
@@ -15,6 +18,7 @@ public class RatAnimations : MonoBehaviour
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int ElectricDeath = Animator.StringToHash("ElectricDeath");
     private static readonly int Attack = Animator.StringToHash("Attack");
+    private static readonly int Angle = Animator.StringToHash("Angle");
 
     private void Awake()
     {
@@ -23,12 +27,19 @@ public class RatAnimations : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Yoinked from the internet (Calculates the speed)
+        //Yoinked from the internet (Calculates the speed) POSITION
         var position = transform.position;
         speed = Mathf.Lerp(speed, (position - lastPosition).magnitude / Time.deltaTime, 0.75f);
         lastPosition = position;
+        //Yoinked from the internet (Calculates the speed) ROTATION;
+ 
+        angle = Mathf.Lerp(angle, (transform.rotation.eulerAngles - oldEulerAngles).magnitude / Time.deltaTime, test);
+        print(angle);
+        oldEulerAngles = transform.rotation.eulerAngles;
+        
 
         ratAnim.SetFloat(Speed, speed);
+        ratAnim.SetFloat(Angle, angle);
     }
 
     public void DisplayDamageAnimation() //Called by enemyCombat

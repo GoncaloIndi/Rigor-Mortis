@@ -991,6 +991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayRunningAnimation: 0
+  AnimationState: 0
   playerAnim: {fileID: 919132149209147896}
   PlayerActionsScript: {fileID: 0}
 --- !u!114 &95479331
@@ -41977,6 +41978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653686559565}
   - component: {fileID: 919132149209147896}
+  - component: {fileID: 919132149209147897}
   m_Layer: 9
   m_Name: NutCracker
   m_TagString: Untagged
@@ -42003,6 +42005,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132149209147897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149209147895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e6b2e6cd8571e4d874b11e5da5d5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkFootstepDelay: 0.7
+  runFootstepDelay: 0.3
 --- !u!1 &941119171348889249
 GameObject:
   m_ObjectHideFlags: 0
@@ -49638,7 +49654,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -56136,7 +56152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionTag: 
   parameter: Surfaces
-  TriggerEvent: 0
+  TriggerEvent: 11
   value: 0
 --- !u!23 &8177385122651727691
 MeshRenderer:

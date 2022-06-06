@@ -80,4 +80,13 @@ public class RatStateManager : MonoBehaviour
     {
         ReturnToOrigin = true;
     }
+
+    public void ResetRatState() //Called by ratPositionResetter
+    {
+        CurrentTarget = null;
+        HasTarget = false;
+        HasPerformedAttack = false;
+        currentState = startingState;
+        
+    }
 }

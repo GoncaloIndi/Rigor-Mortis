@@ -9,6 +9,7 @@ public class Thunder : MonoBehaviour
     [SerializeField] private bool isStormClosingIn = true;
     [SerializeField] private float minStormFlash;
     [SerializeField] private float maxStormFlash;
+    [SerializeField] private bool isThunderStrong = true;
     private Light lighting;
     [SerializeField] private ParticleSystem rainVFX;
 
@@ -37,7 +38,14 @@ public class Thunder : MonoBehaviour
 
     private void ThunderSound()
     {
-        //Implement thunder sounds based on distance
+        if (isThunderStrong)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ThunderStrong", transform.position);
+        }
+        else
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ThunderWeak", transform.position);
+        }
     }
 
     private IEnumerator Thunderstorm()

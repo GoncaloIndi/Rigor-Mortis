@@ -108,18 +108,18 @@ public class PlayerActions : MonoBehaviour
     {
         if (PlayerStatsScript.IsRunning)
         {
-            PlayerMovementScript.ForcePlayerToWalk();
+            //PlayerMovementScript.ForcePlayerToWalk();
         }
-        PlayerLockOnTargetScript.BeginLockOnState();
+        //PlayerLockOnTargetScript.BeginLockOnState();
     }
     
     private void StopLockOn(InputAction.CallbackContext context)
     {
-        PlayerLockOnTargetScript.EndLockOnState();
+        //PlayerLockOnTargetScript.EndLockOnState();
 
         if (PlayerStatsScript.IsRunning)
         {
-            PlayerMovementScript.StartPlayerSprintingMomentum();
+            //PlayerMovementScript.StartPlayerSprintingMomentum();
         }
 
     }

@@ -75,6 +75,7 @@ public class SceneTransition : Interactible
 
     private void FixCameraPosition()
     {
+        playerMovementScript.CameraToUseMovement = cameraToTransition; //Observation with camera fix
         if (shouldSwitchCameraInput)
         {
             playerMovementScript.CurrentCamera = cameraToTransition;

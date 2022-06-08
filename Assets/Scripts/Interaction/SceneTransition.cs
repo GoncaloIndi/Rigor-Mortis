@@ -24,6 +24,8 @@ public class SceneTransition : Interactible
     [SerializeField] private GameObject cameraToTransition;
     [SerializeField] private bool shouldSwitchCameraInput = false;
     private Transform playerPosition;
+    [Header("Sound")] 
+    [SerializeField] private string transitionSfx;
     
     private static readonly int DarkenAndLighten = Animator.StringToHash("DarkenAndLighten");
 
@@ -47,10 +49,7 @@ public class SceneTransition : Interactible
 
     private void TeleportPlayer()
     {
-        if (interactionEvent != null) //Interaction event
-        {
-            interactionEvent.Trigger();
-        }
+        
         sceneToTransition.SetActive(true);
         if (oddObjectOn != null)
         {
@@ -66,11 +65,12 @@ public class SceneTransition : Interactible
         playerPosition.rotation = playerTeleportRotation;
         playerController.enabled = true;
         FixCameraPosition();
-        //Invoke event
-        if (interactionEvent != null)
+        //An event was were (if it breaks is cuz im stoopid)
+        if (interactionEvent != null) //Interaction event
         {
             interactionEvent.Trigger();
         }
+        PlayTransitionSFX();
     }
 
     private void FixCameraPosition()
@@ -82,6 +82,13 @@ public class SceneTransition : Interactible
         }
         if (isCameraFixed) return;
         cameraScript.transform.position = playerPosition.position + cameraScript.CameraOffset;
+    }
+
+    private void PlayTransitionSFX()
+    {
+        if (transitionSfx == null) return;
+
+        FMODUnity.RuntimeManager.PlayOneShot(transitionSfx);
     }
     
     

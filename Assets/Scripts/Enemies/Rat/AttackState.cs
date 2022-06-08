@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,143 +9,139 @@ public class AttackState : State
     private ChaseState chaseState;
     [SerializeField] private RatAnimations ratAnimationsScript;
     [SerializeField] private RatStateManager ratStateManagerScript;
+    [SerializeField] private EnemyCombat enemyCombatScript;
+
+    [Header("Zombie Attacks")] 
+    [SerializeField] private RatAttackAction[] ratAttackActions;
+
+    [Header("Performable Attacks")] 
+    [SerializeField] private List<RatAttackAction> potentialAttacks;
+
+    [Header("Current Attack")] 
+    [SerializeField] private RatAttackAction currentAttack;
+
+    [SerializeField] private bool hasAttackSelected; //To improve performance used whenever current attack is being used
     
-    [Header("Angle & Distance")]
-    [SerializeField] private float minAttackAngle = 160;
-    [SerializeField] private float maxAttackAngle = 200;
-    [SerializeField] private float minAttackDistance = 1.5f;
-    [SerializeField] private float minAttackDistanceOffset = .5f; //In order to make the rat turn and get an angle before getting to close to the player
-    [SerializeField] private float maxAttackDistance = 2.5f;
+
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
-    [SerializeField] private Transform retreatSpot;
     private Vector3 targetDirection;
     private float viewableAngleFromCurrentTarget;
-
-    [Header("Cooldown")]
-    [SerializeField] private float currentAttackCooldown;
-    [SerializeField] private Transform retreatPosition;
-    private bool isGoingBehind = false;
-
-    [Header("Attack Logic")] 
-    [SerializeField] private Transform attackPosition;
-    [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float attackRange = .3f;
-    private bool hasAttackSucceded = false;
- 
-    private float delayBeforeRetreat;
-    private bool isPerformingAttack = false;
+    
 
     private void Awake()
     {
         chaseState = GetComponent<ChaseState>();
     }
 
-    private void FixedUpdate()
-    {
-        if (currentAttackCooldown > 0) //Cooldown timer logic (if need be move to ratStateManager)
-        {
-            currentAttackCooldown -= Time.deltaTime;
-            if (currentAttackCooldown <= delayBeforeRetreat) //Retreat a short while after the cooldown so the player has a chance to attack
-            {
-                Retreat(ratStateManagerScript);
-            }
-            if (currentAttackCooldown <= 0)
-            {
-                ratStateManagerScript.HasPerformedAttack = false;
-            }
-        }
-    }
-
     public override State Tick(RatStateManager ratStateManager)
     {
         GetTargetAngle(ratStateManager);
 
-        
 
-        if (!ratStateManager.HasPerformedAttack && currentAttackCooldown <= 0)
+        if (!ratStateManager.HasPerformedAttack && ratStateManager.CurrentAttackCooldown <= 0)
         {
-            ValidateAttack(ratStateManager);
+            if (!hasAttackSelected)
+            {
+                GetValidAttack(ratStateManager);
+            }
+            else
+            {
+                AttackTarget(ratStateManager);
+            }
         }
         
-        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget && !isPerformingAttack) //Return to chase state
+        if (ratStateManager.CurrentAttackCooldown > 0) //Cooldown timer logic
         {
-            ratStateManager.HasPerformedAttack = false;
-            isGoingBehind = false;
+            ratStateManager.CurrentAttackCooldown -= Time.deltaTime;
+
+            if (ratStateManager.CurrentAttackCooldown <= 0)
+            {
+                ratStateManagerScript.HasPerformedAttack = false;
+            }
+        }
+        
+        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget) //Return to chase state
+        {
+            //Reset values
             
+
             return chaseState;
         }
         else
         {
             return this;
         }
+        
+        
     }
 
-    private void ValidateAttack(RatStateManager ratStateManager) //Checks to see if it can attack the player
+    private void GetValidAttack(RatStateManager ratStateManager) //See what attack are valid and choose a random one
     {
-        if (ratStateManager.DistanceFromCurrentTarget <= maxAttackDistance) //Checks if the player is in attacking distance
+        for (int i = 0; i < ratAttackActions.Length; i++)
         {
-            if (ratStateManager.DistanceFromCurrentTarget <= minAttackDistance + minAttackDistanceOffset) //If the rat its too close it gets away from the player until it can attack
-            {
-                Retreat(ratStateManager);
-            }
-            
-            else if (ratStateManager.DistanceFromCurrentTarget > minAttackDistanceOffset)//Passed distance validations 
-            {
-                ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-                
-                if (viewableAngleFromCurrentTarget <= maxAttackAngle && viewableAngleFromCurrentTarget >= minAttackAngle) //Angle validation
-                {
-                    //Raycast validation
-                    RaycastHit hit;
-                    //raycast goes a bit up
-                    float height = .2f;
-                    var transform1 = ratStateManager.CurrentTarget.transform;
-                    Vector3 playerStartPoint = new Vector3(transform1.position.x, transform1.position.y + height, transform1.position.z);
-                    var position = transform.position;
-                    Vector3 ratStartPoint = new Vector3(position.x, position.y + height, position.z);
+            RatAttackAction ratAttack = ratAttackActions[i];
 
-                    if (Physics.Linecast(playerStartPoint, ratStartPoint, out hit, ignoreWhenInLineOfSight))
-                    {
-                        //Improve
-                        Retreat(ratStateManager);
-                    }
-                    else
-                    {
-                        isGoingBehind = false;
-                        StartCoroutine(PerformAttack(ratStateManager));
-                    }
-                }
-                else
+            //Check for attack distance
+            if (ratStateManager.DistanceFromCurrentTarget >= ratAttack.MinAttackDistance
+                && ratStateManager.DistanceFromCurrentTarget <= ratAttack.MaxAttackDistance)
+            { 
+                //Check for attack angles
+                print("DistanceCheck");
+                if (viewableAngleFromCurrentTarget >= ratAttack.MinAttackAngle
+                    && viewableAngleFromCurrentTarget <= ratAttack.MaxAttackAngle)
                 {
-                    ratStateManager.RatSpeed = .2f;
-                    ratStateManager.ChangeRatSpeed();
-                    ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+                    print("AngleCheck");
+                    //Add to attack list
+                    potentialAttacks.Add(ratAttack);
                 }
             }
         }
+
+        int rng = Random.Range(0, potentialAttacks.Count);
+
+        if (potentialAttacks.Count <= 0)
+        {
+            //Return to chaseState
+        }
+        else //Choose attack
+        {
+            currentAttack = potentialAttacks[rng];
+            hasAttackSelected = true;
+            potentialAttacks.Clear();
+        }
     }
 
-    private IEnumerator PerformAttack(RatStateManager ratStateManager)
+    private void AttackTarget(RatStateManager ratStateManager)
     {
-        isPerformingAttack = true;
-        ratStateManager.RatSpeed = 0;
-        ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
-        ratAnimationsScript.DisplayAttackAnimation();
-        yield return new WaitForSeconds(1.5f);
-        ratStateManager.RatSpeed = ratStateManager.AttackSpeed;
-        ratStateManager.ChangeRatSpeed();
-        ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-        yield return new WaitForSeconds(.35f);
-        AttackLogic();
-        yield return new WaitForSeconds(.3f);
-        ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
-        AttackLogic();
-        currentAttackCooldown = ratStateManager.AttackCooldown;
-        isPerformingAttack = false;
-        delayBeforeRetreat = Random.Range(0f, .5f);
-        delayBeforeRetreat *= ratStateManager.AttackCooldown;
-        hasAttackSucceded = false;
+        
+        if (hasAttackSelected)
+        {
+            hasAttackSelected = false;
+
+            //Handle logic from different attacks
+            if (currentAttack.AttackNumber == 0) //Lunge Attack
+            {
+                StartCoroutine(enemyCombatScript.PerformLungeAttack(ratStateManager, currentAttack.AttackAnimation));
+            }
+            else
+            {
+                ratStateManager.RatSpeed = 0;
+                ratStateManager.ChangeRatSpeed();
+                ratAnimationsScript.DisplayAttackAnimation(currentAttack.AttackAnimation);
+                print("Implement attack logic");
+            }
+            //Cooldown
+            ratStateManager.CurrentAttackCooldown = currentAttack.AttackCooldown;
+
+        }
+        else //Should not happer
+        {
+            Debug.LogWarning("Rat doesnt have attack");
+        }
+        
+        
+        
     }
 
     private void GetTargetAngle(RatStateManager ratStateManager)
@@ -153,24 +150,12 @@ public class AttackState : State
         viewableAngleFromCurrentTarget = Vector3.SignedAngle(targetDirection, transform.forward, Vector3.up);
     }
 
-    private void Retreat(RatStateManager ratStateManager)
+    private void ResetValues(RatStateManager ratStateManager) //Reset values before going back to chase
     {
-        if (isGoingBehind) return;
+        ratStateManager.HasPerformedAttack = false;
 
-        ratStateManager.RatSpeed = ratStateManager.MaxRatChaseSpeed;
+        ratStateManager.RatNavMeshAgent.speed = ratStateManager.MinRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
-        if (!ratStateManager.RatNavMeshAgent.isActiveAndEnabled) return;
-        ratStateManager.RatNavMeshAgent.SetDestination(retreatPosition.position);
-        isGoingBehind = true;
     }
 
-    private void AttackLogic()
-    {
-        Collider[] playerCol = Physics.OverlapSphere(attackPosition.position, attackRange, playerLayer);
-
-        if (playerCol.Length < 1 || hasAttackSucceded) return;
-            var dmg = Random.Range(6, 11);
-            playerCol[0].GetComponent<PlayerStats>().DamagePlayer(dmg, true);
-            hasAttackSucceded = true;
-    }
 }

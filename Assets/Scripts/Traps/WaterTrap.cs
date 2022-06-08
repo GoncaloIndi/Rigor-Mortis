@@ -96,6 +96,7 @@ public class WaterTrap : MonoBehaviour
             if (timesShocked < 3)
             {
                 timesShocked++;
+                PlayerStatsScript.FakeDamagePlayer();
             }
             else
             {
@@ -103,7 +104,7 @@ public class WaterTrap : MonoBehaviour
             }
             
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
         }
         
     }

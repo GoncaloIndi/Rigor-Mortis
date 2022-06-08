@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyCombat : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class EnemyCombat : MonoBehaviour
     private RatStateManager ratStateManager;
 
     private IdleState idleStateScript;
+    
+    [Header("Attack Logic")] 
+    [SerializeField] private Transform attackPosition;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float attackRange = .27f;
+    private bool hasAttackSucceded = false;
 
     private void Awake()
     {
@@ -24,6 +31,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager = GetComponent<RatStateManager>();
     }
 
+    //When rat is hurt
     public void TakeDamage(int damage) 
     {
         EnemyStatsScript.EnemyHp -= damage;
@@ -62,4 +70,39 @@ public class EnemyCombat : MonoBehaviour
         Destroy(this);
     }
     
+    //Rat attack logic
+    
+    private void AttackLogic(RatStateManager ratStateManager) //Logic for hurting player
+    {
+            Collider[] playerCol = Physics.OverlapSphere(attackPosition.position, attackRange, playerLayer);
+    
+            if (playerCol.Length < 1 || hasAttackSucceded) return;
+                var dmg = Random.Range(6, 11);
+                playerCol[0].GetComponent<PlayerStats>().DamagePlayer(dmg, true);
+                ratStateManager.RatSpeed = 0;
+                ratStateManager.ChangeRatSpeed();
+                hasAttackSucceded = true;
+    }
+    
+    public IEnumerator PerformLungeAttack(RatStateManager ratStateManager, string attackTrigger) //Lunge attack Logic
+    {
+        hasAttackSucceded = false;
+        ratStateManager.RatSpeed = 0;
+        ratStateManager.ChangeRatSpeed();
+        ratStateManager.HasPerformedAttack = true;
+        ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
+        yield return new WaitForSeconds(1.5f);
+        ratStateManager.RatSpeed = ratStateManager.AttackSpeed;
+        ratStateManager.ChangeRatSpeed();
+        ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+        yield return new WaitForSeconds(.1f);
+        AttackLogic(ratStateManager);
+        yield return new WaitForSeconds(.1f);
+        AttackLogic(ratStateManager);
+        yield return new WaitForSeconds(.15f);
+        AttackLogic(ratStateManager);
+        yield return new WaitForSeconds(.3f);
+        ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
+        AttackLogic(ratStateManager);
+    }
 }

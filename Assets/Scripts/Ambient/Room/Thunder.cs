@@ -99,4 +99,9 @@ public class Thunder : MonoBehaviour
         if (rainVFX == null) return; //Only start rain if there is rain in the scene
         StartCoroutine(Rain());
     }
+
+    private void OnDisable()
+    {
+        lighting.enabled = false;
+    }
 }

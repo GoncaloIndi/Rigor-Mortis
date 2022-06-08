@@ -63,6 +63,7 @@ public class LooseCable : MonoBehaviour
             if (timesShocked < 6)
             {
                 timesShocked++;
+                PlayerStatsScript.FakeDamagePlayer();
             }
             else
             {

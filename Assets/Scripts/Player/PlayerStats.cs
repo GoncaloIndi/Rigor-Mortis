@@ -44,6 +44,7 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerHp -= dmg;
         playerAnimationsScript.DisplayDamageAnimation();
+        StartCoroutine(StopInputOnDamage());
         if (vibrateController)
         {
             StartCoroutine(VibrateController());
@@ -53,6 +54,14 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Death");
         }
+    }
+
+    public void FakeDamagePlayer()
+    {
+        playerAnimationsScript.DisplayDamageAnimation();
+        StartCoroutine(StopInputOnDamage());
+        StartCoroutine(VibrateController());
+        
     }
 
     public void EquipSword()
@@ -82,12 +91,18 @@ public class PlayerStats : MonoBehaviour
     {
         var shockTime = .5f;
 
-        playerActionsScript.PlayerToNoInput();
+        
         GamePad.SetVibration(playerIndex, 1f, 1f);
             
             
         yield return new WaitForSeconds(shockTime);
-        playerActionsScript.PlayerToNoInput();
         GamePad.SetVibration(playerIndex, 0, 0);
+    }
+
+    private IEnumerator StopInputOnDamage()
+    {
+        playerActionsScript.PlayerToNoInput();
+        yield return new WaitForSeconds(.5f);
+        playerActionsScript.PlayerToNoInput();
     }
 }

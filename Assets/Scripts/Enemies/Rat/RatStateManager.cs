@@ -27,11 +27,11 @@ public class RatStateManager : MonoBehaviour
 
     [Header("Attack & Chase")]
     public float MaximumChaseDistance = 3.7f;
-    public float AttackCooldown = 2.5f;
     public float ReturnToChaseDistance = 3;
     public float DistanceToTriggerAttackState = 1.1f;
     public float AttackSpeed = 3f;
     public bool HasPerformedAttack = false;
+    public float CurrentAttackCooldown;
 
     [Header("Debug Values")] 
     public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies

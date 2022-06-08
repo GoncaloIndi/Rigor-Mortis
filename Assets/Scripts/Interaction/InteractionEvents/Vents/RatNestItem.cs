@@ -33,6 +33,9 @@ public class RatNestItem : InteractionEvent
     [SerializeField] private ClosetDoor closetDoorScript;
     public GameObject Bootprint; //BootprintUpdater script
 
+    [Header("Vent Related")] 
+    [SerializeField] private GameObject ratBang;
+
     
     
     private void Awake()
@@ -46,6 +49,7 @@ public class RatNestItem : InteractionEvent
     {
         playerStatsScript.CurrentInteractionGameObject = this.gameObject;
         RoomGasLighting();
+        VentChanges();
         Interact();
     }
 
@@ -91,5 +95,11 @@ public class RatNestItem : InteractionEvent
         bear.SetActive(false);
         Bootprint.SetActive(true);
         closetDoorScript.IsAffectedByWind = true;
+    }
+    
+    //Changes in vent level
+    private void VentChanges()
+    {
+        ratBang.SetActive(false);
     }
 }

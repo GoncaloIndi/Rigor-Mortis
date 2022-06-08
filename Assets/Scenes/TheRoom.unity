@@ -14106,11 +14106,11 @@ MonoBehaviour:
   MaxRatChaseSpeed: 2.2
   DelayChaseSpeed: 0.9
   MaximumChaseDistance: 7.2
-  AttackCooldown: 2.5
-  ReturnToChaseDistance: 3
-  DistanceToTriggerAttackState: 1.5
+  ReturnToChaseDistance: 2.31
+  DistanceToTriggerAttackState: 1.2
   AttackSpeed: 3
   HasPerformedAttack: 0
+  CurrentAttackCooldown: 0
   IsPerformingAction: 0
   ReturnToOrigin: 0
 --- !u!114 &489573651
@@ -14143,6 +14143,11 @@ MonoBehaviour:
   dustVFX: {fileID: 138320552}
   electricVFX: {fileID: 2006656761}
   EnemyStatsScript: {fileID: 0}
+  attackPosition: {fileID: 1683507207}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  attackRange: 0.27
 --- !u!65 &489573654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17739,6 +17744,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 0}
   cameraToTransition: {fileID: 1470673338}
   shouldSwitchCameraInput: 0
+  transitionSfx: event:/UI/sfx_VentTransition
 --- !u!65 &858082013
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30768,6 +30774,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 0}
   cameraToTransition: {fileID: 1338051725}
   shouldSwitchCameraInput: 0
+  transitionSfx: event:/UI/sfx_VentTransition
 --- !u!65 &1259222493
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31374,7 +31381,7 @@ MonoBehaviour:
   CameraOffset: {x: 0, y: 0.9, z: 2}
   cameraSmoothness: 2
   xCameraClamp:
-  - 3.4
+  - 3.55
   - 4.15
   zCameraClamp:
   - -11.5
@@ -32452,6 +32459,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 0}
   cameraToTransition: {fileID: 1418252579}
   shouldSwitchCameraInput: 0
+  transitionSfx: 
 --- !u!65 &1418252583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33035,6 +33043,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 1470673338}
   cameraToTransition: {fileID: 1470673338}
   shouldSwitchCameraInput: 1
+  transitionSfx: event:/UI/sfx_RopeTransitionDown
 --- !u!65 &1478668776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33206,6 +33215,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 0}
   cameraToTransition: {fileID: 1470673338}
   shouldSwitchCameraInput: 0
+  transitionSfx: 
 --- !u!65 &1489165440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34621,6 +34631,7 @@ MonoBehaviour:
   bear: {fileID: 5934587165423447377}
   closetDoorScript: {fileID: 919132148803795860}
   Bootprint: {fileID: 1882362339}
+  ratBang: {fileID: 1409966997}
 --- !u!212 &1621791512
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35601,6 +35612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1767501287}
   - component: {fileID: 1767501288}
+  - component: {fileID: 1767501289}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -35645,6 +35657,36 @@ MonoBehaviour:
   pauseGameScript: {fileID: 1415818252}
   optionsMenu: {fileID: 85688942}
   defaultMenu: {fileID: 1544968214}
+--- !u!114 &1767501289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767501286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -872200565
+      Data2: 1225879593
+      Data3: -1913685080
+      Data4: 865623131
+    Path: snapshot:/PauseMenu
+  Event: 
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1771191084
 GameObject:
   m_ObjectHideFlags: 0
@@ -37323,6 +37365,7 @@ MonoBehaviour:
   oddObjectOn: {fileID: 0}
   cameraToTransition: {fileID: 29509199}
   shouldSwitchCameraInput: 1
+  transitionSfx: event:/UI/sfx_RopeTransitionUp
 --- !u!65 &1909318436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44018,22 +44061,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ratAnimationsScript: {fileID: 919132148262279197}
   ratStateManagerScript: {fileID: 489573650}
-  minAttackAngle: -45
-  maxAttackAngle: 45
-  minAttackDistance: 0.3
-  minAttackDistanceOffset: 0.5
-  maxAttackDistance: 2.5
+  enemyCombatScript: {fileID: 489573652}
+  ratAttackActions:
+  - {fileID: 11400000, guid: d91396b047f475146943d3ba1dbf995a, type: 2}
+  - {fileID: 11400000, guid: 4ab45a3e3d19e3c4da91e3edfc72834c, type: 2}
+  - {fileID: 11400000, guid: 78422bde66a4d994593d5ef220025c29, type: 2}
+  potentialAttacks: []
+  currentAttack: {fileID: 0}
+  hasAttackSelected: 0
   ignoreWhenInLineOfSight:
     serializedVersion: 2
     m_Bits: 1023
-  retreatSpot: {fileID: 2067854804}
-  currentAttackCooldown: 0
-  retreatPosition: {fileID: 537374551}
-  attackPosition: {fileID: 1683507207}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  attackRange: 0.27
 --- !u!4 &2116114193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 00a011424f98b094c829e83257a41768, type: 3}
@@ -44613,7 +44651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148262279195}
   m_LocalRotation: {x: 0.00000019973709, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2, y: 0.996, z: 2.01}
+  m_LocalPosition: {x: 1.25, y: 0.996, z: 2.01}
   m_LocalScale: {x: 0.57625073, y: 0.57625073, z: 0.57625073}
   m_Children:
   - {fileID: 2076577589}

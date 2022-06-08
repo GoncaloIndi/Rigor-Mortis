@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RatLungeAttack
   m_EditorClassIdentifier: 
   AttackAnimation: Attack
-  AttackCooldown: 8
+  AttackCooldown: 6
   MinAttackAngle: -30
   MaxAttackAngle: 30
   MinAttackDistance: 1.1

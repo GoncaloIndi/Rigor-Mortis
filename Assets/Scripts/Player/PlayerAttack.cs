@@ -53,6 +53,7 @@ public class PlayerAttack : MonoBehaviour
             EnemyCombat enemyCombatScript = enemyCol[i].GetComponent<EnemyCombat>();
             if (enemyCombatScript != null)
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_SwordHitFlesh");
                 StartCoroutine(VibrateController());
                 enemyCombatScript.TakeDamage(10);
             }

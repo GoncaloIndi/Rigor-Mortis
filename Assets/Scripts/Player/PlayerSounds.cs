@@ -20,7 +20,7 @@ public class PlayerSounds : MonoBehaviour
     }
 
 
-    public void PlayFootstep() //Glitchy so works with playerAnimations and failSafes
+    public void PlayFootstep() //Glitchy so works with playerAnimations and failSafes (due to blend tree)
     {
         if (playerAnimationsScript.AnimationState == 0) return;
 
@@ -35,5 +35,10 @@ public class PlayerSounds : MonoBehaviour
             elapsedTime = 0;
         }
         
+    }
+
+    public void PlayAttackSwoosh() //Played by attack animation
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_SwordSwoosh");
     }
 }

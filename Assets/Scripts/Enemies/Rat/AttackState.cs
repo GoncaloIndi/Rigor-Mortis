@@ -88,11 +88,9 @@ public class AttackState : State
                 && ratStateManager.DistanceFromCurrentTarget <= ratAttack.MaxAttackDistance)
             { 
                 //Check for attack angles
-                print("DistanceCheck");
                 if (viewableAngleFromCurrentTarget >= ratAttack.MinAttackAngle
                     && viewableAngleFromCurrentTarget <= ratAttack.MaxAttackAngle)
                 {
-                    print("AngleCheck");
                     //Add to attack list
                     potentialAttacks.Add(ratAttack);
                 }
@@ -129,10 +127,7 @@ public class AttackState : State
             }
             else
             {
-                ratStateManager.RatSpeed = 0;
-                ratStateManager.ChangeRatSpeed();
-                ratAnimationsScript.DisplayAttackAnimation(currentAttack.AttackAnimation);
-                print("Implement attack logic");
+                StartCoroutine(enemyCombatScript.TailAttack(ratStateManager, currentAttack.AttackAnimation));
             }
             //Cooldown
             ratStateManager.CurrentAttackCooldown = currentAttack.AttackCooldown;

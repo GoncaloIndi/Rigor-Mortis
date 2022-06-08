@@ -40,6 +40,7 @@ public class LooseCableLights : MonoBehaviour
         float rng = Random.Range(0, 100);
         if (rng > lightChance) yield break;
 
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ElectricCable",transform.position);
         cableLight.enabled = true;
         yield return new WaitForSeconds(.1f);
         cableLight.enabled = false;

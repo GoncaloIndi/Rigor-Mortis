@@ -18,10 +18,14 @@ public class EnemyCombat : MonoBehaviour
     private IdleState idleStateScript;
     
     [Header("Attack Logic")] 
-    [SerializeField] private Transform attackPosition;
+    [SerializeField] private Transform lungeAttackPosition;
     [SerializeField] private LayerMask playerLayer;
-    [SerializeField] private float attackRange = .27f;
+    [SerializeField] private float lungeAttackRange = .27f;
     private bool hasAttackSucceded = false;
+    //TailAttacks
+    [SerializeField] private float tailAttackRange = .45f;
+    [SerializeField] private Transform tailAttackPosition;
+    
 
     private void Awake()
     {
@@ -72,9 +76,9 @@ public class EnemyCombat : MonoBehaviour
     
     //Rat attack logic
     
-    private void AttackLogic(RatStateManager ratStateManager) //Logic for hurting player
+    private void AttackLogic(RatStateManager ratStateManager, float attackRange, Transform attackPostion) //Logic for hurting player
     {
-            Collider[] playerCol = Physics.OverlapSphere(attackPosition.position, attackRange, playerLayer);
+            Collider[] playerCol = Physics.OverlapSphere(attackPostion.position, attackRange, playerLayer);
     
             if (playerCol.Length < 1 || hasAttackSucceded) return;
                 var dmg = Random.Range(6, 11);
@@ -96,13 +100,36 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.ChangeRatSpeed();
         ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
         yield return new WaitForSeconds(.1f);
-        AttackLogic(ratStateManager);
+        AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.1f);
-        AttackLogic(ratStateManager);
+        AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.15f);
-        AttackLogic(ratStateManager);
+        AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.3f);
         ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
-        AttackLogic(ratStateManager);
+        AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
     }
+
+    public IEnumerator TailAttack(RatStateManager ratStateManager, string attackTrigger)
+    {
+        hasAttackSucceded = false;
+        ratStateManager.RatSpeed = 0;
+        ratStateManager.ChangeRatSpeed();
+        ratStateManager.HasPerformedAttack = true;
+        ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
+        yield return new WaitForSeconds(.35f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        
+        
+    }
+    
+    
 }

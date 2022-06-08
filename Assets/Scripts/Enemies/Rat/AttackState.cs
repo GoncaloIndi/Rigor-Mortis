@@ -26,6 +26,7 @@ public class AttackState : State
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
     private Vector3 targetDirection;
     private float viewableAngleFromCurrentTarget;
+    private bool returnToChaseByOverride = false;
     
 
     private void Awake()
@@ -60,10 +61,11 @@ public class AttackState : State
             }
         }
         
-        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget) //Return to chase state
+        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget || returnToChaseByOverride) //Return to chase state
         {
             //Reset values
             
+            ResetValues(ratStateManager);
 
             return chaseState;
         }
@@ -99,9 +101,10 @@ public class AttackState : State
 
         int rng = Random.Range(0, potentialAttacks.Count);
 
-        if (potentialAttacks.Count <= 0)
+        if (potentialAttacks.Count <= 0) //If has no attacks
         {
             //Return to chaseState
+            StartCoroutine(ReturnToChaseForAnAttack(ratStateManager));
         }
         else //Choose attack
         {
@@ -111,7 +114,7 @@ public class AttackState : State
         }
     }
 
-    private void AttackTarget(RatStateManager ratStateManager)
+    private void AttackTarget(RatStateManager ratStateManager) //Perform the attack chosen
     {
         ratStateManager.HasPerformedAttack = true;
         
@@ -153,9 +156,19 @@ public class AttackState : State
     private void ResetValues(RatStateManager ratStateManager) //Reset values before going back to chase
     {
         ratStateManager.HasPerformedAttack = false;
+        returnToChaseByOverride = false;
 
         ratStateManager.RatNavMeshAgent.speed = ratStateManager.MinRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
+    }
+
+    private IEnumerator ReturnToChaseForAnAttack(RatStateManager ratStateManager) // To have rat in chase again until he gets back into a valid attack position
+    {
+        returnToChaseByOverride = true;
+        float holder = ratStateManager.DistanceToTriggerAttackState;
+        ratStateManager.DistanceToTriggerAttackState = .5f;
+        yield return new WaitForSeconds(1);
+        ratStateManager.DistanceToTriggerAttackState = holder;
     }
 
 }

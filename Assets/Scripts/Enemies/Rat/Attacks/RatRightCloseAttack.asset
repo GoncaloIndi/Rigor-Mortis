@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RatRightCloseAttack
   m_EditorClassIdentifier: 
   AttackAnimation: CloseAttackRight
-  AttackCooldown: 2
+  AttackCooldown: 4
   MinAttackAngle: 0
   MaxAttackAngle: 180
   MinAttackDistance: 0

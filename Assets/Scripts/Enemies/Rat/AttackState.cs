@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class AttackState : State
 {
     private ChaseState chaseState;
-    [SerializeField] private RatAnimations ratAnimationsScript;
     [SerializeField] private RatStateManager ratStateManagerScript;
     [SerializeField] private EnemyCombat enemyCombatScript;
 
@@ -24,6 +23,12 @@ public class AttackState : State
     
 
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
+
+    //Rotate towards player
+    private Quaternion rotationDirection;
+    private float rotationTime = 0;
+    private bool resetRotationTimer = true;
+    
     private Vector3 targetDirection;
     private float viewableAngleFromCurrentTarget;
     private bool returnToChaseByOverride = false;
@@ -101,12 +106,19 @@ public class AttackState : State
 
         if (potentialAttacks.Count <= 0) //If has no attacks
         {
-            //Return to chaseState
-            StartCoroutine(ReturnToChaseForAnAttack(ratStateManager));
             //Rotate towardsPlayer
+            if (resetRotationTimer)
+            {
+                resetRotationTimer = false;
+                rotationTime = 0;
+            }
+            rotationTime += Time.deltaTime;
+            UpdateTargetPosition();
+            ratStateManager.transform.rotation = Quaternion.Slerp(ratStateManager.transform.rotation, rotationDirection, rotationTime * Time.deltaTime / .1f);
         }
         else //Choose attack
         {
+            resetRotationTimer = true;
             currentAttack = potentialAttacks[rng];
             hasAttackSelected = true;
             potentialAttacks.Clear();
@@ -165,6 +177,34 @@ public class AttackState : State
         ratStateManager.DistanceToTriggerAttackState = .5f;
         yield return new WaitForSeconds(1);
         ratStateManager.DistanceToTriggerAttackState = holder;
+    }
+    // Rotate rat until he gets back into a valid attack position
+    
+    private void UpdateTargetPosition()
+    {
+        Vector3 lockOnVector = ratStateManagerScript.CurrentTarget.transform.position - transform.position;
+        rotationDirection = Quaternion.LookRotation(lockOnVector);
+        rotationDirection = ClampQuaternionValues(rotationDirection);
+    }
+    
+    Quaternion ClampQuaternionValues(Quaternion q) //Look mom I'm a wizard I made quaternion math
+    {
+        q.x /= q.w;
+        q.y /= q.w;
+        q.z /= q.w;
+        q.w = 1.0f;
+  
+        //Clamp X
+        float angleX = 2.0f * Mathf.Rad2Deg * Mathf.Atan (q.x);
+        angleX = Mathf.Clamp (angleX, 0, 0);
+        q.x = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleX);
+        
+        //Clamp Z
+        float angleZ = 2.0f * Mathf.Rad2Deg * Mathf.Atan (q.z);
+        angleZ = Mathf.Clamp (angleZ, 0, 0);
+        q.z = Mathf.Tan (0.5f * Mathf.Deg2Rad * angleZ);
+
+        return q;
     }
 
 }

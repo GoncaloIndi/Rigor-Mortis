@@ -874,7 +874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: -0, y: -0.46423474, z: -0, w: 0.8857122}
-  m_LocalPosition: {x: 3.69, y: -8.529, z: 1.221}
+  m_LocalPosition: {x: 3.69, y: -8.529, z: -1.73}
   m_LocalScale: {x: 0.29108223, y: 0.29108223, z: 0.29108223}
   m_Children:
   - {fileID: 1482103968}
@@ -14107,7 +14107,7 @@ MonoBehaviour:
   DelayChaseSpeed: 0.9
   MaximumChaseDistance: 7.2
   ReturnToChaseDistance: 2.31
-  DistanceToTriggerAttackState: 1.2
+  DistanceToTriggerAttackState: 2
   AttackSpeed: 3
   HasPerformedAttack: 0
   CurrentAttackCooldown: 0
@@ -14125,7 +14125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ebe348d4af0424495b5f8847a26543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHp: 500
+  EnemyHp: 60
   IsBeingTargetedByPlayer: 0
 --- !u!114 &489573652
 MonoBehaviour:
@@ -34707,7 +34707,7 @@ Transform:
   m_GameObject: {fileID: 1635109922}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33272, y: 0.33272, z: 0.33272}
+  m_LocalScale: {x: 0.41257283, y: 0.41257283, z: 0.41257283}
   m_Children: []
   m_Father: {fileID: 3427945163415739765}
   m_RootOrder: 1
@@ -41742,7 +41742,7 @@ Transform:
   m_GameObject: {fileID: 1875684568}
   m_LocalRotation: {x: 0.7053888, y: -0.049263727, z: -0.049263705, w: 0.70538855}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.58586, y: 0.58586, z: 0.58586}
+  m_LocalScale: {x: 0.7440422, y: 0.7440422, z: 0.7440422}
   m_Children: []
   m_Father: {fileID: 3427945163415739765}
   m_RootOrder: 0
@@ -53644,7 +53644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83ef45593be8a84c8c19e25c5a0d713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratAnimationsScript: {fileID: 919132148262279197}
   ratStateManagerScript: {fileID: 489573650}
   enemyCombatScript: {fileID: 489573652}
   ratAttackActions:
@@ -54236,7 +54235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148262279195}
   m_LocalRotation: {x: 0.00000019973709, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 0.996, z: 2.01}
+  m_LocalPosition: {x: -2.7, y: 0.996, z: 2.01}
   m_LocalScale: {x: 0.57625073, y: 0.57625073, z: 0.57625073}
   m_Children:
   - {fileID: 2076577589}
@@ -56164,7 +56163,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3427945163415739722}
   serializedVersion: 7
-  lengthInSec: 0.2
+  lengthInSec: 0.3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -56408,8 +56407,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
-      minScalar: 2
+      scalar: 1.5
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -56989,7 +56988,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -57092,8 +57091,66 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    m_BurstCount: 0
-    m_Bursts: []
+    m_BurstCount: 1
+    m_Bursts:
+    - serializedVersion: 2
+      time: 0
+      countCurve:
+        serializedVersion: 2
+        minMaxState: 3
+        scalar: 3
+        minScalar: 1
+        maxCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        minCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+      cycleCount: 1
+      repeatInterval: 0.01
+      probability: 1
   SizeModule:
     enabled: 1
     curve:
@@ -60871,7 +60928,7 @@ Transform:
   m_GameObject: {fileID: 3427945163415739722}
   m_LocalRotation: {x: -0.7053888, y: 0.049263727, z: 0.049263705, w: 0.70538855}
   m_LocalPosition: {x: 0, y: 0, z: 0.575}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.8512, y: 0.8512, z: 0.8512}
   m_Children:
   - {fileID: 1875684569}
   - {fileID: 1635109923}

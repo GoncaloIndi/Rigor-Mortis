@@ -48,7 +48,7 @@ public class EnemyCombat : MonoBehaviour
         {
             ratAnimationsScript.DisplayDamageAnimation();
             //prevent the attack if rat is stunned 
-            StopAllCoroutines();
+            CancelAttack();
             ratStateManager.CurrentAttackCooldown = attackCooldownByStun;
         }
 
@@ -140,6 +140,11 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         canGetStunned = true; //Iframes
+    }
+
+    public void CancelAttack()
+    {
+        StopAllCoroutines();
     }
     
     

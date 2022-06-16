@@ -41,6 +41,8 @@ public class ChaseState : State
         
         if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.DistanceToTriggerAttackState && hasPlayerInSight && !ratStateManager.HasPerformedAttack) //Transition to AttackState
         {
+            ratStateManager.RatSpeed = 0;
+            ratStateManager.ChangeRatSpeed();
             return attackState;
         }
         

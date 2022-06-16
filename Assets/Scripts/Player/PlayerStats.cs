@@ -19,6 +19,7 @@ public class PlayerStats : MonoBehaviour
     public int PlayerHp = 100;
     public bool HasWeaponEquipped = false;
     [SerializeField] private GameObject sword; //Temp if game gets more weapons
+    public bool IsAttackOnCooldown = false;
 
     [Header("Interaction")]
     public bool IsInInteractionZone = false;
@@ -37,17 +38,32 @@ public class PlayerStats : MonoBehaviour
     {
         playerActionsScript = GetComponent<PlayerActions>();
         playerAnimationsScript = GetComponent<PlayerAnimations>();
+        
+        //Debug purposes
+        if (HasWeaponEquipped)
+        {
+            sword.SetActive(true);
+        }
     }
 
     //Combat
     public void DamagePlayer(int dmg, bool vibrateController)
     {
-        PlayerHp -= dmg;
-        playerAnimationsScript.DisplayDamageAnimation();
-        StartCoroutine(StopInputOnDamage());
-        if (vibrateController)
+        PlayerHp -= dmg; 
+        if (!IsAttackOnCooldown) //If the player is attacking prevent the damage animation
         {
-            StartCoroutine(VibrateController());
+            playerAnimationsScript.DisplayDamageAnimation();
+        }
+        StartCoroutine(StopInputOnDamage());
+        
+        //Vibration If the player gets damaged while attacking the controller vibrates longer
+        if (vibrateController && !IsAttackOnCooldown)
+        {
+            StartCoroutine(VibrateController(.5f));
+        }
+        else if(vibrateController && IsAttackOnCooldown)
+        {
+            StartCoroutine(VibrateController(1.4f));
         }
         
         if (PlayerHp <= 0)
@@ -60,7 +76,7 @@ public class PlayerStats : MonoBehaviour
     {
         playerAnimationsScript.DisplayDamageAnimation();
         StartCoroutine(StopInputOnDamage());
-        StartCoroutine(VibrateController());
+        StartCoroutine(VibrateController(.5f));
         
     }
 
@@ -87,15 +103,12 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(ResetSceneTransition());
     }
 
-    private IEnumerator VibrateController()
+    private IEnumerator VibrateController(float rumbleTime)
     {
-        var shockTime = .5f;
-
-        
         GamePad.SetVibration(playerIndex, 1f, 1f);
             
             
-        yield return new WaitForSeconds(shockTime);
+        yield return new WaitForSeconds(rumbleTime);
         GamePad.SetVibration(playerIndex, 0, 0);
     }
 

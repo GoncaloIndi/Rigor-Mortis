@@ -18,9 +18,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
 
     [SerializeField] private float attackRange = .4f;
-
-    [SerializeField] private bool isAttackOnCooldown = false;
-
     [SerializeField] private float attackCooldown;
     private float cooldownTimer;
 
@@ -30,16 +27,16 @@ public class PlayerAttack : MonoBehaviour
         PlayerStatsScript = GetComponent<PlayerStats>();
     }
 
-    public void Attack()
+    public void Attack() //Make it so the attack is performed every swing so the sfx works (Waiting for new animations)
     {
-        if (!isAttackOnCooldown)
+        if (!PlayerStatsScript.IsAttackOnCooldown)
         {
-            isAttackOnCooldown = true;
+            PlayerStatsScript.IsAttackOnCooldown = true;
             PlayerStatsScript.CanMove = false;
             PlayerAnimationsScript.DisplayAttackAnimation();
             //Make it animation based and remove invokes
             Invoke("PerformAttackLogic", .6f);
-            Invoke("ResetAttack", 1.3f);
+            Invoke("ResetAttack", attackCooldown);
             
         }
     }
@@ -68,7 +65,7 @@ public class PlayerAttack : MonoBehaviour
     public void ResetAttack()
     {
         PlayerStatsScript.CanMove = true;
-        isAttackOnCooldown = false;
+        PlayerStatsScript.IsAttackOnCooldown = false;
     }
 
     private IEnumerator VibrateController()

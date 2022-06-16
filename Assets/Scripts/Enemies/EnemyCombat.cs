@@ -6,16 +6,17 @@ using Random = UnityEngine.Random;
 
 public class EnemyCombat : MonoBehaviour
 {
-    [Header("Particles")]
-    [SerializeField] private ParticleSystem bloodVFX;
-    [SerializeField] private ParticleSystem dustVFX;
-    [SerializeField] private ParticleSystem electricVFX;
+    [SerializeField] private RatVFXManager ratVFX;
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
     private RatStateManager ratStateManager;
 
     private IdleState idleStateScript;
+
+    [Header("Stun Logic")] 
+    [SerializeField] private bool canGetStunned = true; //Used to not stagger the rat during certain frames to make combat more risky 
+    [SerializeField] private float attackCooldownByStun = 1.6f;
     
     [Header("Attack Logic")] 
     [SerializeField] private Transform lungeAttackPosition;
@@ -39,13 +40,21 @@ public class EnemyCombat : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         EnemyStatsScript.EnemyHp -= damage;
-        bloodVFX.Play();
-        idleStateScript.HasDetectedPlayer = true; //Might need to redo this later
-        ratAnimationsScript.DisplayDamageAnimation();
-        
-        
-        if (EnemyStatsScript.EnemyHp <= 0)
+        //Blood logic 
+        ratVFX.BloodVFX();
+        idleStateScript.HasDetectedPlayer = true;
+
+        if (canGetStunned)
         {
+            ratAnimationsScript.DisplayDamageAnimation();
+            //prevent the attack if rat is stunned 
+            StopAllCoroutines();
+            ratStateManager.CurrentAttackCooldown = attackCooldownByStun;
+        }
+
+        if (EnemyStatsScript.EnemyHp <= 0) //Damage animation needs to be triggered in order to kill the enemy even if he should not be stunned
+        {
+            ratAnimationsScript.DisplayDamageAnimation();
             StartCoroutine(KillEnemy());
         }
     }
@@ -56,7 +65,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation();
         yield return new WaitForSeconds(1.2f);
-        dustVFX.Play();
+        ratVFX.DustVFX();
         Destroy(this);
     }
 
@@ -70,7 +79,7 @@ public class EnemyCombat : MonoBehaviour
         ratAnimationsScript.DisplayDamageAnimation();
         ratAnimationsScript.DisplayElectrifyAnimation();
         yield return new WaitForSeconds(.2f);
-        electricVFX.Play();
+        ratVFX.SmokeVFX();
         Destroy(this);
     }
     
@@ -99,6 +108,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.RatSpeed = ratStateManager.AttackSpeed;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
+        canGetStunned = false; //Iframes
         yield return new WaitForSeconds(.1f);
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.1f);
@@ -108,15 +118,17 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
+        canGetStunned = true; //Iframes
     }
 
-    public IEnumerator TailAttack(RatStateManager ratStateManager, string attackTrigger)
+    public IEnumerator TailAttack(RatStateManager ratStateManager, string attackTrigger) //Later change Iframes because they are missing antecipation (waiting for new animations)
     {
         hasAttackSucceded = false;
         ratStateManager.RatSpeed = 0;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
         ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
+        canGetStunned = false; //Iframes
         yield return new WaitForSeconds(.35f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
@@ -127,8 +139,7 @@ public class EnemyCombat : MonoBehaviour
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
-        
-        
+        canGetStunned = true; //Iframes
     }
     
     

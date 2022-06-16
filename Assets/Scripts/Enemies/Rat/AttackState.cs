@@ -103,6 +103,7 @@ public class AttackState : State
         {
             //Return to chaseState
             StartCoroutine(ReturnToChaseForAnAttack(ratStateManager));
+            //Rotate towardsPlayer
         }
         else //Choose attack
         {

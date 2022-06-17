@@ -6,7 +6,9 @@ using Random = UnityEngine.Random;
 
 public class EnemyCombat : MonoBehaviour
 {
+    [Header("Details")]
     [SerializeField] private RatVFXManager ratVFX;
+    [SerializeField] private BloodySword bloodySwordScript;
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
@@ -42,6 +44,8 @@ public class EnemyCombat : MonoBehaviour
         EnemyStatsScript.EnemyHp -= damage;
         //Blood logic 
         ratVFX.BloodVFX();
+        bloodySwordScript.UpdateSword();
+        
         idleStateScript.HasDetectedPlayer = true;
 
         if (canGetStunned)

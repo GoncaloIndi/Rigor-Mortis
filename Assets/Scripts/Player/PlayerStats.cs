@@ -20,6 +20,7 @@ public class PlayerStats : MonoBehaviour
     public bool HasWeaponEquipped = false;
     [SerializeField] private GameObject sword; //Temp if game gets more weapons
     public bool IsAttackOnCooldown = false;
+    private PlayerVFXManager playerVFXManagerScript;
 
     [Header("Interaction")]
     public bool IsInInteractionZone = false;
@@ -38,6 +39,7 @@ public class PlayerStats : MonoBehaviour
     {
         playerActionsScript = GetComponent<PlayerActions>();
         playerAnimationsScript = GetComponent<PlayerAnimations>();
+        playerVFXManagerScript = GetComponent<PlayerVFXManager>();
         
         //Debug purposes
         if (HasWeaponEquipped)
@@ -50,6 +52,8 @@ public class PlayerStats : MonoBehaviour
     public void DamagePlayer(int dmg, bool vibrateController)
     {
         PlayerHp -= dmg; 
+        playerVFXManagerScript.WoodchipsVFX();  //Particles
+        
         if (!IsAttackOnCooldown) //If the player is attacking prevent the damage animation
         {
             playerAnimationsScript.DisplayDamageAnimation();
@@ -74,6 +78,7 @@ public class PlayerStats : MonoBehaviour
 
     public void FakeDamagePlayer()
     {
+        playerVFXManagerScript.WoodchipsVFX();  //Particles
         playerAnimationsScript.DisplayDamageAnimation();
         StartCoroutine(StopInputOnDamage());
         StartCoroutine(VibrateController(.5f));

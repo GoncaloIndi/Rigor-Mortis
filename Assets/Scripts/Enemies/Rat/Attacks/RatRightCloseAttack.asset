@@ -17,5 +17,5 @@ MonoBehaviour:
   MinAttackAngle: 10
   MaxAttackAngle: 180
   MinAttackDistance: 0
-  MaxAttackDistance: 1.1
+  MaxAttackDistance: 0.9
   AttackNumber: 2

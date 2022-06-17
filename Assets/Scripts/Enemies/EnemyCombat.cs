@@ -72,8 +72,9 @@ public class EnemyCombat : MonoBehaviour
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
         EnemyStatsScript.EnemyHp = 0;
-        yield return new WaitForSeconds(.3f); //Delay so it is closer to the puddle
+        yield return new WaitForSeconds(.1f); //Delay so it is closer to the puddle
         
+        CancelAttack();
         ratStateManager.enabled = false;
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDamageAnimation();
@@ -99,16 +100,23 @@ public class EnemyCombat : MonoBehaviour
     
     public IEnumerator PerformLungeAttack(RatStateManager ratStateManager, string attackTrigger) //Lunge attack Logic
     {
+        var hpStorer = EnemyStatsScript.EnemyHp;
+        
         hasAttackSucceded = false;
         ratStateManager.RatSpeed = 0;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
         ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
         yield return new WaitForSeconds(1.5f);
+        canGetStunned = false; //Iframes
+        if (EnemyStatsScript.EnemyHp != hpStorer) //Cancel the attack if the rat got hurt
+        {
+            yield break;
+        }
         ratStateManager.RatSpeed = ratStateManager.AttackSpeed;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.CurrentTarget.transform.position);
-        canGetStunned = false; //Iframes
+        
         yield return new WaitForSeconds(.1f);
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.1f);

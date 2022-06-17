@@ -16,13 +16,10 @@ public class ChaseState : State
     [SerializeField] private float chaseLossDelay = .4f; //Continues to follow player after a few seconds after loss of sight
     private float chaseLossTimer = 0;
     private bool hasPerformedDelayChase = false;
-    [Header("Speed")]
-    
-    
-    
-    
+
     //Raycast to see if the player is still in line of sight
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
+    
 
     private void Awake()
     {
@@ -32,6 +29,7 @@ public class ChaseState : State
 
     public override State Tick(RatStateManager ratStateManager)
     {
+
         if (ratStateManager.IsPerformingAction) 
         {
             return this;
@@ -41,8 +39,6 @@ public class ChaseState : State
         
         if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.DistanceToTriggerAttackState && hasPlayerInSight && !ratStateManager.HasPerformedAttack) //Transition to AttackState
         {
-            ratStateManager.RatSpeed = 0;
-            ratStateManager.ChangeRatSpeed();
             return attackState;
         }
         

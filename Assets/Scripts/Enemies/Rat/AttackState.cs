@@ -31,8 +31,7 @@ public class AttackState : State
     
     private Vector3 targetDirection;
     private float viewableAngleFromCurrentTarget;
-    private bool returnToChaseByOverride = false;
-    
+
 
     private void Awake()
     {
@@ -66,7 +65,7 @@ public class AttackState : State
             }
         }
         
-        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget || returnToChaseByOverride) //Return to chase state
+        if (ratStateManager.ReturnToChaseDistance <= ratStateManager.DistanceFromCurrentTarget && !ratStateManager.HasPerformedAttack) //Return to chase state
         {
             //Reset values
             
@@ -164,20 +163,11 @@ public class AttackState : State
     private void ResetValues(RatStateManager ratStateManager) //Reset values before going back to chase
     {
         ratStateManager.HasPerformedAttack = false;
-        returnToChaseByOverride = false;
-
+        
         ratStateManager.RatNavMeshAgent.speed = ratStateManager.MinRatChaseSpeed;
         ratStateManager.ChangeRatSpeed();
     }
 
-    private IEnumerator ReturnToChaseForAnAttack(RatStateManager ratStateManager) // To have rat in chase again until he gets back into a valid attack position
-    {
-        returnToChaseByOverride = true;
-        float holder = ratStateManager.DistanceToTriggerAttackState;
-        ratStateManager.DistanceToTriggerAttackState = .5f;
-        yield return new WaitForSeconds(1);
-        ratStateManager.DistanceToTriggerAttackState = holder;
-    }
     // Rotate rat until he gets back into a valid attack position
     
     private void UpdateTargetPosition()

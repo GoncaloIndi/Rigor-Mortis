@@ -14125,7 +14125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ebe348d4af0424495b5f8847a26543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyHp: 60
+  EnemyHp: 80
   IsBeingTargetedByPlayer: 0
 --- !u!114 &489573652
 MonoBehaviour:
@@ -30894,7 +30894,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldPlayCutscene: 0
   DarkenerAnim: {fileID: 1652802655}
-  PlayerStatsScript: {fileID: 0}
 --- !u!4 &1270054719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ddf8482de29711a4bace5ff0f53a2515, type: 3}

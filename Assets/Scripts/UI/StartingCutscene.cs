@@ -14,7 +14,7 @@ public class StartingCutscene : MonoBehaviour
     [SerializeField] private Animator DarkenerAnim;
     private static readonly int Lighten = Animator.StringToHash("Lighten");
 
-    public PlayerStats PlayerStatsScript;
+    private PlayerActions playerActionsScript;
     private static readonly int ForceDefault = Animator.StringToHash("ForceDefault");
 
     private void Awake()
@@ -27,8 +27,8 @@ public class StartingCutscene : MonoBehaviour
         else
         {
             cutsceneText = this.gameObject.GetComponent<Text>();
-            PlayerStatsScript = FindObjectOfType<PlayerStats>().GetComponent<PlayerStats>();
-            PlayerStatsScript.CanMove = false;
+            playerActionsScript = FindObjectOfType<PlayerActions>();
+            playerActionsScript.PlayerToNoInput();
         }
     }
 
@@ -50,7 +50,7 @@ public class StartingCutscene : MonoBehaviour
         if (isOnLastTextDisplay)
         {
             DarkenerAnim.SetTrigger(Lighten);
-            PlayerStatsScript.CanMove = true;
+            playerActionsScript.PlayerToNoInput();
         }
         
     }

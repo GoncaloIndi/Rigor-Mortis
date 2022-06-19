@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 23cdaa972c7d7bf469ae83ebebb56dfb
+guid: bf329df7103ed5840bd1363ed0d3dedb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Death_Shock
+    second: Chase_Right
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Death_Shock
+      name: Chase_Right
       takeName: Take 001
       internalID: 0
       firstFrame: 1
-      lastFrame: 50
+      lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

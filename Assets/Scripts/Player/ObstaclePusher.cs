@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
@@ -19,7 +17,7 @@ public class ObstaclePusher : MonoBehaviour
             if (rb != null)
             {
                 var position = transform.position;
-                Vector3 forceDirection = hit.gameObject.transform.position - position;
+                Vector3 forceDirection = hit.collider.ClosestPointOnBounds(position) - position; //Gets closest collider point to the player
                 forceDirection.y = -.1f;
                 forceDirection.Normalize();
                 

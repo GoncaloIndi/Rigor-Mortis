@@ -9,6 +9,7 @@ public class EnemyCombat : MonoBehaviour
     [Header("Details")]
     [SerializeField] private RatVFXManager ratVFX;
     [SerializeField] private BloodySword bloodySwordScript;
+    [SerializeField] private GameObject shockJumpscareTrigger; //Used for vent rat
 
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
@@ -75,16 +76,21 @@ public class EnemyCombat : MonoBehaviour
 
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
+        ratStateManager.RatNavMeshAgent.enabled = false;
+        ratStateManager.enabled = false;
         EnemyStatsScript.EnemyHp = 0;
         yield return new WaitForSeconds(.1f); //Delay so it is closer to the puddle
         
         CancelAttack();
-        ratStateManager.enabled = false;
-        ratStateManager.RatNavMeshAgent.enabled = false;
+        
         ratAnimationsScript.DisplayDamageAnimation();
         ratAnimationsScript.DisplayElectrifyAnimation();
         yield return new WaitForSeconds(.2f);
         ratVFX.SmokeVFX();
+        if (shockJumpscareTrigger != null) //Setup for jumpscare (VentRat)
+        {
+            shockJumpscareTrigger.SetActive(true);
+        }
         Destroy(this);
     }
     
@@ -128,7 +134,10 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(.15f);
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         yield return new WaitForSeconds(.3f);
-        ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
+        if (ratStateManager.RatNavMeshAgent.isActiveAndEnabled) //Prevent being Called upon death
+        {
+            ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
+        }
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         canGetStunned = true; //Iframes
     }

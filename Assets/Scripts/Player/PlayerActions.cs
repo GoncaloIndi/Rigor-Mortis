@@ -189,9 +189,9 @@ public class PlayerActions : MonoBehaviour
     }
 
     //NoInput
-    public void PlayerToNoInput()
+    public void PlayerToNoInput(bool toggle)
     {
-        if (playerInputManager.NoInput.enabled)
+        if (!toggle)
         {
             playerInputManager.NoInput.Disable();
             playerInputManager.Player.Enable();

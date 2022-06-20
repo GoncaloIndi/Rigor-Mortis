@@ -28,7 +28,7 @@ public class StartingCutscene : MonoBehaviour
         {
             cutsceneText = this.gameObject.GetComponent<Text>();
             playerActionsScript = FindObjectOfType<PlayerActions>();
-            playerActionsScript.PlayerToNoInput();
+            playerActionsScript.PlayerToNoInput(false);
         }
     }
 
@@ -50,7 +50,7 @@ public class StartingCutscene : MonoBehaviour
         if (isOnLastTextDisplay)
         {
             DarkenerAnim.SetTrigger(Lighten);
-            playerActionsScript.PlayerToNoInput();
+            playerActionsScript.PlayerToNoInput(true);
         }
         
     }

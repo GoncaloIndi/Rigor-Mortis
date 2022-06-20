@@ -94,11 +94,11 @@ public class PlayerStats : MonoBehaviour
     //Interaction
     private IEnumerator ResetSceneTransition() //Called by sceneTransition script in order to prevent spamming oddities
     {
-        playerActionsScript.PlayerToNoInput();
+        playerActionsScript.PlayerToNoInput(true);
         CanTransitionTroughtScenes = false;
         yield return new WaitForSeconds(1.5f);
         
-        playerActionsScript.PlayerToNoInput();
+        playerActionsScript.PlayerToNoInput(false);
         yield return new WaitForSeconds(.5f);
         CanTransitionTroughtScenes = true;
     }
@@ -119,8 +119,8 @@ public class PlayerStats : MonoBehaviour
 
     private IEnumerator StopInputOnDamage()
     {
-        playerActionsScript.PlayerToNoInput();
+        playerActionsScript.PlayerToNoInput(true);
         yield return new WaitForSeconds(.5f);
-        playerActionsScript.PlayerToNoInput();
+        playerActionsScript.PlayerToNoInput(false);
     }
 }

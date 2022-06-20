@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -8,7 +7,7 @@ public class FollowPlayer : MonoBehaviour
 
     public Vector3 CameraOffset;
 
-    [SerializeField] private float cameraSmoothness;
+    public float CameraSmoothness;
 
     //Both have min an max values to clamp the camera
     [Header("Camera Constraints")]
@@ -37,7 +36,7 @@ public class FollowPlayer : MonoBehaviour
     {
         Vector3 newPosition = playerPosition.position + CameraOffset;
         var position = transform.position;
-        Vector3 smoothPosition = Vector3.Lerp(position, newPosition, cameraSmoothness * Time.fixedDeltaTime);
+        Vector3 smoothPosition = Vector3.Lerp(position, newPosition, CameraSmoothness * Time.fixedDeltaTime);
 
         float xPosition = Mathf.Clamp(smoothPosition.x, xCameraClamp[0], xCameraClamp[1]);
         float yPosition = smoothPosition.y;

@@ -871,7 +871,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: -0, y: -0.46423474, z: -0, w: 0.8857122}
-  m_LocalPosition: {x: 3.69, y: 1.33, z: -13.43}
+  m_LocalPosition: {x: 3.69, y: -8.529, z: -10.78}
   m_LocalScale: {x: 0.29108223, y: 0.29108223, z: 0.29108223}
   m_Children:
   - {fileID: 1482103968}
@@ -15059,7 +15059,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -15478,7 +15478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 0, y: 0.9, z: -2}
-  cameraSmoothness: 2
+  CameraSmoothness: 2
   xCameraClamp:
   - -4.4
   - -4.15
@@ -16605,7 +16605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 2, y: 1, z: 0}
-  cameraSmoothness: 2
+  CameraSmoothness: 2
   xCameraClamp:
   - -14.25
   - 4.5
@@ -28665,7 +28665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 0, y: 2.2, z: -1.45}
-  cameraSmoothness: 5
+  CameraSmoothness: 5
   xCameraClamp:
   - 92.59
   - 102
@@ -36245,7 +36245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 0, y: 0.9, z: 2}
-  cameraSmoothness: 2
+  CameraSmoothness: 2
   xCameraClamp:
   - 3.55
   - 4.15
@@ -36588,7 +36588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 2, y: 1, z: 0}
-  cameraSmoothness: 2
+  CameraSmoothness: 2
   xCameraClamp:
   - -17.5
   - 4.5
@@ -37837,7 +37837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 0, y: 2, z: 2.25}
-  cameraSmoothness: 1.1
+  CameraSmoothness: 1.1
   xCameraClamp:
   - -5
   - 4.5
@@ -45192,11 +45192,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratAnim: {fileID: 931850524}
-  jumpscareChance: 40
+  jumpscareChance: 45
   jumpscareChanceIncrement: 25
   jumpscareCamera: {fileID: 1367391389}
-  zoom: 0.546
-  speed: 3
+  zoom: 0.5
+  lerpSpeed: 3
+  smoothnessMultiplier: 5
+  playerActionsScript: {fileID: 95479326}
 --- !u!65 &1752721562
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -45486,7 +45488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CameraOffset: {x: 2, y: 1, z: 0}
-  cameraSmoothness: 2
+  CameraSmoothness: 2
   xCameraClamp:
   - -14.25
   - 4.5
@@ -84036,7 +84038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8134117748071058211
 MonoBehaviour:
   m_ObjectHideFlags: 0

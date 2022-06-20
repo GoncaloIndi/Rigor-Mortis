@@ -15,11 +15,14 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
     [Header("Camera Cutscene")] 
     [SerializeField] private FollowPlayer jumpscareCamera;
     [SerializeField, Range(.5f, 1.5f)] private float zoom = 1;
-    [SerializeField] private float speed = .5f;
+    [SerializeField] private float lerpSpeed = .5f;
     private Vector3 startingCameraVector;
     private Vector3 endingCameraVector;
     private bool doCameraZoom = false;
-    private int timesPingPonged; //Prevent camera from doing lerp more than two times
+    [SerializeField] private float smoothnessMultiplier = 2;
+    [SerializeField] private PlayerActions playerActionsScript;
+    private float lerpTimer;
+    private bool isZoomingBackwards = true;
 
     private void OnEnable()
     {
@@ -34,22 +37,23 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
     private void OnDisable()//Failsafe if the player transitions into another camera
     {
         jumpscareCamera.CameraOffset = startingCameraVector;
+        jumpscareCamera.CameraSmoothness /= smoothnessMultiplier;
     }
 
     private void FixedUpdate()
     {
-        if (doCameraZoom)
-        {
-            float pingPong = Mathf.PingPong(Time.time * speed, 1);
-            jumpscareCamera.CameraOffset = Vector3.Lerp(startingCameraVector, endingCameraVector, pingPong);
 
-            if (pingPong >= .9) //Camera only pingPongs two times
+        if (doCameraZoom) //Fuck linear interpolation, all my homies hate linear interpolation
+        {
+            lerpTimer *= Time.time * lerpSpeed;
+            
+            if (!isZoomingBackwards)
             {
-                timesPingPonged++;
-                if (timesPingPonged >= 2)
-                {
-                    doCameraZoom = false;
-                }
+                jumpscareCamera.CameraOffset = Vector3.Lerp(startingCameraVector, endingCameraVector, lerpTimer);
+            }
+            else
+            {
+                jumpscareCamera.CameraOffset = Vector3.Lerp(endingCameraVector, startingCameraVector, lerpTimer);
             }
         }
     }
@@ -74,11 +78,18 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
     private IEnumerator RatJumpScare()
     {
         //Sound
+        playerActionsScript.PlayerToNoInput(true);
         doCameraZoom = true;
+        lerpTimer = 0; //Reset Lerp
+        jumpscareCamera.CameraSmoothness *= smoothnessMultiplier;
         ratAnim.enabled = true;
         ratAnim.SetTrigger(JumpScare);
         yield return new WaitForSeconds(1.87f); //AnimationDuration
         ratAnim.enabled = false;
+        isZoomingBackwards = false;
+        lerpTimer = 0; //Reset Lerp
+        yield return new WaitForSeconds(.5f); //Time to lerpBackwards
+        playerActionsScript.PlayerToNoInput(false);
         this.gameObject.SetActive(false);
     }
 
@@ -86,5 +97,6 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
     {
         yield return new WaitForSeconds(3);
         shouldHoldJumpscare = false;
+        
     }
 }

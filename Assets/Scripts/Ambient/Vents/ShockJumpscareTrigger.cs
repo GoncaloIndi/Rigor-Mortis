@@ -14,7 +14,7 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
 
     [Header("Camera Cutscene")] 
     [SerializeField] private FollowPlayer jumpscareCamera;
-    [SerializeField, Range(.5f, 1.5f)] private float zoom = 1;
+    [SerializeField, Range(.2f, 1.5f)] private float zoom = 1;
     [SerializeField] private float lerpSpeed = .5f;
     private Vector3 startingCameraVector;
     private Vector3 endingCameraVector;

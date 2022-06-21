@@ -25,7 +25,8 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private Transform lungeAttackPosition;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float lungeAttackRange = .27f;
-    private bool hasAttackSucceded = false;
+    private bool hasAttackSucceded;
+    private bool isPerformingAttack;
     //TailAttacks
     [SerializeField] private float tailAttackRange = .45f;
     [SerializeField] private Transform tailAttackPosition;
@@ -54,7 +55,15 @@ public class EnemyCombat : MonoBehaviour
             ratAnimationsScript.DisplayDamageAnimation();
             //prevent the attack if rat is stunned 
             CancelAttack();
-            ratStateManager.CurrentAttackCooldown = attackCooldownByStun;
+            if (isPerformingAttack)
+            {
+                ratStateManager.CurrentAttackCooldown = attackCooldownByStun;
+            }
+            else
+            {
+                ratStateManager.CurrentAttackCooldown = .7f;
+            }
+            
         }
 
         if (EnemyStatsScript.EnemyHp <= 0) //Damage animation needs to be triggered in order to kill the enemy even if he should not be stunned
@@ -98,20 +107,26 @@ public class EnemyCombat : MonoBehaviour
     
     private void AttackLogic(RatStateManager ratStateManager, float attackRange, Transform attackPostion) //Logic for hurting player
     {
-            Collider[] playerCol = Physics.OverlapSphere(attackPostion.position, attackRange, playerLayer);
+        if (EnemyStatsScript.EnemyHp <= 0) //Prevent attacking after death
+        {
+            return;
+        }
+        Collider[] playerCol = Physics.OverlapSphere(attackPostion.position, attackRange, playerLayer);
     
-            if (playerCol.Length < 1 || hasAttackSucceded) return;
-                var dmg = Random.Range(6, 11);
-                playerCol[0].GetComponent<PlayerStats>().DamagePlayer(dmg, true);
-                ratStateManager.RatSpeed = 0;
-                ratStateManager.ChangeRatSpeed();
-                hasAttackSucceded = true;
+        if (playerCol.Length < 1 || hasAttackSucceded) return;
+        var dmg = Random.Range(6, 11);
+        playerCol[0].GetComponent<PlayerStats>().DamagePlayer(dmg, true);
+        ratStateManager.RatSpeed = 0;
+        ratStateManager.ChangeRatSpeed();
+        hasAttackSucceded = true;
+                
     }
     
     public IEnumerator PerformLungeAttack(RatStateManager ratStateManager, string attackTrigger) //Lunge attack Logic
     {
         var hpStorer = EnemyStatsScript.EnemyHp;
-        
+
+        isPerformingAttack = true;
         hasAttackSucceded = false;
         ratStateManager.RatSpeed = 0;
         ratStateManager.ChangeRatSpeed();
@@ -140,17 +155,26 @@ public class EnemyCombat : MonoBehaviour
         }
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         canGetStunned = true; //Iframes
+        isPerformingAttack = false;
     }
 
     public IEnumerator TailAttack(RatStateManager ratStateManager, string attackTrigger) //Later change Iframes because they are missing antecipation (waiting for new animations)
     {
+        isPerformingAttack = true;
+        var hpStorer = EnemyStatsScript.EnemyHp;
+        
         hasAttackSucceded = false;
         ratStateManager.RatSpeed = 0;
         ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
         ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
+        yield return new WaitForSeconds(.9f);
+        if (EnemyStatsScript.EnemyHp != hpStorer) //Cancel the attack if the rat got hurt
+        {
+            yield break;
+        }
         canGetStunned = false; //Iframes
-        yield return new WaitForSeconds(.35f);
+        yield return new WaitForSeconds(.3f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
@@ -160,7 +184,16 @@ public class EnemyCombat : MonoBehaviour
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        hasAttackSucceded = false; //Attack reset for 2nd tail whip
+        yield return new WaitForSeconds(.15f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
+        AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        yield return new WaitForSeconds(.2f);
         canGetStunned = true; //Iframes
+        isPerformingAttack = false;
     }
 
     public void CancelAttack()

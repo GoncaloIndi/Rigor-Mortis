@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class RatStateManager : MonoBehaviour
 {
     [SerializeField] private IdleState startingState;
     public Vector3 Origin;
     public bool HasTarget = false;
+    private RatSoundManager ratSFX;
     
     [Header("Current State")]
     [SerializeField] private State currentState;
-
+    
     [Header("Current Target")] 
     public GameObject CurrentTarget;
     public float DistanceFromCurrentTarget;
@@ -36,6 +38,7 @@ public class RatStateManager : MonoBehaviour
     [Header("Debug Values")] 
     public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies
     public bool ReturnToOrigin = false;
+    public bool IsInIdleState = true; //Initialized as default value
     
 
     private void Awake()
@@ -43,6 +46,7 @@ public class RatStateManager : MonoBehaviour
         currentState = startingState;
         RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
+        ratSFX = GetComponent<RatSoundManager>();
         ChangeRatSpeed();
         Origin = transform.localPosition;
     }
@@ -88,5 +92,20 @@ public class RatStateManager : MonoBehaviour
         HasPerformedAttack = false;
         currentState = startingState;
         
+    }
+    
+    //Sound
+    public IEnumerator RatSqueak()
+    {
+        while (IsInIdleState)
+        {
+            var rng = Random.Range(4, 10);
+            yield return new WaitForSeconds(rng);
+            if (!IsInIdleState)//Failsafe
+            {
+                yield break;
+            }
+            ratSFX.RatIdleSqueak();
+        }
     }
 }

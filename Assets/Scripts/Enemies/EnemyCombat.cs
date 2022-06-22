@@ -14,6 +14,7 @@ public class EnemyCombat : MonoBehaviour
     [HideInInspector] public EnemyStats EnemyStatsScript;
     private RatAnimations ratAnimationsScript;
     private RatStateManager ratStateManager;
+    private RatSoundManager ratSFX;
 
     private IdleState idleStateScript;
 
@@ -38,6 +39,7 @@ public class EnemyCombat : MonoBehaviour
         idleStateScript = GetComponentInChildren<IdleState>();
         ratAnimationsScript = GetComponent<RatAnimations>();
         ratStateManager = GetComponent<RatStateManager>();
+        ratSFX = GetComponent<RatSoundManager>();
     }
 
     //When rat is hurt
@@ -47,7 +49,11 @@ public class EnemyCombat : MonoBehaviour
         //Blood logic 
         ratVFX.BloodVFX();
         bloodySwordScript.UpdateSword();
-        
+
+        if (EnemyStatsScript.EnemyHp > 0) //Damage sound
+        {
+            ratSFX.RatDamageSFX();
+        }
         idleStateScript.HasDetectedPlayer = true;
 
         if (canGetStunned)
@@ -85,6 +91,7 @@ public class EnemyCombat : MonoBehaviour
 
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
+        ratSFX.RatShockDeathSFX();
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratStateManager.enabled = false;
         EnemyStatsScript.EnemyHp = 0;
@@ -175,6 +182,7 @@ public class EnemyCombat : MonoBehaviour
         }
         canGetStunned = false; //Iframes
         yield return new WaitForSeconds(.3f);
+        ratSFX.RatTailWhip();
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
@@ -186,6 +194,7 @@ public class EnemyCombat : MonoBehaviour
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         hasAttackSucceded = false; //Attack reset for 2nd tail whip
         yield return new WaitForSeconds(.15f);
+        ratSFX.RatTailWhip();
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);

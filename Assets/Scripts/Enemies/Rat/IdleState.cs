@@ -9,7 +9,8 @@ public class IdleState : State
     //Idle until the player is in sight
     //If player is in sight go to chase state
     private ChaseState chaseState;
-    public bool HasDetectedPlayer = false;
+    public bool HasDetectedPlayer;
+    [SerializeField] private RatStateManager ratStateManagerScript;
 
     [Header("Detection Radius")]
     [SerializeField] private float detectionRadius = 2;
@@ -23,22 +24,23 @@ public class IdleState : State
     
     //Related to wander
     private float lookoutTime, waitingTime;
-    
-    
-    
+
 
     private void Awake()
     {
         chaseState = GetComponent<ChaseState>();
-        
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(ratStateManagerScript.RatSqueak());
     }
 
     public override State Tick(RatStateManager ratStateManager)
     {
         if (ratStateManager.HasTarget)
         {
-            ratStateManager.RatSpeed = .6f;
-            ratStateManager.ChangeRatSpeed();
+            ratStateManager.IsInIdleState = false;
             return chaseState;
         }
         else
@@ -136,4 +138,5 @@ public class IdleState : State
     {
         HasDetectedPlayer = true;
     }
+
 }

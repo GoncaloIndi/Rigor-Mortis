@@ -11,6 +11,7 @@ public class RatAnimations : MonoBehaviour
     private Vector3 lastPosition;
     private Vector3 oldEulerAngles;
     [SerializeField] private float test = .75f;
+    private RatSoundManager ratSFX;
 
     private RatStateManager ratStateManager;
     private static readonly int Speed = Animator.StringToHash("Speed");
@@ -22,6 +23,7 @@ public class RatAnimations : MonoBehaviour
     private void Awake()
     {
         ratStateManager = GetComponent<RatStateManager>();
+        ratSFX = GetComponent<RatSoundManager>();
     }
 
     private void FixedUpdate()
@@ -35,10 +37,13 @@ public class RatAnimations : MonoBehaviour
         angle = Mathf.Lerp(angle, (transform.rotation.eulerAngles - oldEulerAngles).magnitude / Time.deltaTime, test);
         //print(angle);
         oldEulerAngles = transform.rotation.eulerAngles;
-        
-
+    
         ratAnim.SetFloat(Speed, speed);
-        ratAnim.SetFloat(Angle, angle);
+        ratAnim.SetFloat(Angle, angle);    
+        
+        //Sound
+        ratSFX.ShouldPlayFootSteps = speed > .15f;
+
     }
 
     public void DisplayDamageAnimation() //Called by enemyCombat

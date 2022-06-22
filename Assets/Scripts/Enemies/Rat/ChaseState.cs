@@ -39,6 +39,8 @@ public class ChaseState : State
         
         if (ratStateManager.DistanceFromCurrentTarget <= ratStateManager.DistanceToTriggerAttackState && hasPlayerInSight && !ratStateManager.HasPerformedAttack) //Transition to AttackState
         {
+            ratStateManager.RatSpeed = 0;
+            ratStateManager.ChangeRatSpeed();
             return attackState;
         }
         
@@ -54,6 +56,10 @@ public class ChaseState : State
             ratStateManager.ChangeRatSpeed();
             hasPerformedDelayChase = false;
             ratStateManager.HasTarget = false;
+            
+            //Sound
+            ratStateManager.IsInIdleState = true;
+            StartCoroutine(ratStateManager.RatSqueak());
             return idleState;
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI

@@ -77,16 +77,17 @@ public class ShockJumpscareTrigger : MonoBehaviour //Activated by rat shock deat
 
     private IEnumerator RatJumpScare()
     {
-        //Sound
         playerActionsScript.PlayerToNoInput(true);
         doCameraZoom = true;
         lerpTimer = 0; //Reset Lerp
         jumpscareCamera.CameraSmoothness *= smoothnessMultiplier;
         ratAnim.enabled = true;
         ratAnim.SetTrigger(JumpScare);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_ShockRatJumpscare");
         yield return new WaitForSeconds(1.87f); //AnimationDuration
         ratAnim.enabled = false;
         isZoomingBackwards = false;
+        yield return new WaitForSeconds(.3f);
         lerpTimer = 0; //Reset Lerp
         yield return new WaitForSeconds(.5f); //Time to lerpBackwards
         playerActionsScript.PlayerToNoInput(false);

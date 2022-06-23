@@ -67,7 +67,7 @@ public class EnemyCombat : MonoBehaviour
             }
             else
             {
-                ratStateManager.CurrentAttackCooldown = .7f;
+                ratStateManager.CurrentAttackCooldown = .5f;
             }
             
         }
@@ -175,13 +175,13 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
         ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(.8f);
         if (EnemyStatsScript.EnemyHp != hpStorer) //Cancel the attack if the rat got hurt
         {
             yield break;
         }
         canGetStunned = false; //Iframes
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.4f);
         ratSFX.RatTailWhip();
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);

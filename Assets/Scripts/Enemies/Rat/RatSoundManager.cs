@@ -29,7 +29,7 @@ public class RatSoundManager : MonoBehaviour
 
     public void RatIdleSqueak()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatDamage");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatDamage", transform.position);
     }
 
     public void RatTailWhip()

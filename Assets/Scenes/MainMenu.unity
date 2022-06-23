@@ -742,6 +742,7 @@ MonoBehaviour:
   fadeAnim: {fileID: 1976848459}
   defaultOptionsButton: {fileID: 0}
   optionsClosedButton: {fileID: 0}
+  music: {fileID: 1460626881}
 --- !u!1 &1072404001
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject defaultMenu, optionsMenu;
     [SerializeField] private Animator fadeAnim;
     private static readonly int Fade = Animator.StringToHash("Fade");
-    [SerializeField] private GameObject defaultOptionsButton, optionsClosedButton;
+    [SerializeField] private GameObject defaultOptionsButton, optionsClosedButton, music;
 
     private void Awake()
     {
@@ -20,11 +20,13 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         StartCoroutine(FadeToNextScene());
     }
 
     public void Options() 
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         defaultMenu.SetActive(false);
         optionsMenu.SetActive(true);
         //Set default button in options later
@@ -33,11 +35,13 @@ public class MainMenu : MonoBehaviour
 
     public void Quit()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         Application.Quit(0);
     }
 
     public void Back()
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         if (optionsMenu.activeSelf)
         {
             optionsMenu.SetActive(false);
@@ -51,8 +55,9 @@ public class MainMenu : MonoBehaviour
     private IEnumerator FadeToNextScene()
     {
         fadeAnim.SetTrigger(Fade);
-        //StopMusic
-        yield return new WaitForSeconds(1.5f);
+        music.SetActive(false);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_MainMenuKidCry");
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

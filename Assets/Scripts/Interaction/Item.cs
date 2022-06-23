@@ -29,6 +29,7 @@ public class Item : Interactible
 
     public override void Interact() //Called by PlayerActions
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ItemPickUp");
         PlayerStatsScript.IsInInteractionZone = false;
         InteractionUI.SetActive(true);
         SpriteUI.SetActive(true);

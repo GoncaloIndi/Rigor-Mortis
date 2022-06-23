@@ -87,8 +87,10 @@ public class Thunder : MonoBehaviour
         while (true)
         {
             int rng = Random.Range(4, 16);
+            
 
             rainVFX.Play();
+
             yield return new WaitForSeconds(rng);
             
         }

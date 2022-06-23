@@ -55,6 +55,7 @@ public class RatNestItem : InteractionEvent
 
     private void Interact() //Called by PlayerActions
     {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ItemPickUp");
         playerActionsScript.PlayerToUI();
         InteractionUI.SetActive(true);
         SpriteUI.SetActive(true);

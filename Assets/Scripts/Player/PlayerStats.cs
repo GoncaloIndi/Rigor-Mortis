@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
 
     private PlayerActions playerActionsScript;
     private PlayerAnimations playerAnimationsScript;
+    [SerializeField] private PlayerSounds playerSoundsScript;
 
     [HideInInspector] public GameObject CurrentInteractionGameObject; //Used for items
     [HideInInspector] public Vector3 LockOnVector; //Used on the alternate controls
@@ -40,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         playerActionsScript = GetComponent<PlayerActions>();
         playerAnimationsScript = GetComponent<PlayerAnimations>();
         playerVFXManagerScript = GetComponent<PlayerVFXManager>();
-        
+
         //Debug purposes
         if (HasWeaponEquipped)
         {
@@ -53,6 +54,7 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerHp -= dmg; 
         playerVFXManagerScript.WoodchipsVFX();  //Particles
+        playerSoundsScript.DamageSound(); //Sound
         
         if (!IsAttackOnCooldown) //If the player is attacking prevent the damage animation
         {
@@ -78,6 +80,7 @@ public class PlayerStats : MonoBehaviour
 
     public void FakeDamagePlayer()
     {
+        playerSoundsScript.DamageSound(); //Sound
         playerVFXManagerScript.WoodchipsVFX();  //Particles
         playerAnimationsScript.DisplayDamageAnimation();
         StartCoroutine(StopInputOnDamage());

@@ -41,4 +41,9 @@ public class PlayerSounds : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_SwordSwoosh");
     }
+
+    public void DamageSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_Damage", transform.position);
+    }
 }

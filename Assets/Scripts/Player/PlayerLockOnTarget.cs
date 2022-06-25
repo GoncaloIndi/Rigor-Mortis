@@ -14,7 +14,7 @@ public class PlayerLockOnTarget : MonoBehaviour
     [SerializeField] private Transform currentLockOnTarget;
 
     //Lerp Stuff
-    private bool doLockLerp = false;
+    private bool doLockLerp;
     private float lockOnTime;
     private Transform playerStartRotation;
 

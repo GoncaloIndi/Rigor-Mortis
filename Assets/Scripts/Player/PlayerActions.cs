@@ -23,12 +23,15 @@ public class PlayerActions : MonoBehaviour
     public PauseMenu PauseMenuScript;
 
     private PlayerInputManager playerInputManager;
+
+    private InventoryManager inventoryManagerScript;
     
 
    
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        inventoryManagerScript = FindObjectOfType<InventoryManager>();
         PlayerMovementScript = GetComponent<PlayerMovement>();
         PlayerQuickTurnScript = GetComponent<PlayerQuickTurn>();
         PlayerStatsScript = GetComponent<PlayerStats>();
@@ -47,11 +50,17 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Attack.started += Attack;
         playerInputManager.Player.QuickTurn.started += QuickTurn;
         playerInputManager.Player.Pause.started += Pause;
+        playerInputManager.Player.Inventory.started += OpenInventory;
         //InteractionUI Action Map
         playerInputManager.InteractionUI.Accept.performed += Accept;
         //PauseMenuUI Action Map
         playerInputManager.PauseMenuUI.Resume.started += Resume;
         playerInputManager.PauseMenuUI.Back.started += Back;
+        //InventoryActionMap
+        playerInputManager.Inventory.Resume.started += CloseInventory;
+        playerInputManager.Inventory.Back.started += BackInventory;
+        playerInputManager.Inventory.NextTab.started += NextTab;
+        playerInputManager.Inventory.PreviousTab.started += PreviousTab;
 
     }
 
@@ -143,6 +152,11 @@ public class PlayerActions : MonoBehaviour
         PauseGameScript.Pause();
     }
 
+    private void OpenInventory(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.OpenInventory();
+    }
+
     //InteractionUI Action Map
     private void Accept(InputAction.CallbackContext context)
     {
@@ -172,6 +186,32 @@ public class PlayerActions : MonoBehaviour
     {
         PauseMenuScript.Back();
     }
+    
+    //Inventory Action Map
+    
+    private void CloseInventory(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.CloseInventory();
+    }
+    
+    private void BackInventory(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.BackInventory();
+    }
+
+    private void NextTab(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.NextTab();
+    }
+    
+    private void PreviousTab(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.PreviousTab();
+    }
+    
+    
+    
+    
     
     //Change Action Maps
 
@@ -215,6 +255,21 @@ public class PlayerActions : MonoBehaviour
         {
             playerInputManager.Player.Disable();
             playerInputManager.PauseMenuUI.Enable();
+        }
+    }
+    
+    //Inventory
+    public void PlayerToInventory(bool toggle)
+    {
+        if (!toggle)
+        {
+            playerInputManager.Inventory.Disable();
+            playerInputManager.Player.Enable();
+        }
+        else
+        {
+            playerInputManager.Player.Disable();
+            playerInputManager.Inventory.Enable();
         }
     }
 

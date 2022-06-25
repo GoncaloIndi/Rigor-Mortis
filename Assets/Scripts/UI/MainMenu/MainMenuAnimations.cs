@@ -56,8 +56,8 @@ public class MainMenuAnimations : MonoBehaviour
 
         while (timeElapsed <= 119.5)
         {
-            float delayBetweenEvent = Random.Range(1, 3.5f);
-            float timeActive = Random.Range(.1f, .2f);
+            float delayBetweenEvent = Random.Range(1, 4.5f);
+            float timeActive = Random.Range(.03f, .1f);
             if (timeElapsed + delayBetweenEvent < 119.5)
             {
                 yield return new WaitForSeconds(delayBetweenEvent);

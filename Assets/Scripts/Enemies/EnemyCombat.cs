@@ -15,6 +15,7 @@ public class EnemyCombat : MonoBehaviour
     private RatAnimations ratAnimationsScript;
     private RatStateManager ratStateManager;
     private RatSoundManager ratSFX;
+    private bool displayInvertedDeath;
 
     private IdleState idleStateScript;
 
@@ -55,6 +56,7 @@ public class EnemyCombat : MonoBehaviour
             ratSFX.RatDamageSFX();
         }
         idleStateScript.HasDetectedPlayer = true;
+        
 
         if (canGetStunned)
         {
@@ -74,7 +76,10 @@ public class EnemyCombat : MonoBehaviour
 
         if (EnemyStatsScript.EnemyHp <= 0) //Damage animation needs to be triggered in order to kill the enemy even if he should not be stunned
         {
-            ratAnimationsScript.DisplayDamageAnimation();
+            if (!displayInvertedDeath)
+            {
+                ratAnimationsScript.DisplayDamageAnimation();
+            }
             StartCoroutine(KillEnemy());
         }
     }
@@ -83,7 +88,7 @@ public class EnemyCombat : MonoBehaviour
     {
         ratStateManager.enabled = false;
         ratStateManager.RatNavMeshAgent.enabled = false;
-        ratAnimationsScript.DisplayDeathAnimation();
+        ratAnimationsScript.DisplayDeathAnimation(displayInvertedDeath);
         yield return new WaitForSeconds(1.2f);
         ratVFX.DustVFX();
         Destroy(this);
@@ -183,6 +188,7 @@ public class EnemyCombat : MonoBehaviour
         canGetStunned = false; //Iframes
         yield return new WaitForSeconds(.4f);
         ratSFX.RatTailWhip();
+        displayInvertedDeath = true; //InvertedDeath
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
@@ -198,6 +204,7 @@ public class EnemyCombat : MonoBehaviour
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
+        displayInvertedDeath = false; //InvertedDeath
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);

@@ -19,6 +19,7 @@ public class RatAnimations : MonoBehaviour
     private static readonly int Death = Animator.StringToHash("Death");
     private static readonly int ElectricDeath = Animator.StringToHash("ElectricDeath");
     private static readonly int Angle = Animator.StringToHash("Angle");
+    private static readonly int DeathInverted = Animator.StringToHash("DeathInverted");
 
     private void Awake()
     {
@@ -58,9 +59,16 @@ public class RatAnimations : MonoBehaviour
     }
 
     //Player must be in damage animation state to transition to die
-    public void DisplayDeathAnimation()
+    public void DisplayDeathAnimation(bool isInverted)
     {
-        ratAnim.SetTrigger(Death); 
+        if (isInverted)
+        {
+            ratAnim.SetTrigger(DeathInverted); 
+        }
+        else
+        {
+            ratAnim.SetTrigger(Death); 
+        }
     }
 
     public void DisplayElectrifyAnimation()

@@ -11,20 +11,31 @@ public class PauseGame : MonoBehaviour
     [Header("Buttons")] [SerializeField] private GameObject onPauseButton, optionsFirstButton, optionsClosedButton;
 
     public static bool IsGamePaused;
+    private bool cameFromNoInput;
 
     private void Awake()
     {
         pauseMenu.SetActive(false);
     }
 
-    public void Pause()
+    public void Pause(bool pauseFromNoInput)
     {
         if (!IsGamePaused) //Pause game
         {
             IsGamePaused = true;
             pauseMenu.SetActive(true);
-            playerActionsScript.PlayerToPauseMenuUI();
-            
+            if (!pauseFromNoInput) //To switch action maps accordingly
+            {
+                cameFromNoInput = false;
+                playerActionsScript.PlayerToPauseMenuUI();
+            }
+            else
+            {
+                cameFromNoInput = true;
+                playerActionsScript.PauseToNoInput(false);
+            }
+
+
             Time.timeScale = 0;
             
             //Select default button
@@ -35,7 +46,16 @@ public class PauseGame : MonoBehaviour
         {
             IsGamePaused = false;
             pauseMenu.SetActive(false);
-            playerActionsScript.PlayerToPauseMenuUI();
+
+            if (cameFromNoInput)
+            {
+                playerActionsScript.PauseToNoInput(true);
+            }
+            else
+            {
+                playerActionsScript.PlayerToPauseMenuUI();
+            }
+            
             
             Time.timeScale = 1;
         }

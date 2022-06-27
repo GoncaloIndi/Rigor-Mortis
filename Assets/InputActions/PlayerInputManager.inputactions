@@ -457,14 +457,6 @@
             "id": "70acf9fa-1952-4703-bef0-4d29867ca293",
             "actions": [
                 {
-                    "name": "Inventory",
-                    "type": "Button",
-                    "id": "3fb804b1-ad4a-4b3e-b699-485232c52ee4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "cb924041-679f-4c17-b34c-e45c4bf501bf",
@@ -493,39 +485,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "786ee319-bc6f-42c5-8ea1-2be2d7008749",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and mouse",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3f944819-e4ed-41ec-a362-173065a9ff69",
-                    "path": "<Keyboard>/i",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and mouse",
-                    "action": "Inventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8ae537cb-f624-4340-8402-42ef58584d83",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

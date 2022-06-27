@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     public void ResumeGame()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
-        pauseGameScript.Pause();
+        pauseGameScript.Pause(false);
     }
 
     public void Options()
@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
-            pauseGameScript.Pause();
+            pauseGameScript.Pause(false);
         }
     }
     

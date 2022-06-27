@@ -53,6 +53,8 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Inventory.started += OpenInventory;
         //InteractionUI Action Map
         playerInputManager.InteractionUI.Accept.performed += Accept;
+        //NoInputActionMap
+        playerInputManager.NoInput.Pause.started += PauseFromNoInput;
         //PauseMenuUI Action Map
         playerInputManager.PauseMenuUI.Resume.started += Resume;
         playerInputManager.PauseMenuUI.Back.started += Back;
@@ -154,7 +156,7 @@ public class PlayerActions : MonoBehaviour
 
     private void Pause(InputAction.CallbackContext context)
     {
-        PauseGameScript.Pause();
+        PauseGameScript.Pause(false);
     }
 
     private void OpenInventory(InputAction.CallbackContext context)
@@ -181,10 +183,16 @@ public class PlayerActions : MonoBehaviour
         
     }
     
+    //NoInput ActionMap
+    private void PauseFromNoInput(InputAction.CallbackContext context)
+    {
+        PauseGameScript.Pause(true);
+    }
+    
     //PauseMenuUI Action Map
     private void Resume(InputAction.CallbackContext context)
     {
-        PauseGameScript.Pause();
+        PauseGameScript.Pause(false);
     }
 
     private void Back(InputAction.CallbackContext context)
@@ -268,6 +276,20 @@ public class PlayerActions : MonoBehaviour
         }
     }
     
+    public void PauseToNoInput(bool toggle)
+    {
+        if (!toggle)
+        {
+            playerInputManager.NoInput.Disable();
+            playerInputManager.PauseMenuUI.Enable();
+        }
+        else
+        {
+            playerInputManager.PauseMenuUI.Disable();
+            playerInputManager.NoInput.Enable();
+        }
+    }
+
     //PauseMenuUI
     public void PlayerToPauseMenuUI()
     {

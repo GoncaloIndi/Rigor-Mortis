@@ -470,9 +470,17 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
             ""id"": ""70acf9fa-1952-4703-bef0-4d29867ca293"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Inventory"",
                     ""type"": ""Button"",
-                    ""id"": ""31972e1b-35f3-4e2d-9b59-c55865f3fb62"",
+                    ""id"": ""3fb804b1-ad4a-4b3e-b699-485232c52ee4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""cb924041-679f-4c17-b34c-e45c4bf501bf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -481,12 +489,56 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""5dd9d4b2-204b-48b4-97d6-68016b394f94"",
-                    ""path"": """",
+                    ""id"": ""60044be1-0ae0-4450-b304-fe2352fbee83"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2aa55df4-de1b-40b8-979b-a42b1191a4ef"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""786ee319-bc6f-42c5-8ea1-2be2d7008749"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f944819-e4ed-41ec-a362-173065a9ff69"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ae537cb-f624-4340-8402-42ef58584d83"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -787,6 +839,22 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""NextItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee63f3f7-e59f-47d3-b3f4-224f739a672b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""PreviousItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""b68a3bd6-9040-4139-ae36-9d1c7409a6a3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -888,6 +956,94 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""action"": ""PreviousTab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2522c2a1-10eb-40ed-b94c-02b3ef6be8c4"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""NextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""00917d9e-12e0-4b8f-aa2a-0b2a3603b1f7"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""NextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e033ade-f9d5-431e-89b1-4feb1bd0d129"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c17de9a8-0e76-464e-abaa-2babb33ce44f"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9d45f5a-ccbf-44df-8c6d-00b83c9be771"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""PreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6705edc0-b800-4f2a-9e14-afd6556ddee1"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""PreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f6284a6-bc6c-4447-ad88-e0e547aa04e4"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b75e19ce-356f-4c8b-b232-ec5129cff3b0"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""PreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -937,7 +1093,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_InteractionUI_Accept = m_InteractionUI.FindAction("Accept", throwIfNotFound: true);
         // NoInput
         m_NoInput = asset.FindActionMap("NoInput", throwIfNotFound: true);
-        m_NoInput_Newaction = m_NoInput.FindAction("New action", throwIfNotFound: true);
+        m_NoInput_Inventory = m_NoInput.FindAction("Inventory", throwIfNotFound: true);
+        m_NoInput_Pause = m_NoInput.FindAction("Pause", throwIfNotFound: true);
         // PauseMenuUI
         m_PauseMenuUI = asset.FindActionMap("PauseMenuUI", throwIfNotFound: true);
         m_PauseMenuUI_Resume = m_PauseMenuUI.FindAction("Resume", throwIfNotFound: true);
@@ -950,6 +1107,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Inventory_Back = m_Inventory.FindAction("Back", throwIfNotFound: true);
         m_Inventory_NextTab = m_Inventory.FindAction("NextTab", throwIfNotFound: true);
         m_Inventory_PreviousTab = m_Inventory.FindAction("PreviousTab", throwIfNotFound: true);
+        m_Inventory_NextItem = m_Inventory.FindAction("NextItem", throwIfNotFound: true);
+        m_Inventory_PreviousItem = m_Inventory.FindAction("PreviousItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1121,12 +1280,14 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     // NoInput
     private readonly InputActionMap m_NoInput;
     private INoInputActions m_NoInputActionsCallbackInterface;
-    private readonly InputAction m_NoInput_Newaction;
+    private readonly InputAction m_NoInput_Inventory;
+    private readonly InputAction m_NoInput_Pause;
     public struct NoInputActions
     {
         private @PlayerInputManager m_Wrapper;
         public NoInputActions(@PlayerInputManager wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_NoInput_Newaction;
+        public InputAction @Inventory => m_Wrapper.m_NoInput_Inventory;
+        public InputAction @Pause => m_Wrapper.m_NoInput_Pause;
         public InputActionMap Get() { return m_Wrapper.m_NoInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1136,16 +1297,22 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_NoInputActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_NoInputActionsCallbackInterface.OnNewaction;
+                @Inventory.started -= m_Wrapper.m_NoInputActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_NoInputActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_NoInputActionsCallbackInterface.OnInventory;
+                @Pause.started -= m_Wrapper.m_NoInputActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_NoInputActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_NoInputActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_NoInputActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -1215,6 +1382,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Inventory_Back;
     private readonly InputAction m_Inventory_NextTab;
     private readonly InputAction m_Inventory_PreviousTab;
+    private readonly InputAction m_Inventory_NextItem;
+    private readonly InputAction m_Inventory_PreviousItem;
     public struct InventoryActions
     {
         private @PlayerInputManager m_Wrapper;
@@ -1223,6 +1392,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         public InputAction @Back => m_Wrapper.m_Inventory_Back;
         public InputAction @NextTab => m_Wrapper.m_Inventory_NextTab;
         public InputAction @PreviousTab => m_Wrapper.m_Inventory_PreviousTab;
+        public InputAction @NextItem => m_Wrapper.m_Inventory_NextItem;
+        public InputAction @PreviousItem => m_Wrapper.m_Inventory_PreviousItem;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1244,6 +1415,12 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @PreviousTab.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousTab;
                 @PreviousTab.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousTab;
                 @PreviousTab.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousTab;
+                @NextItem.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnNextItem;
+                @NextItem.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnNextItem;
+                @NextItem.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnNextItem;
+                @PreviousItem.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
+                @PreviousItem.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
+                @PreviousItem.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
             }
             m_Wrapper.m_InventoryActionsCallbackInterface = instance;
             if (instance != null)
@@ -1260,6 +1437,12 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @PreviousTab.started += instance.OnPreviousTab;
                 @PreviousTab.performed += instance.OnPreviousTab;
                 @PreviousTab.canceled += instance.OnPreviousTab;
+                @NextItem.started += instance.OnNextItem;
+                @NextItem.performed += instance.OnNextItem;
+                @NextItem.canceled += instance.OnNextItem;
+                @PreviousItem.started += instance.OnPreviousItem;
+                @PreviousItem.performed += instance.OnPreviousItem;
+                @PreviousItem.canceled += instance.OnPreviousItem;
             }
         }
     }
@@ -1299,7 +1482,8 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     }
     public interface INoInputActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPauseMenuUIActions
     {
@@ -1314,5 +1498,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnBack(InputAction.CallbackContext context);
         void OnNextTab(InputAction.CallbackContext context);
         void OnPreviousTab(InputAction.CallbackContext context);
+        void OnNextItem(InputAction.CallbackContext context);
+        void OnPreviousItem(InputAction.CallbackContext context);
     }
 }

@@ -61,6 +61,11 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Inventory.Back.started += BackInventory;
         playerInputManager.Inventory.NextTab.started += NextTab;
         playerInputManager.Inventory.PreviousTab.started += PreviousTab;
+        playerInputManager.Inventory.NextItem.started += NextItem;
+        playerInputManager.Inventory.NextItem.canceled += NextItemRelease;
+        playerInputManager.Inventory.PreviousItem.started += PreviousItem;
+        playerInputManager.Inventory.PreviousItem.canceled += PreviousItemRelease;
+
 
     }
 
@@ -207,6 +212,26 @@ public class PlayerActions : MonoBehaviour
     private void PreviousTab(InputAction.CallbackContext context)
     {
         inventoryManagerScript.PreviousTab();
+    }
+
+    private void NextItem(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.NextItem();
+    }
+
+    private void NextItemRelease(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.OnNextItemRelease();
+    }
+    
+    private void PreviousItem(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.PreviousItem();
+    }
+
+    private void PreviousItemRelease(InputAction.CallbackContext context)
+    {
+        inventoryManagerScript.OnPreviousItemRelease();
     }
     
     

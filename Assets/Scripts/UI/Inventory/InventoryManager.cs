@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] private GameObject inventory, tabInventory, tabBody, tabCollectibles;
+    private Animator itemInventoryAnim;
 
     [SerializeField] private int currentTab; //0 - Inventory/ 1 - Body/ 2 - Collectibles
 
@@ -12,6 +14,21 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject InventoryBase;
     [SerializeField] private InventoryFadeAnimation inventoryFadeAnimation;
     
+
+    [Header("ItemTab")] 
+    [SerializeField] private bool canSwitchItems = true;
+
+    private bool isHoldingNextItemButton;
+    private bool isHoldingPreviousItemButton;
+    private static readonly int Next = Animator.StringToHash("Next");
+    private static readonly int Previous = Animator.StringToHash("Previous");
+    
+
+    private void Awake()
+    {
+        itemInventoryAnim = tabInventory.GetComponent<Animator>();
+    }
+
     public void OpenInventory()
     {
         if (inventory.activeSelf) return;
@@ -102,4 +119,60 @@ public class InventoryManager : MonoBehaviour
             ToggleTabs(1);
         }
     }
+    
+    //InventoryTab items
+    
+
+    private IEnumerator EnableNextItemSwitch() //PreventSpam
+    {
+        while (isHoldingNextItemButton)
+        {
+            canSwitchItems = false;
+            itemInventoryAnim.SetTrigger(Next);
+            yield return new WaitForSecondsRealtime(.5f);
+            //Item Logic
+            canSwitchItems = true; 
+        }
+        
+    }
+    public void NextItem()
+    {
+        isHoldingNextItemButton = true;
+        if (!canSwitchItems && currentTab == 0) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
+
+        
+        StartCoroutine(EnableNextItemSwitch());
+    }
+
+    public void OnNextItemRelease()
+    {
+        isHoldingNextItemButton = false;
+    }
+    
+    private IEnumerator EnablePreviousItemSwitch() //PreventSpam
+    {
+        while (isHoldingPreviousItemButton)
+        {
+            canSwitchItems = false;
+            itemInventoryAnim.SetTrigger(Previous);
+            yield return new WaitForSecondsRealtime(.5f);
+            //Item Logic
+            canSwitchItems = true; 
+        }
+        
+    }
+    public void PreviousItem()
+    {
+        isHoldingPreviousItemButton = true;
+        if (!canSwitchItems && currentTab == 0) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
+
+        
+        StartCoroutine(EnablePreviousItemSwitch());
+    }
+
+    public void OnPreviousItemRelease()
+    {
+        isHoldingPreviousItemButton = false;
+    }
+    
 }

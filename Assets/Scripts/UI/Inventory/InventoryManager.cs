@@ -9,9 +9,13 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int currentTab; //0 - Inventory/ 1 - Body/ 2 - Collectibles
 
     [SerializeField] private PlayerActions playerActionsScript;
+    [SerializeField] private GameObject InventoryBase;
+    [SerializeField] private InventoryFadeAnimation inventoryFadeAnimation;
     
     public void OpenInventory()
     {
+        if (inventory.activeSelf) return;
+
         inventory.SetActive(true);
         PauseGame.IsGamePaused = true;
         ToggleTabs(0); //Inventory by default
@@ -21,7 +25,9 @@ public class InventoryManager : MonoBehaviour
 
     public void CloseInventory()
     {
-        inventory.SetActive(false);
+        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
+        
+        inventoryFadeAnimation.TriggerFadeOut(); //Animation
         PauseGame.IsGamePaused = false;
         Time.timeScale = 1;
         playerActionsScript.PlayerToInventory(false);
@@ -29,6 +35,8 @@ public class InventoryManager : MonoBehaviour
 
     public void BackInventory()
     {
+        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
+        
         CloseInventory();  
     }
     
@@ -61,6 +69,8 @@ public class InventoryManager : MonoBehaviour
 
     public void NextTab()
     {
+        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
+        
         if (currentTab == 0)
         {
             ToggleTabs(1);
@@ -77,6 +87,8 @@ public class InventoryManager : MonoBehaviour
 
     public void PreviousTab()
     {
+        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
+        
         if (currentTab == 0)
         {
             ToggleTabs(2);

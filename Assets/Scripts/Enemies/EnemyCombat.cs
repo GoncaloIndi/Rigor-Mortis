@@ -100,7 +100,7 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratStateManager.enabled = false;
         EnemyStatsScript.EnemyHp = 0;
-        yield return new WaitForSeconds(.1f); //Delay so it is closer to the puddle
+        yield return new WaitForSeconds(.3f); //Delay so it is closer to the puddle
         
         CancelAttack();
         

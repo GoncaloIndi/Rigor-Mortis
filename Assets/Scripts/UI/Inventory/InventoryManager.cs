@@ -22,7 +22,7 @@ public class InventoryManager : MonoBehaviour
     private bool isHoldingPreviousItemButton;
     private static readonly int Next = Animator.StringToHash("Next");
     private static readonly int Previous = Animator.StringToHash("Previous");
-    private bool preventRectTransformBug; //Prevent a bug
+    [SerializeField] private DisplayInventoryItems displayInventoryItems;
 
 
     private void Awake()
@@ -35,6 +35,7 @@ public class InventoryManager : MonoBehaviour
         if (inventory.activeSelf) return;
         
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_Open");
+        displayInventoryItems.UpdateItems();
         inventory.SetActive(true);
         PauseGame.IsGamePaused = true;
         ToggleTabs(0, false); //Inventory by default
@@ -44,7 +45,7 @@ public class InventoryManager : MonoBehaviour
 
     public void CloseInventory()
     {
-        if (!InventoryBase.activeSelf || preventRectTransformBug) return; //Prevent actions whilst in animation
+        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
         
         
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_Close");
@@ -147,7 +148,7 @@ public class InventoryManager : MonoBehaviour
     public void NextItem()
     {
         isHoldingNextItemButton = true;
-        if (!canSwitchItems && currentTab == 0) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
+        if ((!canSwitchItems && currentTab == 0) || !displayInventoryItems.CanSwapItems) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
 
         
         StartCoroutine(EnableNextItemSwitch());
@@ -174,7 +175,7 @@ public class InventoryManager : MonoBehaviour
     public void PreviousItem()
     {
         isHoldingPreviousItemButton = true;
-        if (!canSwitchItems && currentTab == 0) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
+        if ((!canSwitchItems && currentTab == 0) || !displayInventoryItems.CanSwapItems) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
 
         
         StartCoroutine(EnablePreviousItemSwitch());

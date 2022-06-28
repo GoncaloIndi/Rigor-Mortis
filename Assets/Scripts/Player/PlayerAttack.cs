@@ -58,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
             BreakableVent breakableVentScript = enemyCol[i].GetComponent<BreakableVent>();
             if (breakableVentScript != null)
             {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/sfx_OnVentBreak");
                 breakableVentScript.Hit();
             }
             //Other damageable things

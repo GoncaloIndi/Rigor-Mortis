@@ -36,6 +36,9 @@ public class PlayerStats : MonoBehaviour
     GamePadState state;
     GamePadState prevState;
 
+    [Header("Inventory")] 
+    [SerializeField] private ItemManager inventory;
+
     private void Awake()
     {
         playerActionsScript = GetComponent<PlayerActions>();
@@ -131,5 +134,17 @@ public class PlayerStats : MonoBehaviour
         playerActionsScript.PlayerToNoInput(true);
         yield return new WaitForSeconds(.5f);
         playerActionsScript.PlayerToNoInput(false);
+    }
+
+    
+    //Inventory
+    public void ObtainNewItem(ItemData item)
+    {
+        inventory.AddItem(item, 1);
+    }
+
+    private void OnApplicationQuit()
+    {
+        inventory.inventoryItems.Clear();   
     }
 }

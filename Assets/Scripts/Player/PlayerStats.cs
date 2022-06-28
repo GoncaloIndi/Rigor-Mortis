@@ -55,16 +55,15 @@ public class PlayerStats : MonoBehaviour
         PlayerHp -= dmg; 
         playerVFXManagerScript.WoodchipsVFX();  //Particles
         playerSoundsScript.DamageSound(); //Sound
+
+        playerAnimationsScript.DisplayDamageAnimation();
         
-        if (!IsAttackOnCooldown) //If the player is attacking prevent the damage animation
-        {
-            playerAnimationsScript.DisplayDamageAnimation();
-        }
         StartCoroutine(StopInputOnDamage());
         
         //Vibration If the player gets damaged while attacking the controller vibrates longer
         if (vibrateController && !IsAttackOnCooldown)
         {
+            StartCoroutine(TriggerAttackCooldown(.5f));
             StartCoroutine(VibrateController(.5f));
         }
         else if(vibrateController && IsAttackOnCooldown)
@@ -86,6 +85,13 @@ public class PlayerStats : MonoBehaviour
         StartCoroutine(StopInputOnDamage());
         StartCoroutine(VibrateController(.5f));
         
+    }
+    
+    public IEnumerator TriggerAttackCooldown(float cooldownTime) //Prevent playerFromAttacking whilst getting damaged
+    {
+        IsAttackOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        IsAttackOnCooldown = false;
     }
 
     public void EquipSword()

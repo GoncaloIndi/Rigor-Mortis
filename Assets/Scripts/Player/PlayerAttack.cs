@@ -60,6 +60,12 @@ public class PlayerAttack : MonoBehaviour
             {
                 breakableVentScript.Hit();
             }
+            //Other damageable things
+            Damageable damageableScript = enemyCol[i].GetComponent<Damageable>();
+            if (damageableScript != null)
+            {
+                damageableScript.OnDamage();
+            }
         }
     }
     public void ResetAttack()

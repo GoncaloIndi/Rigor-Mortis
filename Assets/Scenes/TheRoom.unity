@@ -37965,6 +37965,7 @@ MonoBehaviour:
   playerActionsScript: {fileID: 95479326}
   InventoryBase: {fileID: 1981771188}
   inventoryFadeAnimation: {fileID: 2111149465}
+  canSwitchItems: 1
 --- !u!1001 &1418146144
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -22,7 +22,8 @@ public class InventoryManager : MonoBehaviour
     private bool isHoldingPreviousItemButton;
     private static readonly int Next = Animator.StringToHash("Next");
     private static readonly int Previous = Animator.StringToHash("Previous");
-    
+    private bool preventRectTransformBug; //Prevent a bug
+
 
     private void Awake()
     {
@@ -32,18 +33,21 @@ public class InventoryManager : MonoBehaviour
     public void OpenInventory()
     {
         if (inventory.activeSelf) return;
-
+        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_Open");
         inventory.SetActive(true);
         PauseGame.IsGamePaused = true;
-        ToggleTabs(0); //Inventory by default
+        ToggleTabs(0, false); //Inventory by default
         Time.timeScale = 0;
         playerActionsScript.PlayerToInventory(true);
     }
 
     public void CloseInventory()
     {
-        if (!InventoryBase.activeSelf) return; //Prevent actions whilst in animation
+        if (!InventoryBase.activeSelf || preventRectTransformBug) return; //Prevent actions whilst in animation
         
+        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_Close");
         inventoryFadeAnimation.TriggerFadeOut(); //Animation
         PauseGame.IsGamePaused = false;
         Time.timeScale = 1;
@@ -58,8 +62,13 @@ public class InventoryManager : MonoBehaviour
     }
     
     //Tabs
-    private void ToggleTabs(int tab)
+    private void ToggleTabs(int tab, bool playSfx)
     {
+        if (playSfx)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapTab");
+        }
+        
         if (tab == 0) //inventory
         {
             currentTab = 0;
@@ -90,15 +99,15 @@ public class InventoryManager : MonoBehaviour
         
         if (currentTab == 0)
         {
-            ToggleTabs(1);
+            ToggleTabs(1, true);
         }
         else if (currentTab == 1)
         {
-            ToggleTabs(2);
+            ToggleTabs(2, true);
         }
         else if(currentTab == 2)
         {
-            ToggleTabs(0);
+            ToggleTabs(0, true);
         }
     }
 
@@ -108,25 +117,25 @@ public class InventoryManager : MonoBehaviour
         
         if (currentTab == 0)
         {
-            ToggleTabs(2);
+            ToggleTabs(2, true);
         }
         else if (currentTab == 1)
         {
-            ToggleTabs(0);
+            ToggleTabs(0, true);
         }
         else if(currentTab == 2)
         {
-            ToggleTabs(1);
+            ToggleTabs(1, true);
         }
     }
     
     //InventoryTab items
     
-
     private IEnumerator EnableNextItemSwitch() //PreventSpam
     {
         while (isHoldingNextItemButton)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Next);
             yield return new WaitForSecondsRealtime(.5f);
@@ -153,6 +162,7 @@ public class InventoryManager : MonoBehaviour
     {
         while (isHoldingPreviousItemButton)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Previous);
             yield return new WaitForSecondsRealtime(.5f);

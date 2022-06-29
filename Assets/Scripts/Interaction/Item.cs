@@ -18,6 +18,7 @@ public class Item : Interactible
 
     public ItemData ItemData;
     [SerializeField] private DisplayInventoryItems displayInventoryItems;
+    [SerializeField] private bool addToInventory;
 
     private bool AvoidButtonSpamming = true;
     private PlayerStats playerStatsScript;
@@ -34,8 +35,11 @@ public class Item : Interactible
     public override void Interact() //Called by PlayerActions
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ItemPickUp");
-        playerStatsScript.ObtainNewItem(ItemData); //Get item in inventory
-        displayInventoryItems.UpdateItems();
+        if (addToInventory)
+        {
+            playerStatsScript.ObtainNewItem(ItemData); //Get item in inventory
+            displayInventoryItems.UpdateItems();
+        }
         PlayerStatsScript.IsInInteractionZone = false;
         InteractionUI.SetActive(true);
         SpriteUI.SetActive(true);

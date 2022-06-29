@@ -453,7 +453,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 304849719247d3343aa3ff4854e71b7e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.14117648}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.16470589}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -946,7 +946,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: -0, y: -0.46423474, z: -0, w: 0.8857122}
-  m_LocalPosition: {x: 3.69, y: -8.529, z: 1.221}
+  m_LocalPosition: {x: 3.69, y: 1.33, z: -13.43}
   m_LocalScale: {x: 0.29108223, y: 0.29108223, z: 0.29108223}
   m_Children:
   - {fileID: 1482103968}
@@ -15486,7 +15486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -28974,6 +28974,7 @@ MonoBehaviour:
   itemNameUI: {fileID: 575540788}
   ItemData: {fileID: 0}
   displayInventoryItems: {fileID: 0}
+  addToInventory: 0
 --- !u!65 &959970932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54689,8 +54690,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10885295, y: 0.17236812, z: 1.0012993}
-  m_Center: {x: -0.00000000357565, y: 0.031757675, z: 1.2324299e-10}
+  m_Size: {x: 0.0537214, y: 0.17236812, z: 1.0012993}
+  m_Center: {x: 0.0014094587, y: 0.031757668, z: -2.7461398e-11}
 --- !u!1 &2006656758
 GameObject:
   m_ObjectHideFlags: 0
@@ -59814,6 +59815,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00a011424f98b094c829e83257a41768, type: 3}
+--- !u!1 &2008162348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2008162349}
+  - component: {fileID: 2008162352}
+  - component: {fileID: 2008162351}
+  - component: {fileID: 2008162350}
+  m_Layer: 0
+  m_Name: Puddle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2008162349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008162348}
+  m_LocalRotation: {x: -0.11810481, y: -0.6971737, z: 0.11810513, w: 0.6971738}
+  m_LocalPosition: {x: 0, y: -0.005, z: 0.192}
+  m_LocalScale: {x: 0.04541326, y: 0.06937928, z: 0.07485152}
+  m_Children: []
+  m_Father: {fileID: 563303955}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2008162350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008162348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  parameter: Surfaces
+  TriggerEvent: 3
+  value: 3
+--- !u!114 &2008162351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008162348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b0e04e2572f9a940a47465f6f3c2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  parameter: Surfaces
+  TriggerEvent: 4
+  value: 0
+--- !u!64 &2008162352
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2008162348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2534964839176971238, guid: 53bc207358aae21428ea772071d10b63, type: 3}
 --- !u!1 &2011166779
 GameObject:
   m_ObjectHideFlags: 0
@@ -59878,6 +59958,7 @@ MonoBehaviour:
   itemNameUI: {fileID: 575540788}
   ItemData: {fileID: 11400000, guid: 7640753905137ee4980723a83bc4080b, type: 2}
   displayInventoryItems: {fileID: 877534274}
+  addToInventory: 1
 --- !u!65 &2015874567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86135,7 +86216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8134117748071058211
 MonoBehaviour:
   m_ObjectHideFlags: 0

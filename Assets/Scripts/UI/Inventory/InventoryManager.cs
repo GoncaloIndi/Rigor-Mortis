@@ -66,6 +66,8 @@ public class InventoryManager : MonoBehaviour
     //Tabs
     private void ToggleTabs(int tab, bool playSfx)
     {
+        isHoldingNextItemButton = false;
+        isHoldingPreviousItemButton = false;
         if (playSfx)
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapTab");
@@ -73,6 +75,7 @@ public class InventoryManager : MonoBehaviour
         
         if (tab == 0) //inventory
         {
+            displayInventoryItems.UpdateItems();
             currentTab = 0;
             tabInventory.SetActive(true);
             tabBody.SetActive(false);
@@ -137,6 +140,7 @@ public class InventoryManager : MonoBehaviour
     {
         while (isHoldingNextItemButton)
         {
+            if (currentTab != 0) yield break;
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Next);
@@ -164,6 +168,7 @@ public class InventoryManager : MonoBehaviour
     {
         while (isHoldingPreviousItemButton)
         {
+            if (currentTab != 0) yield break;
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Previous);

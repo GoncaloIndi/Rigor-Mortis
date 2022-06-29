@@ -28,6 +28,7 @@ public class RatNestItem : InteractionEvent
     private PlayerActions playerActionsScript;
     private PlayerStats playerStatsScript;
     public ItemData ItemData;
+    [SerializeField] private DisplayInventoryItems displayInventoryItems;
 
     [Header("Room Related")]
     [SerializeField] private GameObject bear;
@@ -58,6 +59,7 @@ public class RatNestItem : InteractionEvent
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ItemPickUp");
         playerStatsScript.ObtainNewItem(ItemData); //Get item in inventory
+        displayInventoryItems.UpdateItems();
         playerActionsScript.PlayerToUI();
         InteractionUI.SetActive(true);
         SpriteUI.SetActive(true);

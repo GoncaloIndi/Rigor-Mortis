@@ -23,6 +23,7 @@ public class InventoryManager : MonoBehaviour
     private static readonly int Next = Animator.StringToHash("Next");
     private static readonly int Previous = Animator.StringToHash("Previous");
     [SerializeField] private DisplayInventoryItems displayInventoryItems;
+    public ItemData CurrentItem;
 
 
     private void Awake()
@@ -139,8 +140,8 @@ public class InventoryManager : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Next);
-            yield return new WaitForSecondsRealtime(.5f);
             //Item Logic
+            yield return new WaitForSecondsRealtime(.55f);
             canSwitchItems = true; 
         }
         
@@ -149,13 +150,13 @@ public class InventoryManager : MonoBehaviour
     {
         isHoldingNextItemButton = true;
         if ((!canSwitchItems && currentTab == 0) || !displayInventoryItems.CanSwapItems) return; //Reset after animation CHANGE LATER IF GAME GOES FORWARD TO A SEPARATE FUNCTION FOR ALL THE DIFFERENT TABS
-
         
         StartCoroutine(EnableNextItemSwitch());
     }
 
     public void OnNextItemRelease()
     {
+        
         isHoldingNextItemButton = false;
     }
     
@@ -166,8 +167,8 @@ public class InventoryManager : MonoBehaviour
             FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_SwapItem");
             canSwitchItems = false;
             itemInventoryAnim.SetTrigger(Previous);
-            yield return new WaitForSecondsRealtime(.5f);
             //Item Logic
+            yield return new WaitForSecondsRealtime(.55f);
             canSwitchItems = true; 
         }
         

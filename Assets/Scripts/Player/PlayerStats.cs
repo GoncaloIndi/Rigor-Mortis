@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private GameObject sword; //Temp if game gets more weapons
     public bool IsAttackOnCooldown = false;
     private PlayerVFXManager playerVFXManagerScript;
+    [SerializeField] private Animator damageFX;
 
     [Header("Interaction")]
     public bool IsInInteractionZone = false;
@@ -38,6 +39,8 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Inventory")] 
     [SerializeField] private ItemManager inventory;
+
+    private static readonly int DamageFX = Animator.StringToHash("DamageFX");
 
     private void Awake()
     {
@@ -60,6 +63,7 @@ public class PlayerStats : MonoBehaviour
         playerSoundsScript.DamageSound(); //Sound
 
         playerAnimationsScript.DisplayDamageAnimation();
+        damageFX.SetTrigger(DamageFX);
         
         StartCoroutine(StopInputOnDamage());
         
@@ -82,6 +86,7 @@ public class PlayerStats : MonoBehaviour
 
     public void FakeDamagePlayer()
     {
+        damageFX.SetTrigger(DamageFX);
         playerSoundsScript.DamageSound(); //Sound
         playerVFXManagerScript.WoodchipsVFX();  //Particles
         playerAnimationsScript.DisplayDamageAnimation();
@@ -146,5 +151,6 @@ public class PlayerStats : MonoBehaviour
     private void OnApplicationQuit()
     {
         inventory.inventoryItems.Clear();   
+        GamePad.SetVibration(playerIndex, 0, 0);
     }
 }

@@ -11,6 +11,7 @@ public class DisplayInventoryItems : MonoBehaviour
 
     [SerializeField] private Image currentItem, itemRight, itemLeft;
     public bool CanSwapItems;
+    [SerializeField] private Text itemDisplay;
 
     private Sprite currentHolder, nextHolder;
 
@@ -23,6 +24,7 @@ public class DisplayInventoryItems : MonoBehaviour
     {
         if (PlayerInventory.inventoryItems.Count == 0) //No items
         {
+            itemDisplay.text = "";
             CanSwapItems = false;
             ToggleItemSprites(false);
         }
@@ -34,6 +36,7 @@ public class DisplayInventoryItems : MonoBehaviour
             itemLeft.enabled = false;
             itemRight.enabled = false;
             currentItem.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
+            itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
             inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
 
         }
@@ -43,11 +46,13 @@ public class DisplayInventoryItems : MonoBehaviour
             ToggleItemSprites(true);
             if (currentItem.sprite == PlayerInventory.inventoryItems[0].Item.Icon)
             {
+                itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
                 itemLeft.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
             }
             else
             {
+                itemDisplay.text = PlayerInventory.inventoryItems[1].Item.name;
                 itemLeft.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
             }
@@ -83,6 +88,7 @@ public class DisplayInventoryItems : MonoBehaviour
         currentHolder = currentItem.sprite;
         nextHolder = itemLeft.sprite;
         itemRight.sprite = currentHolder;
+        ChangeCurrentItemName();
     }
 
     public void PreviousItemEnd()
@@ -96,11 +102,24 @@ public class DisplayInventoryItems : MonoBehaviour
         currentHolder = currentItem.sprite;
         nextHolder = itemRight.sprite;
         itemLeft.sprite = currentHolder;
+        ChangeCurrentItemName();
     }
 
     public void NextItemEnd()
     {
         itemRight.sprite = currentHolder;
         currentItem.sprite = nextHolder;
+    }
+
+    private void ChangeCurrentItemName() //Stupid not supposed to be like this
+    {
+        if (itemDisplay.text == PlayerInventory.inventoryItems[1].Item.name)
+        {
+            itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
+        }
+        else
+        {
+            itemDisplay.text = PlayerInventory.inventoryItems[1].Item.name;
+        }
     }
 }

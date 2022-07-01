@@ -11,7 +11,8 @@ public class DisplayInventoryItems : MonoBehaviour
 
     [SerializeField] private Image currentItem, itemRight, itemLeft;
     public bool CanSwapItems;
-    [SerializeField] private Text itemDisplay;
+    [SerializeField] private Text itemNameDisplay;
+    [SerializeField] private Text itemDescriptionDisplay;
 
     private Sprite currentHolder, nextHolder;
 
@@ -24,7 +25,8 @@ public class DisplayInventoryItems : MonoBehaviour
     {
         if (PlayerInventory.inventoryItems.Count == 0) //No items
         {
-            itemDisplay.text = "";
+            itemNameDisplay.text = "";
+            itemDescriptionDisplay.text = "";
             CanSwapItems = false;
             ToggleItemSprites(false);
         }
@@ -36,7 +38,8 @@ public class DisplayInventoryItems : MonoBehaviour
             itemLeft.enabled = false;
             itemRight.enabled = false;
             currentItem.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
-            itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
+            itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
+            itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
             inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
 
         }
@@ -46,13 +49,15 @@ public class DisplayInventoryItems : MonoBehaviour
             ToggleItemSprites(true);
             if (currentItem.sprite == PlayerInventory.inventoryItems[0].Item.Icon)
             {
-                itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
+                itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
+                itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
                 itemLeft.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
             }
             else
             {
-                itemDisplay.text = PlayerInventory.inventoryItems[1].Item.name;
+                itemNameDisplay.text = PlayerInventory.inventoryItems[1].Item.Name;
+                itemDescriptionDisplay.text = PlayerInventory.inventoryItems[1].Item.ExamineText;
                 itemLeft.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
             }
@@ -113,13 +118,16 @@ public class DisplayInventoryItems : MonoBehaviour
 
     private void ChangeCurrentItemName() //Stupid not supposed to be like this
     {
-        if (itemDisplay.text == PlayerInventory.inventoryItems[1].Item.name)
+        if (itemNameDisplay.text == PlayerInventory.inventoryItems[1].Item.Name)
         {
-            itemDisplay.text = PlayerInventory.inventoryItems[0].Item.name;
+            itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
+            itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
+            
         }
         else
         {
-            itemDisplay.text = PlayerInventory.inventoryItems[1].Item.name;
+            itemNameDisplay.text = PlayerInventory.inventoryItems[1].Item.Name;
+            itemDescriptionDisplay.text = PlayerInventory.inventoryItems[1].Item.ExamineText;
         }
     }
 }

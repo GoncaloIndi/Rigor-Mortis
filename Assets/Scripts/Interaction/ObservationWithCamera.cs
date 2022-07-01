@@ -29,7 +29,7 @@ public class ObservationWithCamera : Interactible
     {
         //Camera related
         cameraToDeactivate = playerMovementScript.CameraToUseMovement;
-        SwitchCameras();
+        SwitchCameras(true);
         
         InteractionUI.SetActive(true);
         darkenEffect.SetActive(false);
@@ -43,7 +43,7 @@ public class ObservationWithCamera : Interactible
     public override void FinishInteract() //Called by PlayerActions
     {        
         if(AvoidButtonSpamming) return;
-        SwitchCameras();
+        SwitchCameras(false);
         descriptionBottomUI.text = "";
         InteractionUI.SetActive(false);
         darkenEffect.SetActive(true);
@@ -66,9 +66,9 @@ public class ObservationWithCamera : Interactible
 
     }
 
-    private void SwitchCameras()
+    private void SwitchCameras(bool toggleUICamera)
     {
-        if (uiCamera.activeSelf)
+        if (!toggleUICamera)
         {
             cameraToDeactivate.SetActive(true);
             uiCamera.SetActive(false);

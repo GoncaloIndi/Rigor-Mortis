@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
         CurrentCamera = FindObjectOfType<FollowPlayer>().gameObject;
+        CameraToUseMovement = CurrentCamera;
     }
 
     private void FixedUpdate()

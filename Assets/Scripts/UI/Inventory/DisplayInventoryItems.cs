@@ -122,12 +122,14 @@ public class DisplayInventoryItems : MonoBehaviour
         {
             itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
             itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
-            
+            inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
+
         }
         else
         {
             itemNameDisplay.text = PlayerInventory.inventoryItems[1].Item.Name;
             itemDescriptionDisplay.text = PlayerInventory.inventoryItems[1].Item.ExamineText;
+            inventoryManager.CurrentItem = PlayerInventory.inventoryItems[1].Item;
         }
     }
 }

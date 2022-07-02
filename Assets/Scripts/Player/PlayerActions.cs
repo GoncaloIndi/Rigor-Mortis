@@ -25,6 +25,8 @@ public class PlayerActions : MonoBehaviour
     private PlayerInputManager playerInputManager;
 
     private InventoryManager inventoryManagerScript;
+
+    private InventoryUseItem inventoryUseItemScript;
     
 
    
@@ -38,6 +40,7 @@ public class PlayerActions : MonoBehaviour
         PlayerLockOnTargetScript = GetComponent<PlayerLockOnTarget>();
         PlayerAttackScript = GetComponent<PlayerAttack>();
         PauseGameScript = FindObjectOfType<PauseGame>();
+        inventoryUseItemScript = FindObjectOfType<InventoryUseItem>();
 
         //Player Action Map
         playerInputManager = new PlayerInputManager();
@@ -67,6 +70,7 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Inventory.NextItem.canceled += NextItemRelease;
         playerInputManager.Inventory.PreviousItem.started += PreviousItem;
         playerInputManager.Inventory.PreviousItem.canceled += PreviousItemRelease;
+        playerInputManager.Inventory.Use.started += UseItem;
 
 
     }
@@ -240,6 +244,11 @@ public class PlayerActions : MonoBehaviour
     private void PreviousItemRelease(InputAction.CallbackContext context)
     {
         inventoryManagerScript.OnPreviousItemRelease();
+    }
+
+    private void UseItem(InputAction.CallbackContext context)
+    {
+        inventoryUseItemScript.UseItem();
     }
     
     

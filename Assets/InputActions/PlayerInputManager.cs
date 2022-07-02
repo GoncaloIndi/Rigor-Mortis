@@ -814,6 +814,14 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""82c8c55c-68ed-4066-8ffd-93b874588a9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -1003,6 +1011,50 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""action"": ""PreviousItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f9bac69-6f25-4f0a-9066-e76395c7320e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7406f3a-8390-4c66-a0da-c351630dbdfd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a503c12-9781-4649-aa1f-ad79fc9dc16d"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and mouse"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8d3e93e-cee4-4575-8d39-1b8ea599fa72"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1067,6 +1119,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Inventory_PreviousTab = m_Inventory.FindAction("PreviousTab", throwIfNotFound: true);
         m_Inventory_NextItem = m_Inventory.FindAction("NextItem", throwIfNotFound: true);
         m_Inventory_PreviousItem = m_Inventory.FindAction("PreviousItem", throwIfNotFound: true);
+        m_Inventory_Use = m_Inventory.FindAction("Use", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1334,6 +1387,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Inventory_PreviousTab;
     private readonly InputAction m_Inventory_NextItem;
     private readonly InputAction m_Inventory_PreviousItem;
+    private readonly InputAction m_Inventory_Use;
     public struct InventoryActions
     {
         private @PlayerInputManager m_Wrapper;
@@ -1344,6 +1398,7 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         public InputAction @PreviousTab => m_Wrapper.m_Inventory_PreviousTab;
         public InputAction @NextItem => m_Wrapper.m_Inventory_NextItem;
         public InputAction @PreviousItem => m_Wrapper.m_Inventory_PreviousItem;
+        public InputAction @Use => m_Wrapper.m_Inventory_Use;
         public InputActionMap Get() { return m_Wrapper.m_Inventory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1371,6 +1426,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @PreviousItem.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
                 @PreviousItem.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
                 @PreviousItem.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnPreviousItem;
+                @Use.started -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUse;
+                @Use.performed -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUse;
+                @Use.canceled -= m_Wrapper.m_InventoryActionsCallbackInterface.OnUse;
             }
             m_Wrapper.m_InventoryActionsCallbackInterface = instance;
             if (instance != null)
@@ -1393,6 +1451,9 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @PreviousItem.started += instance.OnPreviousItem;
                 @PreviousItem.performed += instance.OnPreviousItem;
                 @PreviousItem.canceled += instance.OnPreviousItem;
+                @Use.started += instance.OnUse;
+                @Use.performed += instance.OnUse;
+                @Use.canceled += instance.OnUse;
             }
         }
     }
@@ -1449,5 +1510,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnPreviousTab(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);
         void OnPreviousItem(InputAction.CallbackContext context);
+        void OnUse(InputAction.CallbackContext context);
     }
 }

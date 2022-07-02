@@ -27,6 +27,14 @@ public class ItemManager : ScriptableObject
             inventoryItems.Add(new InventorySlot(item, amount));
         }
     }
+
+    public void RemoveItem(InventorySlot itemSlot)
+    {
+
+        //Remove item if player has it (not used so no need to make it work)
+
+        inventoryItems.Remove(itemSlot);
+    }
 }
 
 [System.Serializable]
@@ -44,5 +52,10 @@ public class InventorySlot
     public void AddAmount(int value)
     {
         Amount += value;
+    }
+    
+    public void RemoveAmount(int value)
+    {
+        Amount -= value;
     }
 }

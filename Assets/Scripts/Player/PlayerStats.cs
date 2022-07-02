@@ -40,6 +40,8 @@ public class PlayerStats : MonoBehaviour
     [Header("Inventory")] 
     [SerializeField] private ItemManager inventory;
 
+    public OnItemUse CurrentItemUse;
+
     private static readonly int DamageFX = Animator.StringToHash("DamageFX");
 
     private void Awake()

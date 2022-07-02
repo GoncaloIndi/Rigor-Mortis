@@ -1054,6 +1054,7 @@ MonoBehaviour:
   CurrentInteractionGameObject: {fileID: 0}
   LockOnVector: {x: 0, y: 0, z: 0}
   inventory: {fileID: 11400000, guid: 8d35ac24d58a7564a94caee5f636c794, type: 2}
+  CurrentItemUse: {fileID: 0}
 --- !u!114 &95479330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,6 +1291,65 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.40732393, y: 1, z: 1}
   m_Center: {x: 0.044668186, y: 0, z: -4.5744893e-16}
+--- !u!1 &109772291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 109772292}
+  - component: {fileID: 109772294}
+  - component: {fileID: 109772293}
+  m_Layer: 0
+  m_Name: TrapItemUse
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &109772292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109772291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.64, y: 0.8109999, z: -11.871}
+  m_LocalScale: {x: 1.7327745, y: 1.7327745, z: 1.7327745}
+  m_Children: []
+  m_Father: {fileID: 901135954}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109772293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109772291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0994894c88f354c83824c096ac6224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToBeUsed: 0
+  turnedOnEffect: {fileID: 1926784566}
+--- !u!65 &109772294
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109772291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &124012534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17575,7 +17635,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1461.3625, y: 1080}
+  m_SizeDelta: {x: 1474.74, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &693064171
 Animator:
@@ -17904,7 +17964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &713469358
 Transform:
   m_ObjectHideFlags: 0
@@ -19939,6 +19999,7 @@ Transform:
   - {fileID: 543450652156396611}
   - {fileID: 1098899653}
   - {fileID: 1752721560}
+  - {fileID: 109772292}
   m_Father: {fileID: 589999090}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37930,8 +37991,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: f1420a2f3030c8149b3c4c9decf8631f, type: 3}
-    m_FontSize: 104
+    m_Font: {fileID: 12800000, guid: a4a9b61b6b0535f429768c2a13ee7b61, type: 3}
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -38310,6 +38371,88 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306633339}
   m_Mesh: {fileID: 4493585093827132993, guid: 000ae20a77837d641bbcb311d430866f, type: 3}
+--- !u!1 &1311266286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1311266287}
+  - component: {fileID: 1311266288}
+  - component: {fileID: 1311266289}
+  - component: {fileID: 1311266290}
+  m_Layer: 0
+  m_Name: ToyBoyTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1311266287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311266286}
+  m_LocalRotation: {x: -0.50000006, y: -0.49999997, z: -0.50000006, w: 0.49999997}
+  m_LocalPosition: {x: -0.96266, y: -21.2, z: 13.159}
+  m_LocalScale: {x: 74.05696, y: 98.52513, z: 54.288494}
+  m_Children: []
+  m_Father: {fileID: 1861221648}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1311266288
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311266286}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.486753, y: 0.7999999, z: 0.7999999}
+  m_Center: {x: 0.42750067, y: 0.0000002428862, z: 0.000000109354154}
+--- !u!114 &1311266289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311266286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb4955c65c3ace4185cdd8efcf06d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The little soldier's SWORD is there,
+  PlayerActionsScript: {fileID: 0}
+  PlayerStatsScript: {fileID: 0}
+  descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 0}
+  onEndEvent: {fileID: 0}
+  InteractionUI: {fileID: 27153601}
+  itemNameUI: {fileID: 575540788}
+  descriptionBottomUI: {fileID: 200892708}
+  bottomDescription: but he can't reach it.
+--- !u!114 &1311266290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311266286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c0994894c88f354c83824c096ac6224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemToBeUsed: 1
+  turnedOnEffect: {fileID: 713469357}
 --- !u!1001 &1330958259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39417,6 +39560,7 @@ GameObject:
   - component: {fileID: 1415818248}
   - component: {fileID: 1415818252}
   - component: {fileID: 1415818253}
+  - component: {fileID: 1415818254}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -39551,6 +39695,19 @@ MonoBehaviour:
   canSwitchItems: 1
   displayInventoryItems: {fileID: 877534274}
   CurrentItem: {fileID: 0}
+--- !u!114 &1415818254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415818247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdf172a126c3bc4199011e4f096e955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inventory: {fileID: 11400000, guid: 8d35ac24d58a7564a94caee5f636c794, type: 2}
 --- !u!1001 &1418146144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49777,7 +49934,8 @@ Transform:
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 7.6209364, y: 10.1930485, z: 21.274353}
   m_LocalScale: {x: 0.030120213, y: 0.030120213, z: 0.030120213}
-  m_Children: []
+  m_Children:
+  - {fileID: 1311266287}
   m_Father: {fileID: 1794918601}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -54821,6 +54979,10 @@ PrefabInstance:
     - target: {fileID: 2707323115830013143, guid: 8ed278500a0bbb143acc876e633f6923, type: 3}
       propertyPath: m_Name
       value: WaterTrap
+      objectReference: {fileID: 0}
+    - target: {fileID: 2707323115830013143, guid: 8ed278500a0bbb143acc876e633f6923, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8143095323201767802, guid: 8ed278500a0bbb143acc876e633f6923, type: 3}
       propertyPath: m_LocalScale.x

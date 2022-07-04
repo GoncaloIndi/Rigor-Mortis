@@ -22,9 +22,19 @@ public class RatSoundManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatDamage");
     }
 
+    public void RatLungeAttackLandSFX()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatLungeAttack_Land");
+    }
+
     public void RatShockDeathSFX()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatDeathShock");
+    }
+
+    public void RatDeathSFX()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatDeathNormal");
     }
 
     public void RatIdleSqueak()

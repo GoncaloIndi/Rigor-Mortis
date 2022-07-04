@@ -36,7 +36,7 @@ public class RatNestItem : InteractionEvent
     public GameObject Bootprint; //BootprintUpdater script
 
     [Header("Vent Related")] 
-    [SerializeField] private GameObject ratBang;
+    [SerializeField] private GameObject ratBang, killerFootsteps;
 
     
     
@@ -106,5 +106,6 @@ public class RatNestItem : InteractionEvent
     private void VentChanges()
     {
         ratBang.SetActive(false);
+        killerFootsteps.SetActive(true);
     }
 }

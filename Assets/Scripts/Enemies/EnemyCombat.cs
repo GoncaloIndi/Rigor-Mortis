@@ -86,6 +86,7 @@ public class EnemyCombat : MonoBehaviour
 
     private IEnumerator KillEnemy() //Normal Death
     {
+        ratSFX.RatDeathSFX();
         ratStateManager.enabled = false;
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation(displayInvertedDeath);
@@ -168,6 +169,7 @@ public class EnemyCombat : MonoBehaviour
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
         canGetStunned = true; //Iframes
         isPerformingAttack = false;
+        ratSFX.RatLungeAttackLandSFX();
     }
 
     public IEnumerator TailAttack(RatStateManager ratStateManager, string attackTrigger) //Later change Iframes because they are missing antecipation (waiting for new animations)

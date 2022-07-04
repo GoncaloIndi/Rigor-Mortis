@@ -31728,7 +31728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1109112952}
   m_LocalRotation: {x: 0.5516903, y: -0.69809854, z: -0.30976787, w: 0.3351718}
-  m_LocalPosition: {x: 0.5214706, y: 0.14167096, z: 0.33047277}
+  m_LocalPosition: {x: 0.352, y: -0.342, z: 0.332}
   m_LocalScale: {x: 1.1853954, y: 1.1853951, z: 1.185395}
   m_Children: []
   m_Father: {fileID: 6417685789195925483}
@@ -31745,8 +31745,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.6050809, y: 1, z: 0.7718195}
-  m_Center: {x: 0.19745904, y: 0, z: 0.06931405}
+  m_Size: {x: 0.4088664, y: 1, z: 0.6712089}
+  m_Center: {x: 0.18070477, y: 0.000000013131474, z: 0.06939577}
 --- !u!1 &1109114778 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: f7656012f9f8753459c68dab461dc04b, type: 3}
@@ -40082,6 +40082,104 @@ Transform:
   m_Father: {fileID: 135758832}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1445434537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1445434538}
+  - component: {fileID: 1445434540}
+  - component: {fileID: 1445434539}
+  - component: {fileID: 1445434541}
+  m_Layer: 0
+  m_Name: Bear
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1445434538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445434537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.812, y: 9.4, z: 8.001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1794918601}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1445434539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445434537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: Player
+  EventReference:
+    Guid:
+      Data1: 1864623943
+      Data2: 1272171546
+      Data3: 1084321427
+      Data4: -794361468
+    Path: event:/SFX/sfx_BearInteraction
+  Event: 
+  PlayEvent: 4
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!65 &1445434540
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445434537}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1631181, y: 1, z: 1}
+  m_Center: {x: -0.08155906, y: 0, z: 0}
+--- !u!114 &1445434541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445434537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bb4955c65c3ace4185cdd8efcf06d8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: Why is Ollie in the floor?
+  PlayerActionsScript: {fileID: 0}
+  PlayerStatsScript: {fileID: 0}
+  descriptionUI: {fileID: 266337773}
+  interactionEvent: {fileID: 702554314}
+  onEndEvent: {fileID: 0}
+  InteractionUI: {fileID: 27153601}
+  itemNameUI: {fileID: 575540788}
+  descriptionBottomUI: {fileID: 200892708}
+  bottomDescription: He is always in the bed.
 --- !u!1001 &1450520767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40396,6 +40494,64 @@ MonoBehaviour:
   - -11.15
   isFogEnabled: 1
   fogDensity: 0.15
+--- !u!1 &1475910624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1475910625}
+  - component: {fileID: 1475910627}
+  - component: {fileID: 1475910626}
+  m_Layer: 0
+  m_Name: KillerFootsteps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1475910625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475910624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.11, y: 1.3, z: -7.9}
+  m_LocalScale: {x: 1.7863, y: 1, z: 9.841609}
+  m_Children: []
+  m_Father: {fileID: 2011166780}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1475910626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475910624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934e54b81968e8348b313e51c2f9c565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killerPosition: {fileID: 1145259502}
+--- !u!65 &1475910627
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475910624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1478668773
 GameObject:
   m_ObjectHideFlags: 0
@@ -40675,7 +40831,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491889475}
   m_LocalRotation: {x: 0.5516903, y: -0.69809854, z: -0.30976787, w: 0.3351718}
-  m_LocalPosition: {x: 0.727338, y: 0.6317267, z: 0.35306415}
+  m_LocalPosition: {x: 0.558, y: 0.148, z: 0.355}
   m_LocalScale: {x: 0.68956816, y: 0.68956804, z: 0.689568}
   m_Children: []
   m_Father: {fileID: 6417685789195925483}
@@ -42249,6 +42405,7 @@ MonoBehaviour:
   closetDoorScript: {fileID: 919132148803795860}
   Bootprint: {fileID: 1882362339}
   ratBang: {fileID: 1409966997}
+  killerFootsteps: {fileID: 1475910624}
 --- !u!212 &1621791512
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -48845,6 +49002,7 @@ Transform:
   - {fileID: 561952153}
   - {fileID: 1418252580}
   - {fileID: 836595480}
+  - {fileID: 1445434538}
   m_Father: {fileID: 8910899981801066904}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61662,6 +61820,7 @@ Transform:
   - {fileID: 258572127}
   - {fileID: 546519713}
   - {fileID: 1409966998}
+  - {fileID: 1475910625}
   m_Father: {fileID: 589999090}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

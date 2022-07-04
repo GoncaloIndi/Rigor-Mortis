@@ -39,8 +39,7 @@ public class RatSoundManager : MonoBehaviour
 
     private IEnumerator RatFootSteps() //DefaultFootsteps use RatStateManager.IsInIdleState for the chasing maybe change delay on yields
     {
-        
-        
+
         while (true) //Comment relating to animationFrames
         {
             var rng1 = Random.Range(.2f, .4f);

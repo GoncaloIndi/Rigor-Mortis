@@ -7,14 +7,16 @@ using UnityEngine.UI;
 public class StatusUpdater : MonoBehaviour
 {
     private PlayerStats playerStatsScript;
-    private Image statusImage;
+    private Animator statusAnim;
 
     [SerializeField] private int yellowHPTrigger, redHPTrigger;
-    [SerializeField] private Sprite greenHpSprite, yellowHPSprite, redHPSprite;
+    private static readonly int Green = Animator.StringToHash("Green");
+    private static readonly int Orange = Animator.StringToHash("Orange");
+    private static readonly int Red = Animator.StringToHash("Red");
 
     private void Awake()
     {
-        statusImage = GetComponent<Image>();
+        statusAnim = GetComponent<Animator>();
         playerStatsScript = FindObjectOfType<PlayerStats>();
     }
 
@@ -25,15 +27,17 @@ public class StatusUpdater : MonoBehaviour
 
     private void UpdateStatus()
     {
-        statusImage.sprite = greenHpSprite; //Green
-        
-        if (playerStatsScript.PlayerHp < yellowHPTrigger)
+        if (playerStatsScript.PlayerHp > yellowHPTrigger)
         {
-            statusImage.sprite = yellowHPSprite; //Yellow
-            if (playerStatsScript.PlayerHp < redHPTrigger)
-            {
-                statusImage.sprite = redHPSprite; //Red
-            }
+            statusAnim.SetTrigger(Green); //Green
+        }
+        else if(playerStatsScript.PlayerHp > redHPTrigger && playerStatsScript.PlayerHp < yellowHPTrigger)
+        {
+            statusAnim.SetTrigger(Orange); //Orange
+        }
+        else
+        {
+            statusAnim.SetTrigger(Red); //Red
         }
     }
 }

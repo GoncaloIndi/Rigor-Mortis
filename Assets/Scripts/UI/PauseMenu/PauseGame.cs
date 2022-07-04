@@ -1,14 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XInputDotNetPure;
 
 public class PauseGame : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private PlayerActions playerActionsScript;
     [Header("Buttons")] [SerializeField] private GameObject onPauseButton, optionsFirstButton, optionsClosedButton;
+    
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
 
     public static bool IsGamePaused;
     private bool cameFromNoInput;
@@ -24,6 +26,7 @@ public class PauseGame : MonoBehaviour
         {
             IsGamePaused = true;
             pauseMenu.SetActive(true);
+            GamePad.SetVibration(playerIndex, 0, 0); //Prevent infinite vibration
             if (!pauseFromNoInput) //To switch action maps accordingly
             {
                 cameFromNoInput = false;

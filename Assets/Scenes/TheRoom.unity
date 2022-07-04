@@ -17129,73 +17129,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5708765, y: 0.7999999, z: 0.7999999}
   m_Center: {x: 0.3854382, y: 0.00000022707768, z: 0.00000011774588}
---- !u!1 &668942712
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 668942713}
-  - component: {fileID: 668942716}
-  - component: {fileID: 668942715}
-  m_Layer: 0
-  m_Name: GlassShards
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &668942713
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668942712}
-  m_LocalRotation: {x: 0.011089457, y: -0.70701987, z: 0.70701987, w: 0.011089457}
-  m_LocalPosition: {x: -2.002, y: 9.231049, z: 10.515}
-  m_LocalScale: {x: 0.1608979, y: 0.1608979, z: 0.16089787}
-  m_Children: []
-  m_Father: {fileID: 1794918601}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 178.203}
---- !u!114 &668942715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668942712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bb4955c65c3ace4185cdd8efcf06d8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  description: The telescope is broken.
-  PlayerActionsScript: {fileID: 0}
-  PlayerStatsScript: {fileID: 0}
-  descriptionUI: {fileID: 266337773}
-  interactionEvent: {fileID: 0}
-  onEndEvent: {fileID: 0}
-  InteractionUI: {fileID: 27153601}
-  itemNameUI: {fileID: 575540788}
-  descriptionBottomUI: {fileID: 200892708}
-  bottomDescription: Shards of glass fill the floor
---- !u!65 &668942716
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668942712}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.8647246, y: 6.138903, z: 4.8971906}
-  m_Center: {x: -1.5622895, y: 1.011791, z: -2.3485959}
 --- !u!1 &669613643
 GameObject:
   m_ObjectHideFlags: 0
@@ -19200,7 +19133,7 @@ Transform:
   m_LocalScale: {x: 0.1608979, y: 0.1608979, z: 0.16089787}
   m_Children: []
   m_Father: {fileID: 1794918601}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 228.597}
 --- !u!114 &836595481
 MonoBehaviour:
@@ -19789,7 +19722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &877534270
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47711,6 +47644,7 @@ GameObject:
   - component: {fileID: 1701509006}
   - component: {fileID: 1701509005}
   - component: {fileID: 1701509007}
+  - component: {fileID: 1701509008}
   m_Layer: 5
   m_Name: Status
   m_TagString: Untagged
@@ -47757,7 +47691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 70901c83e418a9144bcacef0ac75452d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 137d5df9ff46a324c921209de5428071, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -47787,11 +47721,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea68ed8e0df91b04bbb23422af46932c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yellowHPTrigger: 55
+  yellowHPTrigger: 65
   redHPTrigger: 30
-  greenHpSprite: {fileID: 21300000, guid: 70901c83e418a9144bcacef0ac75452d, type: 3}
-  yellowHPSprite: {fileID: 21300000, guid: 39c0ade92949ad24d89a8c6225f356bf, type: 3}
-  redHPSprite: {fileID: 21300000, guid: 63e1761a822195044b0042311a2e16ed, type: 3}
+--- !u!95 &1701509008
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701509003}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f06d60675cd22b43aad5ebbf2dcbd46, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1710584504
 GameObject:
   m_ObjectHideFlags: 0
@@ -48894,7 +48844,6 @@ Transform:
   - {fileID: 1901522230}
   - {fileID: 561952153}
   - {fileID: 1418252580}
-  - {fileID: 668942713}
   - {fileID: 836595480}
   m_Father: {fileID: 8910899981801066904}
   m_RootOrder: 2
@@ -55062,7 +55011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1882362339}
   m_LocalRotation: {x: -0.48677725, y: -0.512882, z: 0.512882, w: -0.48677725}
-  m_LocalPosition: {x: 1.13, y: 9.34, z: 8.19}
+  m_LocalPosition: {x: 1.6400001, y: 9.34, z: 8.009999}
   m_LocalScale: {x: 0.16733381, y: 0.16733381, z: 0.16733378}
   m_Children: []
   m_Father: {fileID: 1794918601}
@@ -55181,7 +55130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901522229}
   m_LocalRotation: {x: -0.48677725, y: -0.512882, z: 0.512882, w: -0.48677725}
-  m_LocalPosition: {x: 1.13, y: 9.34, z: 8.19}
+  m_LocalPosition: {x: 1.64, y: 9.34, z: 8.01}
   m_LocalScale: {x: 0.16733381, y: 0.16733381, z: 0.16733378}
   m_Children: []
   m_Father: {fileID: 1794918601}

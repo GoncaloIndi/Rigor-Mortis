@@ -18,8 +18,9 @@ public class RatPositionResetter : InteractionEvent
 
     public override void Trigger()
     {
-        if (!this.gameObject.activeSelf) return;
+        if (!this.gameObject.activeSelf || !ratStateManager.isActiveAndEnabled) return;
         
+
         int rng = Random.Range(0, teleportPositions.Length);
 
         rat.localPosition = teleportPositions[rng];

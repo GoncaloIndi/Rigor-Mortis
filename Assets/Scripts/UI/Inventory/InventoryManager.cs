@@ -1,10 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class InventoryManager : MonoBehaviour
 {
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
+    
     [SerializeField] private GameObject inventory, tabInventory, tabBody, tabCollectibles;
     private Animator itemInventoryAnim;
 
@@ -35,6 +38,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (inventory.activeSelf) return;
         
+        GamePad.SetVibration(playerIndex, 0, 0); //Prevent infinite vibration
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_Open");
         displayInventoryItems.UpdateItems();
         inventory.SetActive(true);

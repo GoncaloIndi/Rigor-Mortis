@@ -41,6 +41,7 @@ public class EnemyCombat : MonoBehaviour
         ratAnimationsScript = GetComponent<RatAnimations>();
         ratStateManager = GetComponent<RatStateManager>();
         ratSFX = GetComponent<RatSoundManager>();
+        bloodySwordScript = FindObjectOfType<BloodySword>();
     }
     
 

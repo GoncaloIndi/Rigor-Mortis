@@ -43,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
             PlayerStatsScript.CanMove = false;
             PlayerAnimationsScript.DisplayAttackAnimation();
             //Make it animation based and remove invokes
-            Invoke("PerformAttackLogic", .6f);
+            Invoke("PerformAttackLogic", .4f);
             Invoke("ResetAttack", attackCooldown);
             
         }

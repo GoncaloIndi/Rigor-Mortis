@@ -1351,8 +1351,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.4491527, y: 1, z: 1}
+  m_Center: {x: 0.22457473, y: 0, z: 0}
 --- !u!1001 &124012534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7298,7 +7298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 301.03}
+  m_AnchoredPosition: {x: 0, y: -343.35}
   m_SizeDelta: {x: 805.7861, y: 763.0112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &207520518
@@ -14873,8 +14873,8 @@ MonoBehaviour:
   RatNavMeshAgent: {fileID: 0}
   RatRB: {fileID: 0}
   RatSpeed: 0.9
-  MinRatChaseSpeed: 2
-  MaxRatChaseSpeed: 2.2
+  MinRatChaseSpeed: 2.2
+  MaxRatChaseSpeed: 2.6
   DelayChaseSpeed: 0.9
   MaximumChaseDistance: 7.2
   ReturnToChaseDistance: 2.31

@@ -11,12 +11,8 @@ public class DeathCutscene : MonoBehaviour
     [SerializeField] private Text cutsceneUIText;
     [SerializeField] private Animator faderAnim;
     private static readonly int Darken = Animator.StringToHash("Darken");
-    private PlayerActions playerActionsScript;
-
-    private void Awake()
-    {
-        playerActionsScript = FindObjectOfType<PlayerActions>();
-    }
+    [SerializeField] private PlayerActions playerActionsScript;
+    
 
     public IEnumerator StartDeathCutscene()
     {

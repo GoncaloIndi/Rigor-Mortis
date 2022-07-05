@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,12 +8,14 @@ public class IdleState : State
     //If player is in sight go to chase state
     private ChaseState chaseState;
     public bool HasDetectedPlayer;
+    public bool IsBlinded;
     [SerializeField] private RatStateManager ratStateManagerScript;
 
     [Header("Detection Radius")]
     [SerializeField] private float detectionRadius = 2;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float detectPlayerByNoise = 2.2f;
+    [SerializeField] private float temporaryBlindnessTime = 3.5f;
     
     [Header("Detection FOV")] //Rat FOV
     [SerializeField] private float minimumDetectionAngle = 145;
@@ -137,6 +137,16 @@ public class IdleState : State
     public void TargetPlayer() //Called by enemyCombat to make the rat chase the player when he is attacked
     {
         HasDetectedPlayer = true;
+    }
+
+    public IEnumerator RatTemporaryBlindness() //Make viable to run away
+    {
+        IsBlinded = true;
+        var holder = detectionRadius;
+        detectionRadius = 1;
+        yield return new WaitForSeconds(temporaryBlindnessTime);
+        detectionRadius = holder;
+        IsBlinded = false;
     }
 
 }

@@ -13,6 +13,7 @@ public class DisplayInventoryItems : MonoBehaviour
     public bool CanSwapItems;
     [SerializeField] private Text itemNameDisplay;
     [SerializeField] private Text itemDescriptionDisplay;
+    [SerializeField] private GameObject useItemIcon;
 
     private Sprite currentHolder, nextHolder;
 
@@ -29,6 +30,7 @@ public class DisplayInventoryItems : MonoBehaviour
             itemDescriptionDisplay.text = "";
             CanSwapItems = false;
             ToggleItemSprites(false);
+            useItemIcon.SetActive(false);
         }
         
         else if (PlayerInventory.inventoryItems.Count == 1) //One item 
@@ -41,10 +43,11 @@ public class DisplayInventoryItems : MonoBehaviour
             itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
             itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
             inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
-
+            useItemIcon.SetActive(true);
         }
         else if (PlayerInventory.inventoryItems.Count == 2) //Two items
         {
+            useItemIcon.SetActive(true);
             CanSwapItems = true;
             ToggleItemSprites(true);
             if (currentItem.sprite == PlayerInventory.inventoryItems[0].Item.Icon)
@@ -61,8 +64,6 @@ public class DisplayInventoryItems : MonoBehaviour
                 itemLeft.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
             }
-            
-            
         }
         else //More than two items
         {

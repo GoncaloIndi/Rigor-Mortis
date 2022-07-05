@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class ChaseState : State
 {
@@ -59,6 +55,10 @@ public class ChaseState : State
             
             //Sound
             ratStateManager.IsInIdleState = true;
+            if (!idleState.IsBlinded)
+            {
+                StartCoroutine(idleState.RatTemporaryBlindness());
+            }
             StartCoroutine(ratStateManager.RatSqueak());
             return idleState;
         }

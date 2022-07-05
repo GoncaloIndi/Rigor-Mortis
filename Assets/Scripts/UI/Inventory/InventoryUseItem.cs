@@ -42,14 +42,18 @@ public class InventoryUseItem : MonoBehaviour
                 {
                     itemToRemove = 1;
                 }
+
+                if (inventory.inventoryItems.Count > 0)
+                {
+                    inventory.RemoveItem(inventory.inventoryItems[itemToRemove]);
+                    inventoryManager.CurrentItem = null;
+                }
                 
-                
-                inventory.RemoveItem(inventory.inventoryItems[itemToRemove]);
                 inventoryManager.CloseInventory();
             }
             else
             {
-                //Cant be used Message (Using incorrect message)
+                //Cant be used Message (Using incorrect item)
                 return;
             }
            

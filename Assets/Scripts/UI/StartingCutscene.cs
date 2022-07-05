@@ -16,6 +16,7 @@ public class StartingCutscene : MonoBehaviour
 
     private PlayerActions playerActionsScript;
     private static readonly int ForceDefault = Animator.StringToHash("ForceDefault");
+    [SerializeField] private TutorialMessage tutorial;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class StartingCutscene : MonoBehaviour
         {
             DarkenerAnim.SetTrigger(Lighten);
             playerActionsScript.PlayerToNoInput(false);
+            tutorial.DisplayInteractMessage();
         }
         
     }

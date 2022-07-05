@@ -43,7 +43,6 @@ public class Interactible : MonoBehaviour
         Time.timeScale = 1;
         if (onEndEvent != null)
         {
-            print("TriggeredByEvent");
             onEndEvent.Trigger();
         }
         Destroy(this.gameObject);

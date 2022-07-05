@@ -39,6 +39,8 @@ public class RatNestItem : InteractionEvent
     [Header("Vent Related")] 
     [SerializeField] private GameObject ratBang, killerFootsteps;
 
+    [SerializeField] private InteractionEvent tutorialEvent;
+
     
     
     private void Awake()
@@ -80,6 +82,7 @@ public class RatNestItem : InteractionEvent
         playerActionsScript.UIToPlayer(); 
         Time.timeScale = 1;
         newInteraction.SetActive(true);
+        tutorialEvent.Trigger();
         playerStatsScript.CurrentInteractionGameObject = newInteraction;
         Destroy(oldInteraction);
     }

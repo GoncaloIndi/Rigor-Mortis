@@ -28,18 +28,18 @@ public class PlayerAnimations : MonoBehaviour
         {
             if (DisplayRunningAnimation)
             {
-                playerAnim.SetFloat(Movement, 1, .1f, Time.deltaTime);
+                playerAnim.SetFloat(Movement, 1f, .1f, Time.deltaTime);
                 AnimationState = 2;
             }
             else
             {
-                playerAnim.SetFloat(Movement, .5f,.15f, Time.deltaTime);
+                playerAnim.SetFloat(Movement, .5f,.1f, Time.deltaTime);
                 AnimationState = 1;
             }
         }
         else
         {
-            playerAnim.SetFloat(Movement, 0,.15f, Time.deltaTime);
+            playerAnim.SetFloat(Movement, 0,.1f, Time.deltaTime);
             AnimationState = 0;
         }
         

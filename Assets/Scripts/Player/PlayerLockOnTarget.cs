@@ -9,7 +9,7 @@ public class PlayerLockOnTarget : MonoBehaviour
     [HideInInspector] public PlayerStats PlayerStatsScript;
 
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float maximumLockOnDistance = 10;
+    [SerializeField] private float maximumLockOnDistance = .9f;
     [SerializeField] private Transform nearestLockOnTarget;
     [SerializeField] private Transform currentLockOnTarget;
 
@@ -40,17 +40,20 @@ public class PlayerLockOnTarget : MonoBehaviour
         
     }
 
-    public void BeginLockOnState()
+    public void BeginLockOnState(float minAngle, float maxAngle)
     {
-        PlayerStatsScript.IsOnTargetLockOn = true;
-        PlayerStatsScript.CanRotate = false;
-        PlayerStatsScript.CanRun = false;
         CheckForEnemies();
 
         if (nearestLockOnTarget != null)
         {
             currentLockOnTarget = nearestLockOnTarget;
-            LockOnTarget();
+            Vector3 targetDirection = nearestLockOnTarget.transform.position - transform.position;
+            float currentAngle = Vector3.SignedAngle(targetDirection, transform.forward, Vector3.up);
+
+            if (currentAngle < maxAngle && currentAngle > minAngle) //LockOn Only if angle is close to target
+            {
+                LockOnTarget();
+            }
         }
         
     }
@@ -134,9 +137,6 @@ public class PlayerLockOnTarget : MonoBehaviour
     public void EndLockOnState()
     {
         doLockLerp = false;
-        PlayerStatsScript.IsOnTargetLockOn = false;
-        PlayerStatsScript.CanRotate = true;
-        PlayerStatsScript.CanRun = true;
         ClearLockOnTarget();
     }
 

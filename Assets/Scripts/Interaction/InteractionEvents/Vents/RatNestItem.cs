@@ -33,6 +33,7 @@ public class RatNestItem : InteractionEvent
     [Header("Room Related")]
     [SerializeField] private GameObject bear;
     [SerializeField] private ClosetDoor closetDoorScript;
+    [SerializeField] private GameObject bearInteraction;
     public GameObject Bootprint; //BootprintUpdater script
 
     [Header("Vent Related")] 
@@ -98,6 +99,8 @@ public class RatNestItem : InteractionEvent
     private void RoomGasLighting()
     {
         bear.SetActive(false);
+        bearInteraction.SetActive(false);
+        
         Bootprint.SetActive(true);
         closetDoorScript.IsAffectedByWind = true;
     }

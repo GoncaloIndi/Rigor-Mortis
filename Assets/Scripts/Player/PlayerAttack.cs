@@ -13,6 +13,7 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public PlayerAnimations PlayerAnimationsScript;
 
     [HideInInspector] public PlayerStats PlayerStatsScript;
+    
 
     [SerializeField] private Transform swordTip;
     [SerializeField] private LayerMask enemyLayer;
@@ -21,16 +22,23 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float attackCooldown;
     private float cooldownTimer;
 
+    [Header("Attack Lock On")] [SerializeField]
+    private float minLockOnAngle, maxLockOnAngle;
+    private PlayerLockOnTarget playerLockOnTargetScript; //Reuse the old lock on to connect attacks with rat;
+    
+
     private void Awake()
     {
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
         PlayerStatsScript = GetComponent<PlayerStats>();
+        playerLockOnTargetScript = GetComponent<PlayerLockOnTarget>();
     }
 
     public void Attack() //Make it so the attack is performed every swing so the sfx works (Waiting for new animations)
     {
         if (!PlayerStatsScript.IsAttackOnCooldown)
         {
+            playerLockOnTargetScript.BeginLockOnState(minLockOnAngle, maxLockOnAngle); //Check for angles
             PlayerStatsScript.IsAttackOnCooldown = true;
             PlayerStatsScript.CanMove = false;
             PlayerAnimationsScript.DisplayAttackAnimation();
@@ -68,6 +76,9 @@ public class PlayerAttack : MonoBehaviour
                 damageableScript.OnDamage();
             }
         }
+        
+        
+        playerLockOnTargetScript.EndLockOnState();
     }
     public void ResetAttack()
     {

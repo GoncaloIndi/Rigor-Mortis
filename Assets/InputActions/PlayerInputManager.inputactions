@@ -38,14 +38,6 @@
                     "interactions": ""
                 },
                 {
-                    "name": "AttackLockOn",
-                    "type": "Button",
-                    "id": "dfdbc168-70d2-401c-ace2-84aae37b5080",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "eead7712-29e0-4292-b7b4-77666ed0ac57",
@@ -299,28 +291,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "QuickTurn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9444c30-741f-4db2-93dd-1cb0516030c1",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and mouse",
-                    "action": "AttackLockOn",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "07cf6ec8-7bfc-480f-85e5-ae5cf825fcbc",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "AttackLockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -996,17 +966,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "PreviousItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7f9bac69-6f25-4f0a-9066-e76395c7320e",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and mouse",
-                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

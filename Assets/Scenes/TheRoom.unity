@@ -877,10 +877,10 @@ GameObject:
   - component: {fileID: 95479325}
   - component: {fileID: 95479328}
   - component: {fileID: 95479330}
-  - component: {fileID: 95479322}
   - component: {fileID: 95479331}
   - component: {fileID: 95479327}
   - component: {fileID: 95479323}
+  - component: {fileID: 95479322}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -922,7 +922,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  maximumLockOnDistance: 3.5
+  maximumLockOnDistance: 0.9
   nearestLockOnTarget: {fileID: 0}
   currentLockOnTarget: {fileID: 0}
 --- !u!114 &95479323
@@ -1089,8 +1089,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 1024
-  attackRange: 0.34
+  attackRange: 0.37
   attackCooldown: 1.3
+  minLockOnAngle: -80
+  maxLockOnAngle: 80
 --- !u!1 &95652878
 GameObject:
   m_ObjectHideFlags: 0
@@ -13863,43 +13865,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.09975909
+      value: -0.223
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.17340703
+      value: 0.254
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.035484776
+      value: 0.035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7604134
+      value: 0.7876524
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.21619993
+      value: -0.06762269
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.19767691
+      value: 0.3043117
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5796145
+      value: -0.5314371
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -124.069
+      value: -192.528
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -79.75299
+      value: -145.618
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 5.121002
+      value: 115.874
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 94083579909885d49bcc9cc3817b31e6, type: 3}
       propertyPath: m_Name
@@ -17758,8 +17760,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.3653784, y: 7.2064323, z: 4.89719}
-  m_Center: {x: -0.31196937, y: 0.17875695, z: -2.3485959}
+  m_Size: {x: 4.882749, y: 4.081698, z: 4.89719}
+  m_Center: {x: -0.050061606, y: 0.2354946, z: -2.3485959}
 --- !u!114 &702554314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37858,8 +37860,9 @@ GameObject:
   - component: {fileID: 1259472404}
   - component: {fileID: 1259472403}
   - component: {fileID: 1259472406}
+  - component: {fileID: 1259472407}
   m_Layer: 5
-  m_Name: StartingCutscene
+  m_Name: Cutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37959,6 +37962,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shouldPlayCutscene: 0
   DarkenerAnim: {fileID: 1652802655}
+--- !u!114 &1259472407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259472401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0831f6176a9e96347bee72a6e6d1b4ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathCutsceneText: The light extinguishes...
+  cutsceneUIText: {fileID: 1259472404}
+  faderAnim: {fileID: 1652802655}
 --- !u!4 &1270054719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ddf8482de29711a4bace5ff0f53a2515, type: 3}
@@ -38348,8 +38366,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.486753, y: 0.7999999, z: 0.7999999}
-  m_Center: {x: 0.42750067, y: 0.0000002428862, z: 0.000000109354154}
+  m_Size: {x: 1.56929, y: 0.7999999, z: 0.7999999}
+  m_Center: {x: 0.38623413, y: 0.00000024658385, z: 0.000000109354154}
 --- !u!114 &1311266289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40095,7 +40113,7 @@ GameObject:
   - component: {fileID: 1445434539}
   - component: {fileID: 1445434541}
   m_Layer: 0
-  m_Name: Bear
+  m_Name: BearInteraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42403,6 +42421,7 @@ MonoBehaviour:
   displayInventoryItems: {fileID: 877534274}
   bear: {fileID: 5934587165423447377}
   closetDoorScript: {fileID: 919132148803795860}
+  bearInteraction: {fileID: 1445434537}
   Bootprint: {fileID: 1882362339}
   ratBang: {fileID: 1409966997}
   killerFootsteps: {fileID: 1475910624}
@@ -55208,8 +55227,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.3653784, y: 7.2064323, z: 4.89719}
-  m_Center: {x: -0.31196937, y: 0.17875695, z: -2.3485959}
+  m_Size: {x: 5.170653, y: 4.8883533, z: 4.89719}
+  m_Center: {x: 0.1653463, y: 0.13297378, z: -2.3485959}
 --- !u!212 &1882362343
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -55327,8 +55346,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.3653784, y: 7.2064323, z: 4.89719}
-  m_Center: {x: -0.31196937, y: 0.17875695, z: -2.3485959}
+  m_Size: {x: 5.1316037, y: 4.978247, z: 4.89719}
+  m_Center: {x: 0.1544036, y: 0.14479524, z: -2.3485959}
 --- !u!212 &1901522233
 SpriteRenderer:
   m_ObjectHideFlags: 0

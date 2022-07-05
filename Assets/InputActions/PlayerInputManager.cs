@@ -51,14 +51,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""AttackLockOn"",
-                    ""type"": ""Button"",
-                    ""id"": ""dfdbc168-70d2-401c-ace2-84aae37b5080"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""eead7712-29e0-4292-b7b4-77666ed0ac57"",
@@ -312,28 +304,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""QuickTurn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f9444c30-741f-4db2-93dd-1cb0516030c1"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""AttackLockOn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""07cf6ec8-7bfc-480f-85e5-ae5cf825fcbc"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""AttackLockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1014,17 +984,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""7f9bac69-6f25-4f0a-9066-e76395c7320e"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and mouse"",
-                    ""action"": ""Use"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a7406f3a-8390-4c66-a0da-c351630dbdfd"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -1095,7 +1054,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_QuickTurn = m_Player.FindAction("QuickTurn", throwIfNotFound: true);
-        m_Player_AttackLockOn = m_Player.FindAction("AttackLockOn", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
@@ -1173,7 +1131,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_QuickTurn;
-    private readonly InputAction m_Player_AttackLockOn;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Inventory;
@@ -1185,7 +1142,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @QuickTurn => m_Wrapper.m_Player_QuickTurn;
-        public InputAction @AttackLockOn => m_Wrapper.m_Player_AttackLockOn;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
@@ -1210,9 +1166,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @QuickTurn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
                 @QuickTurn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickTurn;
-                @AttackLockOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
-                @AttackLockOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
-                @AttackLockOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttackLockOn;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -1238,9 +1191,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
                 @QuickTurn.started += instance.OnQuickTurn;
                 @QuickTurn.performed += instance.OnQuickTurn;
                 @QuickTurn.canceled += instance.OnQuickTurn;
-                @AttackLockOn.started += instance.OnAttackLockOn;
-                @AttackLockOn.performed += instance.OnAttackLockOn;
-                @AttackLockOn.canceled += instance.OnAttackLockOn;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -1482,7 +1432,6 @@ public class @PlayerInputManager : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnQuickTurn(InputAction.CallbackContext context);
-        void OnAttackLockOn(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);

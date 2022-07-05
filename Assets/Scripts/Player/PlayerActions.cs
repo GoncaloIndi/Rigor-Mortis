@@ -48,8 +48,6 @@ public class PlayerActions : MonoBehaviour
         playerInputManager.Player.Interact.started += Interact;
         playerInputManager.Player.Sprint.started += StartSprint;
         playerInputManager.Player.Sprint.canceled += EndSprint;
-        playerInputManager.Player.AttackLockOn.started += StartLockOn;
-        playerInputManager.Player.AttackLockOn.canceled += StopLockOn;
         playerInputManager.Player.Attack.started += Attack;
         playerInputManager.Player.QuickTurn.started += QuickTurn;
         playerInputManager.Player.Pause.started += Pause;
@@ -122,26 +120,6 @@ public class PlayerActions : MonoBehaviour
             PlayerMovementScript.StartPlayerSprintingMomentum();
         }
         
-    }
-
-    private void StartLockOn(InputAction.CallbackContext context)
-    {
-        if (PlayerStatsScript.IsRunning)
-        {
-            //PlayerMovementScript.ForcePlayerToWalk();
-        }
-        //PlayerLockOnTargetScript.BeginLockOnState();
-    }
-    
-    private void StopLockOn(InputAction.CallbackContext context)
-    {
-        //PlayerLockOnTargetScript.EndLockOnState();
-
-        if (PlayerStatsScript.IsRunning)
-        {
-            //PlayerMovementScript.StartPlayerSprintingMomentum();
-        }
-
     }
 
     private void Attack(InputAction.CallbackContext context)

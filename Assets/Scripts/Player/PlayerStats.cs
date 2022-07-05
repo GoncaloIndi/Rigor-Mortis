@@ -22,6 +22,7 @@ public class PlayerStats : MonoBehaviour
     public bool IsAttackOnCooldown = false;
     private PlayerVFXManager playerVFXManagerScript;
     [SerializeField] private Animator damageFX;
+    private DeathCutscene deathCutscene;
 
     [Header("Interaction")]
     public bool IsInInteractionZone = false;
@@ -49,6 +50,7 @@ public class PlayerStats : MonoBehaviour
         playerActionsScript = GetComponent<PlayerActions>();
         playerAnimationsScript = GetComponent<PlayerAnimations>();
         playerVFXManagerScript = GetComponent<PlayerVFXManager>();
+        deathCutscene = FindObjectOfType<DeathCutscene>();
 
         //Debug purposes
         if (HasWeaponEquipped)
@@ -60,6 +62,9 @@ public class PlayerStats : MonoBehaviour
     //Combat
     public void DamagePlayer(int dmg, bool vibrateController)
     {
+        if (PlayerHp <= 0) return;  
+
+        
         PlayerHp -= dmg; 
         playerVFXManagerScript.WoodchipsVFX();  //Particles
         playerSoundsScript.DamageSound(); //Sound
@@ -82,7 +87,7 @@ public class PlayerStats : MonoBehaviour
         
         if (PlayerHp <= 0)
         {
-            Debug.Log("Death");
+            StartCoroutine(deathCutscene.StartDeathCutscene());
         }
     }
 

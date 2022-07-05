@@ -145,7 +145,9 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager.ChangeRatSpeed();
         ratStateManager.HasPerformedAttack = true;
         ratAnimationsScript.DisplayAttackAnimation(attackTrigger);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(.8f);
+        ratSFX.RatLungeAttackHissSFX();
+        yield return new WaitForSeconds(.7f);
         canGetStunned = false; //Iframes
         if (EnemyStatsScript.EnemyHp != hpStorer) //Cancel the attack if the rat got hurt
         {

@@ -42,13 +42,14 @@ public class EnemyCombat : MonoBehaviour
         ratStateManager = GetComponent<RatStateManager>();
         ratSFX = GetComponent<RatSoundManager>();
     }
+    
 
     //When rat is hurt
-    public void TakeDamage(int damage) 
+    public void TakeDamage(int damage, Vector3 bloodPosition) 
     {
         EnemyStatsScript.EnemyHp -= damage;
         //Blood logic 
-        ratVFX.BloodVFX();
+        ratVFX.BloodVFX(bloodPosition);
         bloodySwordScript.UpdateSword();
 
         if (EnemyStatsScript.EnemyHp > 0) //Damage sound

@@ -10,7 +10,6 @@ public class RatAnimations : MonoBehaviour
     private float angle;
     private Vector3 lastPosition;
     private Vector3 oldEulerAngles;
-    [SerializeField] private float test = .75f;
     private RatSoundManager ratSFX;
 
     private RatStateManager ratStateManager;
@@ -35,16 +34,37 @@ public class RatAnimations : MonoBehaviour
         lastPosition = position;
         //Yoinked from the internet (Calculates the speed) ROTATION;
  
-        angle = Mathf.Lerp(angle, (transform.rotation.eulerAngles - oldEulerAngles).magnitude / Time.deltaTime, test);
+        //angle = Mathf.Lerp(angle, (transform.rotation.eulerAngles - oldEulerAngles).magnitude / Time.deltaTime, test);
+        //print(transform.rotation.eulerAngles.y - oldEulerAngles.y);
+        angle = transform.rotation.eulerAngles.y - oldEulerAngles.y;
+        GetAngleValues();
         //print(angle);
         oldEulerAngles = transform.rotation.eulerAngles;
     
         ratAnim.SetFloat(Speed, speed);
-        ratAnim.SetFloat(Angle, angle);    
+        
+        
+          
         
         //Sound
         ratSFX.ShouldPlayFootSteps = speed > .15f;
 
+    }
+
+    private void GetAngleValues()
+    {
+        if (angle < -.5f)
+        {
+            ratAnim.SetFloat(Angle, -.5f, .25f, Time.deltaTime);  
+        }
+        else if (angle > .5f)
+        {
+            ratAnim.SetFloat(Angle, .5f, .25f, Time.deltaTime);  
+        }
+        else
+        {
+            ratAnim.SetFloat(Angle, 0, .2f, Time.deltaTime);  
+        }
     }
 
     public void DisplayDamageAnimation() //Called by enemyCombat

@@ -1044,7 +1044,7 @@ MonoBehaviour:
   IsOnTargetLockOn: 0
   PlayerFowardMovementSpeed: 0.011
   PlayerHp: 100
-  HasWeaponEquipped: 0
+  HasWeaponEquipped: 1
   sword: {fileID: 1128827364}
   IsAttackOnCooldown: 0
   damageFX: {fileID: 693064171}
@@ -14853,8 +14853,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.17118992, y: 0.783694, z: 0.94778705}
-  m_Center: {x: -0.011853261, y: -0.0046851775, z: 0.1863576}
+  m_Size: {x: 0.17118992, y: 0.61324984, z: 0.94778705}
+  m_Center: {x: -0.011853261, y: -0.08990749, z: 0.1863576}
 --- !u!195 &489573655
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -18073,7 +18073,7 @@ RectTransform:
   m_GameObject: {fileID: 724858402}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 0.85}
   m_Children:
   - {fileID: 156457131}
   m_Father: {fileID: 877534270}
@@ -18081,7 +18081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -435}
+  m_AnchoredPosition: {x: 0, y: -411.87}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &724858404
@@ -19910,7 +19910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 164.07353, y: 126.63}
+  m_AnchoredPosition: {x: 164.07353, y: 88}
   m_SizeDelta: {x: 1026.4097, y: 929.4598}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &877534272
@@ -62480,7 +62480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000045776367, y: -126.629974}
+  m_AnchoredPosition: {x: 0.000015258789, y: -88}
   m_SizeDelta: {x: 1026.4097, y: 929.4598}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061860744
@@ -64039,7 +64039,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratAnim: {fileID: 931850524}
-  test: 0.2
 --- !u!114 &919132148262279198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75925,7 +75924,7 @@ GameObject:
   - component: {fileID: 4065905294611234880}
   - component: {fileID: 4065905294611234881}
   m_Layer: 0
-  m_Name: 'BloodDropletsVFX '
+  m_Name: 'SwordBloodDropletsVFX '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75939,7 +75938,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4065905294611234882}
   m_LocalRotation: {x: -0.6262931, y: -0.32826355, z: -0.32826355, w: 0.6262931}
-  m_LocalPosition: {x: -0.22075868, y: -0.10308647, z: -0.5583973}
+  m_LocalPosition: {x: -0.22075868, y: 2.79, z: -21.06}
   m_LocalScale: {x: 0.47490042, y: 0.47490045, z: 0.47490054}
   m_Children: []
   m_Father: {fileID: 488495558}

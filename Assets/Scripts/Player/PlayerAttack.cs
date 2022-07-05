@@ -60,7 +60,8 @@ public class PlayerAttack : MonoBehaviour
             {
                 FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_SwordHitFlesh");
                 StartCoroutine(VibrateController());
-                enemyCombatScript.TakeDamage(10);
+                Vector3 bloodPos = enemyCombatScript.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
+                enemyCombatScript.TakeDamage(10, bloodPos);
             }
             //Attack the vents (To break them)
             BreakableVent breakableVentScript = enemyCol[i].GetComponent<BreakableVent>();

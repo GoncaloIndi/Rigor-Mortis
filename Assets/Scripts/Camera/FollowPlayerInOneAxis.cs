@@ -1,7 +1,8 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowPlayer : MonoBehaviour
+public class FollowPlayerInOneAxis : MonoBehaviour
 {
     private Transform playerPosition;
 
@@ -14,6 +15,7 @@ public class FollowPlayer : MonoBehaviour
     [Header("Camera Constraints")]
     [SerializeField] private float[] xCameraClamp;
     [SerializeField] private float[] zCameraClamp;
+    [SerializeField] private bool isUsingXAxis;
 
     [Header("Fog")] 
     [SerializeField] private bool isFogEnabled = true;
@@ -39,12 +41,22 @@ public class FollowPlayer : MonoBehaviour
         var position = transform.position;
         Vector3 smoothPosition = Vector3.Lerp(position, newPosition, CameraSmoothness * Time.fixedDeltaTime);
 
-        float xPosition = Mathf.Clamp(smoothPosition.x, xCameraClamp[0], xCameraClamp[1]);
+        float xPosition = 0;
         float yPosition = smoothPosition.y;
-        float zPosition = Mathf.Clamp(smoothPosition.z, zCameraClamp[0], zCameraClamp[1]);
+        float zPosition = 0;
+        if (isUsingXAxis)
+        {
+            xPosition = Mathf.Clamp(smoothPosition.x, xCameraClamp[0], xCameraClamp[1]);
+            zPosition = smoothPosition.z;
+        }
+        else
+        {
+            zPosition = Mathf.Clamp(smoothPosition.z, zCameraClamp[0], zCameraClamp[1]);
+            xPosition = smoothPosition.x;
+        }
+        
 
         position = new Vector3(xPosition, yPosition, zPosition);
         transform.position = position;
     }
-
 }

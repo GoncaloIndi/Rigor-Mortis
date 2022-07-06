@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerActionsScript = GetComponent<PlayerActions>();
         PlayerAnimationsScript = GetComponent<PlayerAnimations>();
         CurrentCamera = FindObjectOfType<FollowPlayer>().gameObject;
+        
         CameraToUseMovement = CurrentCamera;
     }
 
@@ -68,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            gravityVector.y -= gravity * -2 * Time.deltaTime;
+            gravityVector.y -= gravity * -.5f * Time.deltaTime;
         }
         playerController.Move(gravityVector);
     }

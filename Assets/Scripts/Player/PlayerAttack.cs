@@ -39,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
         if (!PlayerStatsScript.IsAttackOnCooldown)
         {
             playerLockOnTargetScript.BeginLockOnState(minLockOnAngle, maxLockOnAngle); //Check for angles
+            Invoke("StopLockOn", .4f);
             PlayerStatsScript.IsAttackOnCooldown = true;
             PlayerStatsScript.CanMove = false;
             PlayerAnimationsScript.DisplayAttackAnimation();
@@ -79,6 +80,11 @@ public class PlayerAttack : MonoBehaviour
         }
         
         
+        
+    }
+
+    private void StopLockOn()
+    {
         playerLockOnTargetScript.EndLockOnState();
     }
     public void ResetAttack()

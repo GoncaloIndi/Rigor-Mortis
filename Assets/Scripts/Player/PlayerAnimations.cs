@@ -16,6 +16,8 @@ public class PlayerAnimations : MonoBehaviour
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Damage = Animator.StringToHash("Damage");
     private static readonly int StartCutscene = Animator.StringToHash("StartCutscene");
+    private static readonly int Fall = Animator.StringToHash("Fall");
+    private static readonly int StopFall = Animator.StringToHash("StopFall");
 
     private void Awake()
     {
@@ -50,6 +52,16 @@ public class PlayerAnimations : MonoBehaviour
     public void DisplayCutsceneAnimation()
     {
         playerAnim.SetTrigger(StartCutscene);
+    }
+
+    public void DisplayFallAnimation()
+    {
+        playerAnim.SetTrigger(Fall);
+    }
+
+    public void StopFallAnimation()
+    {
+        playerAnim.SetTrigger(StopFall);
     }
 
     public void DisplayAttackAnimation()

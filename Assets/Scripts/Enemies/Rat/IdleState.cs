@@ -10,6 +10,7 @@ public class IdleState : State
     public bool HasDetectedPlayer;
     public bool IsBlinded;
     [SerializeField] private RatStateManager ratStateManagerScript;
+    [SerializeField] private RatAnimations ratAnimations;
 
     [Header("Detection Radius")]
     [SerializeField] private float detectionRadius = 2;
@@ -21,6 +22,7 @@ public class IdleState : State
     [SerializeField] private float minimumDetectionAngle = 145;
     [SerializeField] private float maximumDetectionAngle = 200;
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
+    
     
     //Related to wander
     private float lookoutTime, waitingTime;
@@ -41,6 +43,7 @@ public class IdleState : State
         if (ratStateManager.HasTarget)
         {
             ratStateManager.IsInIdleState = false;
+            ratAnimations.DisplayChaseAnimation(true);
             return chaseState;
         }
         else

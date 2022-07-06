@@ -1042,7 +1042,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95479320}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.843, y: 1.33, z: -13.497}
+  m_LocalPosition: {x: 3.69, y: -8.529, z: 1.221}
   m_LocalScale: {x: 0.2910823, y: 0.29108223, z: 0.2910823}
   m_Children:
   - {fileID: 1482103968}
@@ -1146,7 +1146,7 @@ MonoBehaviour:
   damageFX: {fileID: 693064171}
   IsInInteractionZone: 0
   CanTransitionTroughtScenes: 1
-  playerSoundsScript: {fileID: 0}
+  playerSoundsScript: {fileID: 831985040}
   CurrentInteractionGameObject: {fileID: 0}
   LockOnVector: {x: 0, y: 0, z: 0}
   inventory: {fileID: 11400000, guid: 8d35ac24d58a7564a94caee5f636c794, type: 2}
@@ -16581,7 +16581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &589999090
 Transform:
   m_ObjectHideFlags: 0
@@ -64922,6 +64922,7 @@ MonoBehaviour:
   HasDetectedPlayer: 0
   IsBlinded: 0
   ratStateManagerScript: {fileID: 489573650}
+  ratAnimations: {fileID: 919132148262279197}
   detectionRadius: 5.5
   playerLayer:
     serializedVersion: 2
@@ -64946,6 +64947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseLossDelay: 0.5
+  ratAnimations: {fileID: 919132148262279197}
   ignoreWhenInLineOfSight:
     serializedVersion: 2
     m_Bits: 1023
@@ -66016,7 +66018,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148262279195}
   m_LocalRotation: {x: 0.00000019973709, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.33, y: 0.996, z: 2.08}
+  m_LocalPosition: {x: 4.16, y: 1, z: -3.24}
   m_LocalScale: {x: 0.57625073, y: 0.57625073, z: 0.57625073}
   m_Children:
   - {fileID: 2076577589}
@@ -91499,7 +91501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8134117748071058211
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class ChaseState : State
     [SerializeField] private float chaseLossDelay = .4f; //Continues to follow player after a few seconds after loss of sight
     private float chaseLossTimer = 0;
     private bool hasPerformedDelayChase = false;
+    [SerializeField] private RatAnimations ratAnimations;
 
     //Raycast to see if the player is still in line of sight
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
@@ -54,12 +55,13 @@ public class ChaseState : State
             ratStateManager.HasTarget = false;
             
             //Sound
-            ratStateManager.IsInIdleState = true;
+            ratStateManager.IsInIdleState = true;            //IdleState
             if (!idleState.IsBlinded)
             {
                 StartCoroutine(idleState.RatTemporaryBlindness());
             }
             StartCoroutine(ratStateManager.RatSqueak());
+            ratAnimations.DisplayChaseAnimation(false);
             return idleState;
         }
         else if (ratStateManager.DistanceFromCurrentTarget <= 2) //DIRECTOR AI

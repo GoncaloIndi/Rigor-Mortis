@@ -19,6 +19,8 @@ public class RatAnimations : MonoBehaviour
     private static readonly int ElectricDeath = Animator.StringToHash("ElectricDeath");
     private static readonly int Angle = Animator.StringToHash("Angle");
     private static readonly int DeathInverted = Animator.StringToHash("DeathInverted");
+    private static readonly int Chase = Animator.StringToHash("Chase");
+    private static readonly int StopChase = Animator.StringToHash("StopChase");
 
     private void Awake()
     {
@@ -71,6 +73,18 @@ public class RatAnimations : MonoBehaviour
     {
         ratStateManager.RatNavMeshAgent.speed = 0;
         ratAnim.SetTrigger(Damage);
+    }
+
+    public void DisplayChaseAnimation(bool toggle)
+    {
+        if (toggle)
+        {
+            ratAnim.SetTrigger(Chase);
+        }
+        else
+        {
+            ratAnim.SetTrigger(StopChase);
+        }
     }
 
     public void DisplayAttackAnimation(string attackTrigger)

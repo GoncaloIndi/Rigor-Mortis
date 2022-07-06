@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Animator fadeAnim;
     private static readonly int Fade = Animator.StringToHash("Fade");
     [SerializeField] private GameObject defaultOptionsButton, optionsClosedButton, music;
+    private bool hasBeenPressed;
 
     private void Awake()
     {
@@ -20,8 +21,11 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+        if (hasBeenPressed) return;
+
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         StartCoroutine(FadeToNextScene());
+        hasBeenPressed = true;
     }
 
     public void Options() 

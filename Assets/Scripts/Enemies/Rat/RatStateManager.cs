@@ -34,6 +34,7 @@ public class RatStateManager : MonoBehaviour
     public float AttackSpeed = 3f;
     public bool HasPerformedAttack = false;
     public float CurrentAttackCooldown;
+    public bool IsRatAlive = true;
 
     [Header("Debug Values")] 
     public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies

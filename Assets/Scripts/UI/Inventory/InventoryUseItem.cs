@@ -7,7 +7,10 @@ public class InventoryUseItem : MonoBehaviour
 {
     private InventoryManager inventoryManager;
     private PlayerStats playerStatsScript;
+    [SerializeField] private DisplayInventoryItems displayItems;
     [SerializeField] private ItemManager inventory;
+    [SerializeField] private Animator cannotAnim;
+    private static readonly int Cannot = Animator.StringToHash("Cannot");
 
     private void Awake()
     {
@@ -19,6 +22,7 @@ public class InventoryUseItem : MonoBehaviour
     {
         if (playerStatsScript.CurrentItemUse == null)
         {
+            cannotAnim.SetTrigger(Cannot);
             //Wrong use sound
             return;
         }
@@ -45,6 +49,7 @@ public class InventoryUseItem : MonoBehaviour
 
                 if (inventory.inventoryItems.Count > 0)
                 {
+                    displayItems.UpdateItems();
                     inventory.RemoveItem(inventory.inventoryItems[itemToRemove]);
                     inventoryManager.CurrentItem = null;
                 }
@@ -54,6 +59,7 @@ public class InventoryUseItem : MonoBehaviour
             else
             {
                 //Cant be used Message (Using incorrect item)
+                cannotAnim.SetTrigger(Cannot);
                 return;
             }
            

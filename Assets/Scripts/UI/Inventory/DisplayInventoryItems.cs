@@ -24,6 +24,7 @@ public class DisplayInventoryItems : MonoBehaviour
 
     public void UpdateItems()
     {
+
         if (PlayerInventory.inventoryItems.Count == 0) //No items
         {
             itemNameDisplay.text = "";
@@ -43,6 +44,7 @@ public class DisplayInventoryItems : MonoBehaviour
             itemNameDisplay.text = PlayerInventory.inventoryItems[0].Item.Name;
             itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
             inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
+            inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
             useItemIcon.SetActive(true);
         }
         else if (PlayerInventory.inventoryItems.Count == 2) //Two items
@@ -56,6 +58,7 @@ public class DisplayInventoryItems : MonoBehaviour
                 itemDescriptionDisplay.text = PlayerInventory.inventoryItems[0].Item.ExamineText;
                 itemLeft.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
+                inventoryManager.CurrentItem = PlayerInventory.inventoryItems[0].Item;
             }
             else
             {
@@ -63,6 +66,7 @@ public class DisplayInventoryItems : MonoBehaviour
                 itemDescriptionDisplay.text = PlayerInventory.inventoryItems[1].Item.ExamineText;
                 itemLeft.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
+                inventoryManager.CurrentItem = PlayerInventory.inventoryItems[1].Item;
             }
         }
         else //More than two items

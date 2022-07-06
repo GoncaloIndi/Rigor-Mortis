@@ -89,6 +89,7 @@ public class EnemyCombat : MonoBehaviour
     private IEnumerator KillEnemy() //Normal Death
     {
         ratSFX.RatDeathSFX();
+        ratStateManager.IsRatAlive = false;
         ratStateManager.enabled = false;
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratAnimationsScript.DisplayDeathAnimation(displayInvertedDeath);
@@ -100,6 +101,7 @@ public class EnemyCombat : MonoBehaviour
     public IEnumerator ElectrifyEnemy() //Called By eletricTrap
     {
         ratSFX.RatShockDeathSFX();
+        ratStateManager.IsRatAlive = false;
         ratStateManager.RatNavMeshAgent.enabled = false;
         ratStateManager.enabled = false;
         EnemyStatsScript.EnemyHp = 0;

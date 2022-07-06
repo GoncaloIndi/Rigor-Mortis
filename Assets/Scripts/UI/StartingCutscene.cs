@@ -18,6 +18,14 @@ public class StartingCutscene : MonoBehaviour
     private static readonly int ForceDefault = Animator.StringToHash("ForceDefault");
     [SerializeField] private TutorialMessage tutorial;
 
+    [Header("In Game Cutscene")]
+    [SerializeField] private GameObject roomCamera;
+    [SerializeField] private GameObject cutsceneCamera;
+    private PlayerAnimations playerAnimations;
+    private Animator cutsceneAnim;
+    private static readonly int StartCutscene = Animator.StringToHash("Start");
+    private static readonly int Blink = Animator.StringToHash("Blink");
+
     private void Awake()
     {
         if (!shouldPlayCutscene)
@@ -30,6 +38,17 @@ public class StartingCutscene : MonoBehaviour
             cutsceneText = this.gameObject.GetComponent<Text>();
             playerActionsScript = FindObjectOfType<PlayerActions>();
             playerActionsScript.PlayerToNoInput(true);
+            playerAnimations = FindObjectOfType<PlayerAnimations>();
+            cutsceneAnim = cutsceneCamera.GetComponent<Animator>();
+        }
+    }
+
+    private void Start()
+    {
+        if (shouldPlayCutscene)
+        {
+           roomCamera.SetActive(false);
+           cutsceneCamera.SetActive(true);
         }
     }
 
@@ -51,10 +70,35 @@ public class StartingCutscene : MonoBehaviour
         if (isOnLastTextDisplay)
         {
             DarkenerAnim.SetTrigger(Lighten);
-            playerActionsScript.PlayerToNoInput(false);
-            tutorial.DisplayInteractMessage();
+            
+            StartInGameCutscene();
+            
         }
         
     }
     
+    //Second part of the cutscene (In game)
+
+    private void StartInGameCutscene()
+    {
+        Invoke("CutsceneBlink", 12.65f);
+        Invoke("EndInGameCutScene", 13);
+        //roomCamera.SetActive(false);
+        //cutsceneCamera.SetActive(true);
+        cutsceneAnim.SetTrigger(StartCutscene);
+        playerAnimations.DisplayCutsceneAnimation();
+    }
+
+    private void CutsceneBlink()
+    {
+        DarkenerAnim.SetTrigger(Blink);
+    }
+    
+    private void EndInGameCutScene()
+    {
+        roomCamera.SetActive(true);
+        cutsceneCamera.SetActive(false);
+        playerActionsScript.PlayerToNoInput(false);
+        tutorial.DisplayInteractMessage();
+    }
 }

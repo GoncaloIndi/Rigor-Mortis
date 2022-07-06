@@ -15,10 +15,12 @@ public class PlayerAnimations : MonoBehaviour
     [HideInInspector] public PlayerActions PlayerActionsScript;
     private static readonly int Attack = Animator.StringToHash("Attack");
     private static readonly int Damage = Animator.StringToHash("Damage");
+    private static readonly int StartCutscene = Animator.StringToHash("StartCutscene");
 
     private void Awake()
     {
         PlayerActionsScript = GetComponent<PlayerActions>();
+
     }
 
     private void FixedUpdate()
@@ -43,6 +45,11 @@ public class PlayerAnimations : MonoBehaviour
             AnimationState = 0;
         }
         
+    }
+
+    public void DisplayCutsceneAnimation()
+    {
+        playerAnim.SetTrigger(StartCutscene);
     }
 
     public void DisplayAttackAnimation()

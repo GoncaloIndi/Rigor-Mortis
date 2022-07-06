@@ -18,7 +18,7 @@ TagManager:
   - ParticleCollider
   - Player
   - Enemy
-  - 
+  - PlayerCollider
   - 
   - 
   - 

@@ -22,7 +22,7 @@ public class SceneTransition : Interactible
     [SerializeField] private GameObject oddObjectOn;
     [Header("Movement Related")]
     [SerializeField] private GameObject cameraToTransition;
-    [SerializeField] private bool shouldSwitchCameraInput = false;
+    [SerializeField] private bool shouldSwitchCameraInput;
     private Transform playerPosition;
     [Header("Sound")] 
     [SerializeField] private string transitionSfx;

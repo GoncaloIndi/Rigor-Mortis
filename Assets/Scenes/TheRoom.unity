@@ -20762,10 +20762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratVFX: {fileID: 919132148262279199}
-  bloodySwordScript: {fileID: 0}
+  bloodySwordScript: {fileID: 1185683502}
   shockJumpscareTrigger: {fileID: 1752721559}
   EnemyStatsScript: {fileID: 0}
-  canGetStunned: 1
+  CanGetStunned: 1
   attackCooldownByStun: 1
   lungeAttackPosition: {fileID: 1683507207}
   playerLayer:
@@ -46402,7 +46402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7c5bf0b28a82648b1db8d0e57bc3e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldPlayCutscene: 1
+  shouldPlayCutscene: 0
   DarkenerAnim: {fileID: 1652802655}
   tutorial: {fileID: 207520521}
   roomCamera: {fileID: 1470673338}

@@ -24,7 +24,8 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Attack Lock On")] [SerializeField]
     private float minLockOnAngle, maxLockOnAngle;
-    private PlayerLockOnTarget playerLockOnTargetScript; //Reuse the old lock on to connect attacks with rat;
+    private PlayerLockOnTarget playerLockOnTargetScript; //Reuse the old lock on to connect attacks with rat
+    private int hpHolder; //Stop attack if player is damaged
     
 
     private void Awake()
@@ -38,6 +39,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!PlayerStatsScript.IsAttackOnCooldown)
         {
+            hpHolder = PlayerStatsScript.PlayerHp;
             playerLockOnTargetScript.BeginLockOnState(minLockOnAngle, maxLockOnAngle); //Check for angles
             Invoke("StopLockOn", .4f);
             PlayerStatsScript.IsAttackOnCooldown = true;
@@ -52,6 +54,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void PerformAttackLogic()
     {
+        if (PlayerStatsScript.PlayerHp != hpHolder) return;
+
         Collider[] enemyCol = Physics.OverlapSphere(swordTip.position, attackRange, enemyLayer);
         for (int i = 0; i < enemyCol.Length; i++)
         {
@@ -62,7 +66,7 @@ public class PlayerAttack : MonoBehaviour
                 FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Player/sfx_SwordHitFlesh");
                 StartCoroutine(VibrateController());
                 Vector3 bloodPos = enemyCombatScript.GetComponent<Collider>().ClosestPointOnBounds(transform.position);
-                enemyCombatScript.TakeDamage(10, bloodPos);
+                enemyCombatScript.TakeDamage(10);
             }
             //Attack the vents (To break them)
             BreakableVent breakableVentScript = enemyCol[i].GetComponent<BreakableVent>();

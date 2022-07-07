@@ -40,6 +40,7 @@ public class RatStateManager : MonoBehaviour
     public bool IsPerformingAction = false; //Used for stopping state machine whenever the rat gets damaged or dies
     public bool ReturnToOrigin = false;
     public bool IsInIdleState = true; //Initialized as default value
+    private EnemyCombat enemyCombat;
     
 
     private void Awake()
@@ -48,6 +49,7 @@ public class RatStateManager : MonoBehaviour
         RatNavMeshAgent = GetComponent<NavMeshAgent>();
         RatRB = GetComponent<Rigidbody>();
         ratSFX = GetComponent<RatSoundManager>();
+        enemyCombat = GetComponent<EnemyCombat>();
         ChangeRatSpeed();
         Origin = transform.localPosition;
     }
@@ -93,7 +95,7 @@ public class RatStateManager : MonoBehaviour
         HasTarget = false;
         HasPerformedAttack = false;
         currentState = startingState;
-        
+        enemyCombat.CanGetStunned = true;
     }
     
     //Sound

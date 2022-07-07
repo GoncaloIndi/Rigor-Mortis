@@ -39,6 +39,8 @@ public class MainMenu : MonoBehaviour
 
     public void Quit()
     {
+        if (hasBeenPressed) return;
+        
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_ButtonPressed");
         Application.Quit(0);
     }

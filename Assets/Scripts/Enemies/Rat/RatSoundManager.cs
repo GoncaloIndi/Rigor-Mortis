@@ -61,12 +61,12 @@ public class RatSoundManager : MonoBehaviour
             
             if (ShouldPlayFootSteps)
             {
-                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatFootsteps"); //0
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatFootsteps", transform.position); //0
             }
             yield return new WaitForSeconds(rng1); 
             if (ShouldPlayFootSteps)
             {
-                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatFootsteps"); //9
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Rat/sfx_RatFootsteps", transform.position); //9
             }
             yield return new WaitForSeconds(rng2);//DelayToNextCycle 765 frames
         }

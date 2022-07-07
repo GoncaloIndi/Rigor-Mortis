@@ -20,7 +20,7 @@ public class EnemyCombat : MonoBehaviour
     private IdleState idleStateScript;
 
     [Header("Stun Logic")] 
-    [SerializeField] private bool canGetStunned = true; //Used to not stagger the rat during certain frames to make combat more risky 
+    public bool CanGetStunned = true; //Used to not stagger the rat during certain frames to make combat more risky 
     [SerializeField] private float attackCooldownByStun = 1.6f;
     
     [Header("Attack Logic")] 
@@ -46,11 +46,11 @@ public class EnemyCombat : MonoBehaviour
     
 
     //When rat is hurt
-    public void TakeDamage(int damage, Vector3 bloodPosition) 
+    public void TakeDamage(int damage) 
     {
         EnemyStatsScript.EnemyHp -= damage;
         //Blood logic 
-        ratVFX.BloodVFX(bloodPosition);
+        ratVFX.BloodVFX();
         bloodySwordScript.UpdateSword();
 
         if (EnemyStatsScript.EnemyHp > 0) //Damage sound
@@ -60,7 +60,7 @@ public class EnemyCombat : MonoBehaviour
         idleStateScript.HasDetectedPlayer = true;
         
 
-        if (canGetStunned)
+        if (CanGetStunned)
         {
             ratAnimationsScript.DisplayDamageAnimation();
             //prevent the attack if rat is stunned 
@@ -152,7 +152,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(.8f);
         ratSFX.RatLungeAttackHissSFX();
         yield return new WaitForSeconds(.7f);
-        canGetStunned = false; //Iframes
+        CanGetStunned = false; //Iframes
         if (EnemyStatsScript.EnemyHp != hpStorer) //Cancel the attack if the rat got hurt
         {
             yield break;
@@ -173,7 +173,7 @@ public class EnemyCombat : MonoBehaviour
             ratStateManager.RatNavMeshAgent.SetDestination(transform.position);
         }
         AttackLogic(ratStateManager, lungeAttackRange, lungeAttackPosition);
-        canGetStunned = true; //Iframes
+        CanGetStunned = true; //Iframes
         isPerformingAttack = false;
         ratSFX.RatLungeAttackLandSFX();
     }
@@ -193,7 +193,7 @@ public class EnemyCombat : MonoBehaviour
         {
             yield break;
         }
-        canGetStunned = false; //Iframes
+        CanGetStunned = false; //Iframes
         yield return new WaitForSeconds(.4f);
         ratSFX.RatTailWhip();
         displayInvertedDeath = true; //InvertedDeath
@@ -216,7 +216,7 @@ public class EnemyCombat : MonoBehaviour
         yield return new WaitForSeconds(.2f);
         AttackLogic(ratStateManager, tailAttackRange, tailAttackPosition);
         yield return new WaitForSeconds(.2f);
-        canGetStunned = true; //Iframes
+        CanGetStunned = true; //Iframes
         isPerformingAttack = false;
     }
 

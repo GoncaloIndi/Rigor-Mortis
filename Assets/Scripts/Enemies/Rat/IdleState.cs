@@ -22,19 +22,24 @@ public class IdleState : State
     [SerializeField] private float minimumDetectionAngle = 145;
     [SerializeField] private float maximumDetectionAngle = 200;
     [SerializeField] private LayerMask ignoreWhenInLineOfSight;
+
+    private float detectionRadiusHolder; 
     
     
     //Related to wander
-    private float lookoutTime, waitingTime;
+    private float lookoutTime, waitingTime, distanceFromDestination;
 
 
     private void Awake()
     {
         chaseState = GetComponent<ChaseState>();
+        detectionRadiusHolder = detectionRadius;
     }
 
-    private void OnEnable()
+    private void OnEnable() //Reset rat
     {
+        detectionRadius = detectionRadiusHolder; 
+        distanceFromDestination = 0;
         StartCoroutine(ratStateManagerScript.RatSqueak());
     }
 
@@ -66,7 +71,7 @@ public class IdleState : State
             ratStateManager.RatNavMeshAgent.SetDestination(ratStateManager.Origin);
         }
 
-        float distanceFromDestination = Vector3.Distance(ratStateManager.RatNavMeshAgent.destination, position);
+        distanceFromDestination = Vector3.Distance(ratStateManager.RatNavMeshAgent.destination, position);
 
         waitingTime += Time.deltaTime;
         

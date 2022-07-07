@@ -21,9 +21,8 @@ public class RatVFXManager : MonoBehaviour
         electricVFX.Play();
     }
 
-    public void BloodVFX(Vector3 bloodPos) //Temp
+    public void BloodVFX() //Temp
     {
-        bloodVFX.transform.position = bloodPos;
         bloodVFX.Play();
     }
     

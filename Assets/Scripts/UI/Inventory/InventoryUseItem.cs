@@ -49,7 +49,6 @@ public class InventoryUseItem : MonoBehaviour
 
                 if (inventory.inventoryItems.Count > 0)
                 {
-                    displayItems.UpdateItems();
                     inventory.RemoveItem(inventory.inventoryItems[itemToRemove]);
                     inventoryManager.CurrentItem = null;
                 }

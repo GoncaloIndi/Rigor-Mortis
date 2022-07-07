@@ -64,6 +64,7 @@ public class DisplayInventoryItems : MonoBehaviour
             {
                 itemNameDisplay.text = PlayerInventory.inventoryItems[1].Item.Name;
                 itemDescriptionDisplay.text = PlayerInventory.inventoryItems[1].Item.ExamineText;
+                currentItem.sprite = PlayerInventory.inventoryItems[1].Item.Icon;
                 itemLeft.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 itemRight.sprite = PlayerInventory.inventoryItems[0].Item.Icon;
                 inventoryManager.CurrentItem = PlayerInventory.inventoryItems[1].Item;

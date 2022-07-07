@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Items
   - Enemy
+  - Glass
+  - Ball
+  - Trophy
   layers:
   - Default
   - TransparentFX

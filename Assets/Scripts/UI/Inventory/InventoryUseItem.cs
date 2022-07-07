@@ -20,9 +20,15 @@ public class InventoryUseItem : MonoBehaviour
 
     public void UseItem()
     {
+
         if (playerStatsScript.CurrentItemUse == null)
         {
-            cannotAnim.SetTrigger(Cannot);
+            if (displayItems.HasItemInInventory)
+            {
+                cannotAnim.SetTrigger(Cannot);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_UseItemFail");
+            }
+            
             //Wrong use sound
             return;
         }
@@ -59,6 +65,7 @@ public class InventoryUseItem : MonoBehaviour
             {
                 //Cant be used Message (Using incorrect item)
                 cannotAnim.SetTrigger(Cannot);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/UI/sfx_Inventory_UseItemFail");
                 return;
             }
            

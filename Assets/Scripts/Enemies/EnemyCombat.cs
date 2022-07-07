@@ -43,7 +43,12 @@ public class EnemyCombat : MonoBehaviour
         ratSFX = GetComponent<RatSoundManager>();
         bloodySwordScript = FindObjectOfType<BloodySword>();
     }
-    
+
+    private void OnEnable()
+    {
+        bloodySwordScript = FindObjectOfType<BloodySword>();
+    }
+
 
     //When rat is hurt
     public void TakeDamage(int damage) 

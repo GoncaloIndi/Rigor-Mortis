@@ -16,6 +16,7 @@ public class DisplayInventoryItems : MonoBehaviour
     [SerializeField] private GameObject useItemIcon;
 
     private Sprite currentHolder, nextHolder;
+    public bool HasItemInInventory;
 
     private void Awake()
     {
@@ -32,10 +33,12 @@ public class DisplayInventoryItems : MonoBehaviour
             CanSwapItems = false;
             ToggleItemSprites(false);
             useItemIcon.SetActive(false);
+            HasItemInInventory = false;
         }
         
         else if (PlayerInventory.inventoryItems.Count == 1) //One item 
         {
+            HasItemInInventory = true;
             CanSwapItems = false;
             currentItem.enabled = true;
             itemLeft.enabled = false;
@@ -49,6 +52,7 @@ public class DisplayInventoryItems : MonoBehaviour
         }
         else if (PlayerInventory.inventoryItems.Count == 2) //Two items
         {
+            HasItemInInventory = true;
             useItemIcon.SetActive(true);
             CanSwapItems = true;
             ToggleItemSprites(true);

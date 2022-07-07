@@ -8,6 +8,7 @@ public class OnItemUse : MonoBehaviour //Where items will be used
     private PlayerStats playerStatsScript;
     [SerializeField] private int itemToBeUsed; //Item ID
     [SerializeField] private GameObject turnedOnEffect; 
+    
 
     private void Awake()
     {
@@ -29,6 +30,12 @@ public class OnItemUse : MonoBehaviour //Where items will be used
         if (currentItem != itemToBeUsed) return false;
         //DefaultCase
         turnedOnEffect.SetActive(true);
+        if (playerStatsScript.CurrentInteractionGameObject == this.gameObject)
+        {
+            playerStatsScript.IsInInteractionZone = false;
+            playerStatsScript.CurrentInteractionGameObject = null;
+            
+        }
         this.gameObject.SetActive(false);
         return true;
     }

@@ -28,6 +28,8 @@ public class StartingCutscene : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        
         if (!shouldPlayCutscene)
         {
             this.gameObject.SetActive(false);
